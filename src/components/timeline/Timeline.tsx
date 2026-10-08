@@ -23,6 +23,7 @@ import DestinationPicker, { type PickerRequest } from '@/components/DestinationP
 import StayDialog from '@/components/StayDialog';
 import AutofillControls from '@/components/timeline/AutofillControls';
 import DayHeader from '@/components/timeline/DayHeader';
+import DriveChip from '@/components/timeline/DriveChip';
 import EmptyStay from '@/components/timeline/EmptyStay';
 import StayBlock from '@/components/timeline/StayBlock';
 import { AIRPORT, getDestination } from '@/data/dataset';
@@ -177,10 +178,17 @@ const Timeline: FC = () => {
     grid.addEventListener('pointercancel', finish);
   };
 
+  /**
+   * Where nights sit in the grid. Wide, each day is a column. On a phone each day is two rows: a
+   * drive row (empty, so zero height, unless a drive arrives that day) and then the night itself,
+   * so a drive appears between the stay it leaves and the stay it reaches.
+   */
+  const driveRow = (day: number) => 2 * day + 1;
+  const nightRow = (day: number) => 2 * day + 2;
   const place = (start: number, span: number) =>
     wide
       ? { gridColumn: `${start + 1} / span ${span}`, gridRow: 2 }
-      : { gridRow: `${start + 1} / span ${span}`, gridColumn: 2 };
+      : { gridRow: `${nightRow(start)} / span ${2 * span - 1}`, gridColumn: 2 };
 
   const openStay = (stay: Stay) => setOpenNight(stay.start);
   const changeDestination = (stay: Stay) => {
@@ -221,8 +229,8 @@ const Timeline: FC = () => {
                     gridTemplateRows: 'auto auto',
                   }
                 : {
-                    gridTemplateColumns: '4.75rem minmax(0, 1fr)',
-                    gridTemplateRows: `repeat(${DAYS.length}, auto)`,
+                    gridTemplateColumns: '3.25rem minmax(0, 1fr)',
+                    gridTemplateRows: `repeat(${DAYS.length}, auto minmax(3.5rem, auto))`,
                   }
             }
           >
@@ -235,10 +243,20 @@ const Timeline: FC = () => {
                 style={
                   wide
                     ? { gridColumn: day.index + 1, gridRow: 1 }
-                    : { gridRow: day.index + 1, gridColumn: 1 }
+                    : { gridRow: nightRow(day.index), gridColumn: 1 }
                 }
               />
             ))}
+
+            {!wide &&
+              [...legsByDay.values()].map((leg) => (
+                <DriveChip
+                  key={`drive-${leg.index}`}
+                  leg={leg}
+                  variant="between"
+                  style={{ gridRow: driveRow(leg.day), gridColumn: 2 }}
+                />
+              ))}
 
             {stays.map((stay, index) => {
               const isValidTarget =

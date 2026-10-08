@@ -204,7 +204,8 @@ export class TripMapController {
       stops.map(({ destination }) => fromLonLat([destination.lon, destination.lat])),
     );
     this.map.getView().fit(extent, {
-      padding: [48, 48, 48, 48],
+      // Extra room on the right, where every stop hangs its name: the east-most label stays in view.
+      padding: [48, 110, 48, 48],
       maxZoom: MAX_FIT_ZOOM,
       duration: 400,
     });

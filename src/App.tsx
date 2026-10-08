@@ -11,7 +11,9 @@ const App: FC = () => (
     <main className="mx-auto flex w-full max-w-[1600px] grow flex-col gap-3 p-3 md:p-4">
       <TripSummary />
       <Timeline />
-      <div className="grid gap-3 lg:h-[640px] lg:grid-cols-[minmax(0,1fr)_400px]">
+      {/* minmax(0, 1fr) on a phone too: an implicit grid column grows to its widest content (a
+          drive's names, which never wrap) and would push the map and the drives off-screen. */}
+      <div className="grid grid-cols-[minmax(0,1fr)] gap-3 lg:h-[640px] lg:grid-cols-[minmax(0,1fr)_400px]">
         <TripMap />
         <LegList />
       </div>
