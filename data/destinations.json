@@ -84,7 +84,7 @@
     "kind": "onsen",
     "lat": 36.6229,
     "lon": 138.5967,
-    "rating": 5,
+    "rating": 4,
     "idealNights": 1,
     "maxNights": 2
   },
@@ -129,7 +129,7 @@
     "kind": "city",
     "lat": 36.5773,
     "lon": 136.6473,
-    "rating": 5,
+    "rating": 2,
     "idealNights": 2,
     "maxNights": 3
   },
@@ -140,7 +140,7 @@
     "kind": "city",
     "lat": 36.2307,
     "lon": 137.9638,
-    "rating": 4,
+    "rating": 3,
     "idealNights": 1,
     "maxNights": 2
   },
@@ -151,7 +151,7 @@
     "kind": "onsen",
     "lat": 36.047,
     "lon": 138.1164,
-    "rating": 3,
+    "rating": 4,
     "idealNights": 1,
     "maxNights": 2
   }
