@@ -36,7 +36,7 @@ npm run dev        # http://localhost:5190
   pinned, and it uses each place for at most one stay. When it runs out of places (or a place
   would go past its maximum nights), it leaves the rest of the nights empty. Each click picks a
   different random seed, so you get a different plan; undo goes back to the previous one.
-- **The address bar always holds the plan** (`#plan=nagoya!.suzuka!.…`), updated as you edit, so
+- **The address bar always holds the plan** (`#plan=!nagoya.!suzuka.…`), updated as you edit, so
   you can copy the URL at any time; **Copy link** does the same in one tap. Opening a link loads
   its plan, and undo brings back the one you had before. The plan is also saved in `localStorage`.
 - **km / mi** in the app bar switches distances and heights between metric and imperial. It is
