@@ -110,5 +110,49 @@
     "rating": 4,
     "idealNights": 1,
     "maxNights": 2
+  },
+  {
+    "id": "bessho",
+    "name": "Bessho Onsen",
+    "nameJa": "別所温泉",
+    "kind": "onsen",
+    "lat": 36.3532,
+    "lon": 138.162,
+    "rating": 3,
+    "idealNights": 1,
+    "maxNights": 2
+  },
+  {
+    "id": "kanazawa",
+    "name": "Kanazawa",
+    "nameJa": "金沢",
+    "kind": "city",
+    "lat": 36.5773,
+    "lon": 136.6473,
+    "rating": 5,
+    "idealNights": 2,
+    "maxNights": 3
+  },
+  {
+    "id": "matsumoto",
+    "name": "Matsumoto",
+    "nameJa": "松本",
+    "kind": "city",
+    "lat": 36.2307,
+    "lon": 137.9638,
+    "rating": 4,
+    "idealNights": 1,
+    "maxNights": 2
+  },
+  {
+    "id": "suwa",
+    "name": "Kami-Suwa Onsen",
+    "nameJa": "上諏訪温泉",
+    "kind": "onsen",
+    "lat": 36.047,
+    "lon": 138.1164,
+    "rating": 3,
+    "idealNights": 1,
+    "maxNights": 2
   }
 ]

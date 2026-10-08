@@ -1,5 +1,383 @@
 {
   "legs": {
+    "bessho>gero": {
+      "from": "bessho",
+      "to": "gero",
+      "distanceKm": 165.9,
+      "durationMin": 205,
+      "winterDurationMin": 222,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1448,
+        "kmAbove1000m": 35,
+        "kmSteep": 4.9,
+        "freezeRatio": 0.81,
+        "snowRatio": 0.88,
+        "kmSnowyMinorRoad": 13,
+        "bridges": 109,
+        "tunnels": 34,
+        "kmMinorRoad": 0.3,
+        "curvinessDegPerKm": 136,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [
+        "13 km of minor road (below 国道 and main prefectural roads) with snow on the ground on most days: winter tyres, and carry chains.",
+        "4.9 km of sustained grades over 8% where most nights freeze."
+      ],
+      "computedAt": "2026-10-08T06:47:40.843Z"
+    },
+    "bessho>kanazawa": {
+      "from": "bessho",
+      "to": "kanazawa",
+      "distanceKm": 293.6,
+      "durationMin": 229,
+      "winterDurationMin": 238,
+      "difficulty": 3,
+      "factors": {
+        "maxElevationM": 709,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.62,
+        "snowRatio": 0.77,
+        "kmSnowyMinorRoad": 5.3,
+        "bridges": 240,
+        "tunnels": 60,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 78,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [
+        "5.3 km of minor road (below 国道 and main prefectural roads) with snow on the ground on most days: winter tyres, and carry chains."
+      ],
+      "computedAt": "2026-10-08T06:50:26.078Z"
+    },
+    "bessho>kawazu": {
+      "from": "bessho",
+      "to": "kawazu",
+      "distanceKm": 298.9,
+      "durationMin": 266,
+      "winterDurationMin": 273,
+      "difficulty": 3,
+      "factors": {
+        "maxElevationM": 1386,
+        "kmAbove1000m": 23,
+        "kmSteep": 2.7,
+        "freezeRatio": 0.63,
+        "snowRatio": 0.5,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 241,
+        "tunnels": 39,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 147,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [
+        "2.7 km of sustained grades over 8% where most nights freeze."
+      ],
+      "computedAt": "2026-10-08T06:47:41.453Z"
+    },
+    "bessho>kusatsu": {
+      "from": "bessho",
+      "to": "kusatsu",
+      "distanceKm": 66.2,
+      "durationMin": 92,
+      "winterDurationMin": 101,
+      "difficulty": 3,
+      "factors": {
+        "maxElevationM": 1368,
+        "kmAbove1000m": 23.2,
+        "kmSteep": 1.9,
+        "freezeRatio": 0.93,
+        "snowRatio": 0.97,
+        "kmSnowyMinorRoad": 5.2,
+        "bridges": 29,
+        "tunnels": 0,
+        "kmMinorRoad": 0.4,
+        "curvinessDegPerKm": 142,
+        "ferry": false,
+        "toll": false
+      },
+      "warnings": [
+        "5.2 km of minor road (below 国道 and main prefectural roads) with snow on the ground on most days: winter tyres, and carry chains."
+      ],
+      "computedAt": "2026-10-08T06:47:40.980Z"
+    },
+    "bessho>matsumoto": {
+      "from": "bessho",
+      "to": "matsumoto",
+      "distanceKm": 39.2,
+      "durationMin": 57,
+      "winterDurationMin": 63,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1083,
+        "kmAbove1000m": 4,
+        "kmSteep": 2.9,
+        "freezeRatio": 0.79,
+        "snowRatio": 0.86,
+        "kmSnowyMinorRoad": 10.1,
+        "bridges": 35,
+        "tunnels": 4,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 191,
+        "ferry": false,
+        "toll": false
+      },
+      "warnings": [
+        "10.1 km of minor road (below 国道 and main prefectural roads) with snow on the ground on most days: winter tyres, and carry chains.",
+        "2.9 km of sustained grades over 8% where most nights freeze."
+      ],
+      "computedAt": "2026-10-08T06:50:36.198Z"
+    },
+    "bessho>nagoya": {
+      "from": "bessho",
+      "to": "nagoya",
+      "distanceKm": 243.4,
+      "durationMin": 209,
+      "winterDurationMin": 217,
+      "difficulty": 3,
+      "factors": {
+        "maxElevationM": 1386,
+        "kmAbove1000m": 13,
+        "kmSteep": 1.1,
+        "freezeRatio": 0.76,
+        "snowRatio": 0.58,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 163,
+        "tunnels": 14,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 101,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:47:39.735Z"
+    },
+    "bessho>ngo": {
+      "from": "bessho",
+      "to": "ngo",
+      "distanceKm": 281.9,
+      "durationMin": 238,
+      "winterDurationMin": 246,
+      "difficulty": 3,
+      "factors": {
+        "maxElevationM": 1386,
+        "kmAbove1000m": 13,
+        "kmSteep": 1.1,
+        "freezeRatio": 0.69,
+        "snowRatio": 0.5,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 202,
+        "tunnels": 20,
+        "kmMinorRoad": 0.4,
+        "curvinessDegPerKm": 103,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:47:39.630Z"
+    },
+    "bessho>okuhida": {
+      "from": "bessho",
+      "to": "okuhida",
+      "distanceKm": 85.2,
+      "durationMin": 112,
+      "winterDurationMin": 122,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1369,
+        "kmAbove1000m": 24.1,
+        "kmSteep": 3.7,
+        "freezeRatio": 0.77,
+        "snowRatio": 0.84,
+        "kmSnowyMinorRoad": 13.1,
+        "bridges": 66,
+        "tunnels": 26,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 158,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [
+        "13.1 km of minor road (below 国道 and main prefectural roads) with snow on the ground on most days: winter tyres, and carry chains.",
+        "3.7 km of sustained grades over 8% where most nights freeze."
+      ],
+      "computedAt": "2026-10-08T06:47:40.874Z"
+    },
+    "bessho>osaka": {
+      "from": "bessho",
+      "to": "osaka",
+      "distanceKm": 411.4,
+      "durationMin": 332,
+      "winterDurationMin": 340,
+      "difficulty": 3,
+      "factors": {
+        "maxElevationM": 1386,
+        "kmAbove1000m": 13,
+        "kmSteep": 1.1,
+        "freezeRatio": 0.66,
+        "snowRatio": 0.37,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 274,
+        "tunnels": 30,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 111,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:47:40.184Z"
+    },
+    "bessho>suwa": {
+      "from": "bessho",
+      "to": "suwa",
+      "distanceKm": 54.9,
+      "durationMin": 70,
+      "winterDurationMin": 75,
+      "difficulty": 3,
+      "factors": {
+        "maxElevationM": 1386,
+        "kmAbove1000m": 13,
+        "kmSteep": 1.1,
+        "freezeRatio": 0.86,
+        "snowRatio": 0.87,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 31,
+        "tunnels": 3,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 105,
+        "ferry": false,
+        "toll": false
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:44.683Z"
+    },
+    "bessho>suzuka": {
+      "from": "bessho",
+      "to": "suzuka",
+      "distanceKm": 295.3,
+      "durationMin": 260,
+      "winterDurationMin": 268,
+      "difficulty": 3,
+      "factors": {
+        "maxElevationM": 1386,
+        "kmAbove1000m": 13,
+        "kmSteep": 1.1,
+        "freezeRatio": 0.67,
+        "snowRatio": 0.48,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 197,
+        "tunnels": 19,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 87,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:47:39.832Z"
+    },
+    "bessho>tokyo": {
+      "from": "bessho",
+      "to": "tokyo",
+      "distanceKm": 217.6,
+      "durationMin": 186,
+      "winterDurationMin": 189,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 924,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.66,
+        "snowRatio": 0.35,
+        "kmSnowyMinorRoad": 2,
+        "bridges": 146,
+        "tunnels": 29,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 136,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:47:40.570Z"
+    },
+    "bessho>yunomine": {
+      "from": "bessho",
+      "to": "yunomine",
+      "distanceKm": 481.5,
+      "durationMin": 414,
+      "winterDurationMin": 423,
+      "difficulty": 3,
+      "factors": {
+        "maxElevationM": 1386,
+        "kmAbove1000m": 13,
+        "kmSteep": 2.3,
+        "freezeRatio": 0.52,
+        "snowRatio": 0.3,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 325,
+        "tunnels": 67,
+        "kmMinorRoad": 1.8,
+        "curvinessDegPerKm": 120,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:47:42.155Z"
+    },
+    "gero>bessho": {
+      "from": "gero",
+      "to": "bessho",
+      "distanceKm": 165.7,
+      "durationMin": 205,
+      "winterDurationMin": 223,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1449,
+        "kmAbove1000m": 36,
+        "kmSteep": 5.2,
+        "freezeRatio": 0.82,
+        "snowRatio": 0.9,
+        "kmSnowyMinorRoad": 14.5,
+        "bridges": 109,
+        "tunnels": 33,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 136,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [
+        "14.5 km of minor road (below 国道 and main prefectural roads) with snow on the ground on most days: winter tyres, and carry chains.",
+        "5.2 km of sustained grades over 8% where most nights freeze."
+      ],
+      "computedAt": "2026-10-08T06:47:37.347Z"
+    },
+    "gero>kanazawa": {
+      "from": "gero",
+      "to": "kanazawa",
+      "distanceKm": 162.9,
+      "durationMin": 156,
+      "winterDurationMin": 162,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 896,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.59,
+        "snowRatio": 0.68,
+        "kmSnowyMinorRoad": 2,
+        "bridges": 85,
+        "tunnels": 29,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 88,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:49:03.371Z"
+    },
     "gero>kawazu": {
       "from": "gero",
       "to": "kawazu",
@@ -49,6 +427,30 @@
         "4.1 km of sustained grades over 8% where most nights freeze."
       ],
       "computedAt": "2026-10-08T05:30:49.175Z"
+    },
+    "gero>matsumoto": {
+      "from": "gero",
+      "to": "matsumoto",
+      "distanceKm": 129.8,
+      "durationMin": 155,
+      "winterDurationMin": 167,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1449,
+        "kmAbove1000m": 32,
+        "kmSteep": 1.9,
+        "freezeRatio": 0.83,
+        "snowRatio": 0.91,
+        "kmSnowyMinorRoad": 2.7,
+        "bridges": 76,
+        "tunnels": 29,
+        "kmMinorRoad": 0.3,
+        "curvinessDegPerKm": 116,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:34.314Z"
     },
     "gero>nagoya": {
       "from": "gero",
@@ -146,6 +548,30 @@
       "warnings": [],
       "computedAt": "2026-10-08T05:30:09.469Z"
     },
+    "gero>suwa": {
+      "from": "gero",
+      "to": "suwa",
+      "distanceKm": 176.9,
+      "durationMin": 156,
+      "winterDurationMin": 163,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 836,
+        "kmAbove1000m": 0,
+        "kmSteep": 0.7,
+        "freezeRatio": 0.8,
+        "snowRatio": 0.79,
+        "kmSnowyMinorRoad": 3,
+        "bridges": 127,
+        "tunnels": 11,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 91,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:42.329Z"
+    },
     "gero>suzuka": {
       "from": "gero",
       "to": "suzuka",
@@ -218,6 +644,348 @@
       "warnings": [],
       "computedAt": "2026-10-08T05:53:00.364Z"
     },
+    "kanazawa>bessho": {
+      "from": "kanazawa",
+      "to": "bessho",
+      "distanceKm": 294,
+      "durationMin": 229,
+      "winterDurationMin": 239,
+      "difficulty": 3,
+      "factors": {
+        "maxElevationM": 709,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.62,
+        "snowRatio": 0.77,
+        "kmSnowyMinorRoad": 5.6,
+        "bridges": 242,
+        "tunnels": 60,
+        "kmMinorRoad": 0,
+        "curvinessDegPerKm": 102,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [
+        "5.6 km of minor road (below 国道 and main prefectural roads) with snow on the ground on most days: winter tyres, and carry chains."
+      ],
+      "computedAt": "2026-10-08T06:50:31.937Z"
+    },
+    "kanazawa>gero": {
+      "from": "kanazawa",
+      "to": "gero",
+      "distanceKm": 164.2,
+      "durationMin": 158,
+      "winterDurationMin": 164,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 896,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.6,
+        "snowRatio": 0.69,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 85,
+        "tunnels": 32,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 93,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:29.127Z"
+    },
+    "kanazawa>kawazu": {
+      "from": "kanazawa",
+      "to": "kawazu",
+      "distanceKm": 510.4,
+      "durationMin": 397,
+      "winterDurationMin": 401,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 1096,
+        "kmAbove1000m": 8,
+        "kmSteep": 1.1,
+        "freezeRatio": 0.42,
+        "snowRatio": 0.24,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 343,
+        "tunnels": 141,
+        "kmMinorRoad": 0,
+        "curvinessDegPerKm": 197,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:30.753Z"
+    },
+    "kanazawa>kusatsu": {
+      "from": "kanazawa",
+      "to": "kusatsu",
+      "distanceKm": 313,
+      "durationMin": 269,
+      "winterDurationMin": 286,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1369,
+        "kmAbove1000m": 34.6,
+        "kmSteep": 4.2,
+        "freezeRatio": 0.66,
+        "snowRatio": 0.8,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 240,
+        "tunnels": 48,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 192,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [
+        "4.2 km of sustained grades over 8% where most nights freeze."
+      ],
+      "computedAt": "2026-10-08T06:50:29.983Z"
+    },
+    "kanazawa>matsumoto": {
+      "from": "kanazawa",
+      "to": "matsumoto",
+      "distanceKm": 200.5,
+      "durationMin": 201,
+      "winterDurationMin": 211,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1449,
+        "kmAbove1000m": 32,
+        "kmSteep": 1.4,
+        "freezeRatio": 0.63,
+        "snowRatio": 0.7,
+        "kmSnowyMinorRoad": 0.3,
+        "bridges": 120,
+        "tunnels": 54,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 122,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:36.603Z"
+    },
+    "kanazawa>nagoya": {
+      "from": "kanazawa",
+      "to": "nagoya",
+      "distanceKm": 234.4,
+      "durationMin": 184,
+      "winterDurationMin": 188,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 1096,
+        "kmAbove1000m": 8,
+        "kmSteep": 0,
+        "freezeRatio": 0.59,
+        "snowRatio": 0.48,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 149,
+        "tunnels": 63,
+        "kmMinorRoad": 0,
+        "curvinessDegPerKm": 109,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:26.685Z"
+    },
+    "kanazawa>ngo": {
+      "from": "kanazawa",
+      "to": "ngo",
+      "distanceKm": 280.8,
+      "durationMin": 220,
+      "winterDurationMin": 224,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 1096,
+        "kmAbove1000m": 8,
+        "kmSteep": 0,
+        "freezeRatio": 0.54,
+        "snowRatio": 0.4,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 176,
+        "tunnels": 64,
+        "kmMinorRoad": 0.3,
+        "curvinessDegPerKm": 127,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:26.570Z"
+    },
+    "kanazawa>okuhida": {
+      "from": "kanazawa",
+      "to": "okuhida",
+      "distanceKm": 152.6,
+      "durationMin": 141,
+      "winterDurationMin": 147,
+      "difficulty": 3,
+      "factors": {
+        "maxElevationM": 1449,
+        "kmAbove1000m": 12.4,
+        "kmSteep": 0.6,
+        "freezeRatio": 0.58,
+        "snowRatio": 0.66,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 87,
+        "tunnels": 32,
+        "kmMinorRoad": 0,
+        "curvinessDegPerKm": 130,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:29.182Z"
+    },
+    "kanazawa>osaka": {
+      "from": "kanazawa",
+      "to": "osaka",
+      "distanceKm": 305.7,
+      "durationMin": 237,
+      "winterDurationMin": 237,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 259,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.44,
+        "snowRatio": 0.25,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 198,
+        "tunnels": 33,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 122,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:28.295Z"
+    },
+    "kanazawa>suwa": {
+      "from": "kanazawa",
+      "to": "suwa",
+      "distanceKm": 230.7,
+      "durationMin": 228,
+      "winterDurationMin": 239,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1449,
+        "kmAbove1000m": 32,
+        "kmSteep": 1.4,
+        "freezeRatio": 0.65,
+        "snowRatio": 0.73,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 138,
+        "tunnels": 55,
+        "kmMinorRoad": 0,
+        "curvinessDegPerKm": 125,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:45.085Z"
+    },
+    "kanazawa>suzuka": {
+      "from": "kanazawa",
+      "to": "suzuka",
+      "distanceKm": 264.8,
+      "durationMin": 232,
+      "winterDurationMin": 232,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 266,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.43,
+        "snowRatio": 0.28,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 182,
+        "tunnels": 24,
+        "kmMinorRoad": 0,
+        "curvinessDegPerKm": 99,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:27.842Z"
+    },
+    "kanazawa>tokyo": {
+      "from": "kanazawa",
+      "to": "tokyo",
+      "distanceKm": 423.9,
+      "durationMin": 374,
+      "winterDurationMin": 387,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1449,
+        "kmAbove1000m": 34,
+        "kmSteep": 1.4,
+        "freezeRatio": 0.66,
+        "snowRatio": 0.59,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 308,
+        "tunnels": 72,
+        "kmMinorRoad": 0,
+        "curvinessDegPerKm": 132,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:28.979Z"
+    },
+    "kanazawa>yunomine": {
+      "from": "kanazawa",
+      "to": "yunomine",
+      "distanceKm": 432.1,
+      "durationMin": 384,
+      "winterDurationMin": 385,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 359,
+        "kmAbove1000m": 0,
+        "kmSteep": 1.6,
+        "freezeRatio": 0.35,
+        "snowRatio": 0.18,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 301,
+        "tunnels": 74,
+        "kmMinorRoad": 1.8,
+        "curvinessDegPerKm": 125,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:31.445Z"
+    },
+    "kawazu>bessho": {
+      "from": "kawazu",
+      "to": "bessho",
+      "distanceKm": 300,
+      "durationMin": 270,
+      "winterDurationMin": 277,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1389,
+        "kmAbove1000m": 21,
+        "kmSteep": 2.6,
+        "freezeRatio": 0.63,
+        "snowRatio": 0.5,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 241,
+        "tunnels": 40,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 150,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [
+        "2.6 km of sustained grades over 8% where most nights freeze."
+      ],
+      "computedAt": "2026-10-08T06:47:38.736Z"
+    },
     "kawazu>gero": {
       "from": "kawazu",
       "to": "gero",
@@ -241,6 +1009,30 @@
       },
       "warnings": [],
       "computedAt": "2026-10-08T05:51:42.826Z"
+    },
+    "kawazu>kanazawa": {
+      "from": "kawazu",
+      "to": "kanazawa",
+      "distanceKm": 510,
+      "durationMin": 399,
+      "winterDurationMin": 403,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 1097,
+        "kmAbove1000m": 8,
+        "kmSteep": 1.3,
+        "freezeRatio": 0.42,
+        "snowRatio": 0.24,
+        "kmSnowyMinorRoad": 0.4,
+        "bridges": 347,
+        "tunnels": 141,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 193,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:11.229Z"
     },
     "kawazu>kusatsu": {
       "from": "kawazu",
@@ -267,6 +1059,30 @@
         "4.6 km of sustained grades over 8% where most nights freeze."
       ],
       "computedAt": "2026-10-08T05:51:43.671Z"
+    },
+    "kawazu>matsumoto": {
+      "from": "kawazu",
+      "to": "matsumoto",
+      "distanceKm": 271.9,
+      "durationMin": 223,
+      "winterDurationMin": 226,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 1069,
+        "kmAbove1000m": 9,
+        "kmSteep": 1.3,
+        "freezeRatio": 0.6,
+        "snowRatio": 0.47,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 228,
+        "tunnels": 33,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 221,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:34.859Z"
     },
     "kawazu>nagoya": {
       "from": "kawazu",
@@ -366,6 +1182,30 @@
       "warnings": [],
       "computedAt": "2026-10-08T05:51:41.799Z"
     },
+    "kawazu>suwa": {
+      "from": "kawazu",
+      "to": "suwa",
+      "distanceKm": 239.2,
+      "durationMin": 201,
+      "winterDurationMin": 203,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 1069,
+        "kmAbove1000m": 9,
+        "kmSteep": 1.3,
+        "freezeRatio": 0.57,
+        "snowRatio": 0.41,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 199,
+        "tunnels": 29,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 201,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:43.809Z"
+    },
     "kawazu>suzuka": {
       "from": "kawazu",
       "to": "suzuka",
@@ -438,6 +1278,33 @@
       "warnings": [],
       "computedAt": "2026-10-08T05:53:01.982Z"
     },
+    "kusatsu>bessho": {
+      "from": "kusatsu",
+      "to": "bessho",
+      "distanceKm": 66.4,
+      "durationMin": 93,
+      "winterDurationMin": 104,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1369,
+        "kmAbove1000m": 22,
+        "kmSteep": 2.5,
+        "freezeRatio": 0.93,
+        "snowRatio": 0.97,
+        "kmSnowyMinorRoad": 6,
+        "bridges": 29,
+        "tunnels": 1,
+        "kmMinorRoad": 0.7,
+        "curvinessDegPerKm": 144,
+        "ferry": false,
+        "toll": false
+      },
+      "warnings": [
+        "6 km of minor road (below 国道 and main prefectural roads) with snow on the ground on most days: winter tyres, and carry chains.",
+        "2.5 km of sustained grades over 8% where most nights freeze."
+      ],
+      "computedAt": "2026-10-08T06:47:38.202Z"
+    },
     "kusatsu>gero": {
       "from": "kusatsu",
       "to": "gero",
@@ -464,6 +1331,32 @@
       ],
       "computedAt": "2026-10-08T05:30:53.585Z"
     },
+    "kusatsu>kanazawa": {
+      "from": "kusatsu",
+      "to": "kanazawa",
+      "distanceKm": 313,
+      "durationMin": 269,
+      "winterDurationMin": 287,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1369,
+        "kmAbove1000m": 35,
+        "kmSteep": 4.2,
+        "freezeRatio": 0.66,
+        "snowRatio": 0.8,
+        "kmSnowyMinorRoad": 1,
+        "bridges": 239,
+        "tunnels": 48,
+        "kmMinorRoad": 0.7,
+        "curvinessDegPerKm": 196,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [
+        "4.2 km of sustained grades over 8% where most nights freeze."
+      ],
+      "computedAt": "2026-10-08T06:50:10.163Z"
+    },
     "kusatsu>kawazu": {
       "from": "kusatsu",
       "to": "kawazu",
@@ -489,6 +1382,32 @@
         "3.9 km of sustained grades over 8% where most nights freeze."
       ],
       "computedAt": "2026-10-08T05:51:40.471Z"
+    },
+    "kusatsu>matsumoto": {
+      "from": "kusatsu",
+      "to": "matsumoto",
+      "distanceKm": 125.5,
+      "durationMin": 124,
+      "winterDurationMin": 135,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1369,
+        "kmAbove1000m": 22,
+        "kmSteep": 2.5,
+        "freezeRatio": 0.79,
+        "snowRatio": 0.85,
+        "kmSnowyMinorRoad": 1.4,
+        "bridges": 80,
+        "tunnels": 19,
+        "kmMinorRoad": 0.8,
+        "curvinessDegPerKm": 171,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [
+        "2.5 km of sustained grades over 8% where most nights freeze."
+      ],
+      "computedAt": "2026-10-08T06:50:34.588Z"
     },
     "kusatsu>nagoya": {
       "from": "kusatsu",
@@ -597,6 +1516,33 @@
       ],
       "computedAt": "2026-10-08T05:30:52.602Z"
     },
+    "kusatsu>suwa": {
+      "from": "kusatsu",
+      "to": "suwa",
+      "distanceKm": 104.6,
+      "durationMin": 137,
+      "winterDurationMin": 151,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1386,
+        "kmAbove1000m": 35,
+        "kmSteep": 3.4,
+        "freezeRatio": 0.91,
+        "snowRatio": 0.92,
+        "kmSnowyMinorRoad": 7,
+        "bridges": 49,
+        "tunnels": 2,
+        "kmMinorRoad": 0.7,
+        "curvinessDegPerKm": 135,
+        "ferry": false,
+        "toll": false
+      },
+      "warnings": [
+        "7 km of minor road (below 国道 and main prefectural roads) with snow on the ground on most days: winter tyres, and carry chains.",
+        "3.4 km of sustained grades over 8% where most nights freeze."
+      ],
+      "computedAt": "2026-10-08T06:50:43.544Z"
+    },
     "kusatsu>suzuka": {
       "from": "kusatsu",
       "to": "suzuka",
@@ -676,6 +1622,347 @@
       ],
       "computedAt": "2026-10-08T05:53:01.354Z"
     },
+    "matsumoto>bessho": {
+      "from": "matsumoto",
+      "to": "bessho",
+      "distanceKm": 39.2,
+      "durationMin": 57,
+      "winterDurationMin": 63,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1090,
+        "kmAbove1000m": 4,
+        "kmSteep": 2.2,
+        "freezeRatio": 0.81,
+        "snowRatio": 0.88,
+        "kmSnowyMinorRoad": 9.1,
+        "bridges": 35,
+        "tunnels": 4,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 186,
+        "ferry": false,
+        "toll": false
+      },
+      "warnings": [
+        "9.1 km of minor road (below 国道 and main prefectural roads) with snow on the ground on most days: winter tyres, and carry chains.",
+        "2.2 km of sustained grades over 8% where most nights freeze."
+      ],
+      "computedAt": "2026-10-08T06:50:39.600Z"
+    },
+    "matsumoto>gero": {
+      "from": "matsumoto",
+      "to": "gero",
+      "distanceKm": 130,
+      "durationMin": 156,
+      "winterDurationMin": 166,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1447,
+        "kmAbove1000m": 31,
+        "kmSteep": 1.7,
+        "freezeRatio": 0.81,
+        "snowRatio": 0.89,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 76,
+        "tunnels": 30,
+        "kmMinorRoad": 0.3,
+        "curvinessDegPerKm": 118,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:38.321Z"
+    },
+    "matsumoto>kanazawa": {
+      "from": "matsumoto",
+      "to": "kanazawa",
+      "distanceKm": 199.3,
+      "durationMin": 199,
+      "winterDurationMin": 209,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1447,
+        "kmAbove1000m": 31,
+        "kmSteep": 1.7,
+        "freezeRatio": 0.62,
+        "snowRatio": 0.7,
+        "kmSnowyMinorRoad": 0.1,
+        "bridges": 119,
+        "tunnels": 53,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 120,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:39.939Z"
+    },
+    "matsumoto>kawazu": {
+      "from": "matsumoto",
+      "to": "kawazu",
+      "distanceKm": 270.9,
+      "durationMin": 220,
+      "winterDurationMin": 223,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 1068,
+        "kmAbove1000m": 10,
+        "kmSteep": 0.8,
+        "freezeRatio": 0.61,
+        "snowRatio": 0.47,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 229,
+        "tunnels": 33,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 217,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:38.809Z"
+    },
+    "matsumoto>kusatsu": {
+      "from": "matsumoto",
+      "to": "kusatsu",
+      "distanceKm": 126.2,
+      "durationMin": 125,
+      "winterDurationMin": 134,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1369,
+        "kmAbove1000m": 23.1,
+        "kmSteep": 2.2,
+        "freezeRatio": 0.77,
+        "snowRatio": 0.83,
+        "kmSnowyMinorRoad": 0.1,
+        "bridges": 82,
+        "tunnels": 19,
+        "kmMinorRoad": 0.5,
+        "curvinessDegPerKm": 169,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [
+        "2.2 km of sustained grades over 8% where most nights freeze."
+      ],
+      "computedAt": "2026-10-08T06:50:38.567Z"
+    },
+    "matsumoto>nagoya": {
+      "from": "matsumoto",
+      "to": "nagoya",
+      "distanceKm": 215.4,
+      "durationMin": 163,
+      "winterDurationMin": 167,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 880,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.75,
+        "snowRatio": 0.56,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 151,
+        "tunnels": 8,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 142,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:37.205Z"
+    },
+    "matsumoto>ngo": {
+      "from": "matsumoto",
+      "to": "ngo",
+      "distanceKm": 253.9,
+      "durationMin": 192,
+      "winterDurationMin": 196,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 880,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.67,
+        "snowRatio": 0.48,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 190,
+        "tunnels": 14,
+        "kmMinorRoad": 0.5,
+        "curvinessDegPerKm": 181,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:37.076Z"
+    },
+    "matsumoto>okuhida": {
+      "from": "matsumoto",
+      "to": "okuhida",
+      "distanceKm": 49.3,
+      "durationMin": 62,
+      "winterDurationMin": 67,
+      "difficulty": 3,
+      "factors": {
+        "maxElevationM": 1369,
+        "kmAbove1000m": 20.2,
+        "kmSteep": 0.8,
+        "freezeRatio": 0.76,
+        "snowRatio": 0.84,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 33,
+        "tunnels": 22,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 123,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:38.354Z"
+    },
+    "matsumoto>osaka": {
+      "from": "matsumoto",
+      "to": "osaka",
+      "distanceKm": 383.4,
+      "durationMin": 286,
+      "winterDurationMin": 290,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 880,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.65,
+        "snowRatio": 0.34,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 262,
+        "tunnels": 24,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 265,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:37.689Z"
+    },
+    "matsumoto>suwa": {
+      "from": "matsumoto",
+      "to": "suwa",
+      "distanceKm": 34.9,
+      "durationMin": 37,
+      "winterDurationMin": 39,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 880,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.85,
+        "snowRatio": 0.95,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 23,
+        "tunnels": 1,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 139,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:45.124Z"
+    },
+    "matsumoto>suzuka": {
+      "from": "matsumoto",
+      "to": "suzuka",
+      "distanceKm": 267.4,
+      "durationMin": 214,
+      "winterDurationMin": 218,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 880,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.66,
+        "snowRatio": 0.45,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 185,
+        "tunnels": 13,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 68,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:37.322Z"
+    },
+    "matsumoto>tokyo": {
+      "from": "matsumoto",
+      "to": "tokyo",
+      "distanceKm": 228.1,
+      "durationMin": 184,
+      "winterDurationMin": 187,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 1017,
+        "kmAbove1000m": 2,
+        "kmSteep": 0,
+        "freezeRatio": 0.71,
+        "snowRatio": 0.51,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 193,
+        "tunnels": 18,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 243,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:38.090Z"
+    },
+    "matsumoto>yunomine": {
+      "from": "matsumoto",
+      "to": "yunomine",
+      "distanceKm": 453.5,
+      "durationMin": 368,
+      "winterDurationMin": 372,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 880,
+        "kmAbove1000m": 0,
+        "kmSteep": 1.6,
+        "freezeRatio": 0.5,
+        "snowRatio": 0.27,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 313,
+        "tunnels": 61,
+        "kmMinorRoad": 2,
+        "curvinessDegPerKm": 147,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:39.513Z"
+    },
+    "nagoya>bessho": {
+      "from": "nagoya",
+      "to": "bessho",
+      "distanceKm": 243.6,
+      "durationMin": 207,
+      "winterDurationMin": 215,
+      "difficulty": 3,
+      "factors": {
+        "maxElevationM": 1389,
+        "kmAbove1000m": 13,
+        "kmSteep": 1.5,
+        "freezeRatio": 0.76,
+        "snowRatio": 0.59,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 161,
+        "tunnels": 15,
+        "kmMinorRoad": 0,
+        "curvinessDegPerKm": 107,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:47:15.593Z"
+    },
     "nagoya>gero": {
       "from": "nagoya",
       "to": "gero",
@@ -699,6 +1986,30 @@
       },
       "warnings": [],
       "computedAt": "2026-10-08T05:27:07.975Z"
+    },
+    "nagoya>kanazawa": {
+      "from": "nagoya",
+      "to": "kanazawa",
+      "distanceKm": 234,
+      "durationMin": 183,
+      "winterDurationMin": 186,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 1098,
+        "kmAbove1000m": 8,
+        "kmSteep": 0,
+        "freezeRatio": 0.58,
+        "snowRatio": 0.48,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 147,
+        "tunnels": 63,
+        "kmMinorRoad": 0,
+        "curvinessDegPerKm": 98,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:48:05.451Z"
     },
     "nagoya>kawazu": {
       "from": "nagoya",
@@ -750,6 +2061,30 @@
         "11.1 km of sustained grades over 8% where most nights freeze."
       ],
       "computedAt": "2026-10-08T05:27:08.908Z"
+    },
+    "nagoya>matsumoto": {
+      "from": "nagoya",
+      "to": "matsumoto",
+      "distanceKm": 215.5,
+      "durationMin": 160,
+      "winterDurationMin": 165,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 880,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.75,
+        "snowRatio": 0.56,
+        "kmSnowyMinorRoad": 0.3,
+        "bridges": 148,
+        "tunnels": 8,
+        "kmMinorRoad": 0,
+        "curvinessDegPerKm": 217,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:33.093Z"
     },
     "nagoya>ngo": {
       "from": "nagoya",
@@ -823,6 +2158,30 @@
       "warnings": [],
       "computedAt": "2026-10-08T05:27:06.889Z"
     },
+    "nagoya>suwa": {
+      "from": "nagoya",
+      "to": "suwa",
+      "distanceKm": 203,
+      "durationMin": 152,
+      "winterDurationMin": 156,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 836,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.75,
+        "snowRatio": 0.54,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 146,
+        "tunnels": 8,
+        "kmMinorRoad": 0,
+        "curvinessDegPerKm": 98,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:41.282Z"
+    },
     "nagoya>suzuka": {
       "from": "nagoya",
       "to": "suzuka",
@@ -895,6 +2254,30 @@
       "warnings": [],
       "computedAt": "2026-10-08T05:52:31.387Z"
     },
+    "ngo>bessho": {
+      "from": "ngo",
+      "to": "bessho",
+      "distanceKm": 279.8,
+      "durationMin": 238,
+      "winterDurationMin": 246,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1389,
+        "kmAbove1000m": 12,
+        "kmSteep": 1.5,
+        "freezeRatio": 0.7,
+        "snowRatio": 0.51,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 203,
+        "tunnels": 22,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 105,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:47:15.343Z"
+    },
     "ngo>gero": {
       "from": "ngo",
       "to": "gero",
@@ -918,6 +2301,30 @@
       },
       "warnings": [],
       "computedAt": "2026-10-08T05:27:05.256Z"
+    },
+    "ngo>kanazawa": {
+      "from": "ngo",
+      "to": "kanazawa",
+      "distanceKm": 277.8,
+      "durationMin": 216,
+      "winterDurationMin": 220,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 1097,
+        "kmAbove1000m": 9,
+        "kmSteep": 0,
+        "freezeRatio": 0.54,
+        "snowRatio": 0.4,
+        "kmSnowyMinorRoad": 0.5,
+        "bridges": 173,
+        "tunnels": 64,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 99,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:48:05.283Z"
     },
     "ngo>kawazu": {
       "from": "ngo",
@@ -969,6 +2376,30 @@
         "10.7 km of sustained grades over 8% where most nights freeze."
       ],
       "computedAt": "2026-10-08T05:27:06.174Z"
+    },
+    "ngo>matsumoto": {
+      "from": "ngo",
+      "to": "matsumoto",
+      "distanceKm": 251.8,
+      "durationMin": 190,
+      "winterDurationMin": 195,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 880,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.67,
+        "snowRatio": 0.47,
+        "kmSnowyMinorRoad": 0.5,
+        "bridges": 190,
+        "tunnels": 15,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 169,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:32.939Z"
     },
     "ngo>nagoya": {
       "from": "ngo",
@@ -1042,6 +2473,30 @@
       "warnings": [],
       "computedAt": "2026-10-08T05:27:04.030Z"
     },
+    "ngo>suwa": {
+      "from": "ngo",
+      "to": "suwa",
+      "distanceKm": 239.3,
+      "durationMin": 183,
+      "winterDurationMin": 187,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 836,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.68,
+        "snowRatio": 0.46,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 188,
+        "tunnels": 15,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 88,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:41.145Z"
+    },
     "ngo>suzuka": {
       "from": "ngo",
       "to": "suzuka",
@@ -1114,6 +2569,33 @@
       "warnings": [],
       "computedAt": "2026-10-08T05:52:30.754Z"
     },
+    "okuhida>bessho": {
+      "from": "okuhida",
+      "to": "bessho",
+      "distanceKm": 85.2,
+      "durationMin": 112,
+      "winterDurationMin": 122,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1365,
+        "kmAbove1000m": 24,
+        "kmSteep": 2.8,
+        "freezeRatio": 0.8,
+        "snowRatio": 0.88,
+        "kmSnowyMinorRoad": 14,
+        "bridges": 66,
+        "tunnels": 26,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 154,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [
+        "14 km of minor road (below 国道 and main prefectural roads) with snow on the ground on most days: winter tyres, and carry chains.",
+        "2.8 km of sustained grades over 8% where most nights freeze."
+      ],
+      "computedAt": "2026-10-08T06:47:37.396Z"
+    },
     "okuhida>gero": {
       "from": "okuhida",
       "to": "gero",
@@ -1137,6 +2619,30 @@
       },
       "warnings": [],
       "computedAt": "2026-10-08T05:30:50.918Z"
+    },
+    "okuhida>kanazawa": {
+      "from": "okuhida",
+      "to": "kanazawa",
+      "distanceKm": 151.4,
+      "durationMin": 139,
+      "winterDurationMin": 145,
+      "difficulty": 3,
+      "factors": {
+        "maxElevationM": 1449,
+        "kmAbove1000m": 12,
+        "kmSteep": 0,
+        "freezeRatio": 0.59,
+        "snowRatio": 0.67,
+        "kmSnowyMinorRoad": 0.3,
+        "bridges": 86,
+        "tunnels": 31,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 119,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:49:05.595Z"
     },
     "okuhida>kawazu": {
       "from": "okuhida",
@@ -1187,6 +2693,30 @@
         "2.7 km of sustained grades over 8% where most nights freeze."
       ],
       "computedAt": "2026-10-08T05:30:51.271Z"
+    },
+    "okuhida>matsumoto": {
+      "from": "okuhida",
+      "to": "matsumoto",
+      "distanceKm": 49.3,
+      "durationMin": 62,
+      "winterDurationMin": 67,
+      "difficulty": 3,
+      "factors": {
+        "maxElevationM": 1365,
+        "kmAbove1000m": 20,
+        "kmSteep": 0.8,
+        "freezeRatio": 0.8,
+        "snowRatio": 0.88,
+        "kmSnowyMinorRoad": 0.2,
+        "bridges": 33,
+        "tunnels": 22,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 122,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:34.350Z"
     },
     "okuhida>nagoya": {
       "from": "okuhida",
@@ -1260,6 +2790,30 @@
       "warnings": [],
       "computedAt": "2026-10-08T05:30:50.298Z"
     },
+    "okuhida>suwa": {
+      "from": "okuhida",
+      "to": "suwa",
+      "distanceKm": 79.5,
+      "durationMin": 89,
+      "winterDurationMin": 95,
+      "difficulty": 3,
+      "factors": {
+        "maxElevationM": 1365,
+        "kmAbove1000m": 20,
+        "kmSteep": 0.8,
+        "freezeRatio": 0.81,
+        "snowRatio": 0.89,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 51,
+        "tunnels": 23,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 130,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:42.970Z"
+    },
     "okuhida>suzuka": {
       "from": "okuhida",
       "to": "suzuka",
@@ -1332,6 +2886,30 @@
       "warnings": [],
       "computedAt": "2026-10-08T05:53:00.704Z"
     },
+    "osaka>bessho": {
+      "from": "osaka",
+      "to": "bessho",
+      "distanceKm": 410.2,
+      "durationMin": 333,
+      "winterDurationMin": 340,
+      "difficulty": 3,
+      "factors": {
+        "maxElevationM": 1374,
+        "kmAbove1000m": 13,
+        "kmSteep": 0.6,
+        "freezeRatio": 0.67,
+        "snowRatio": 0.37,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 257,
+        "tunnels": 33,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 104,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:47:16.846Z"
+    },
     "osaka>gero": {
       "from": "osaka",
       "to": "gero",
@@ -1355,6 +2933,30 @@
       },
       "warnings": [],
       "computedAt": "2026-10-08T05:27:40.843Z"
+    },
+    "osaka>kanazawa": {
+      "from": "osaka",
+      "to": "kanazawa",
+      "distanceKm": 305,
+      "durationMin": 239,
+      "winterDurationMin": 240,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 259,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.45,
+        "snowRatio": 0.25,
+        "kmSnowyMinorRoad": 2,
+        "bridges": 185,
+        "tunnels": 32,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 57,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:49:01.461Z"
     },
     "osaka>kawazu": {
       "from": "osaka",
@@ -1406,6 +3008,30 @@
         "10.8 km of sustained grades over 8% where most nights freeze."
       ],
       "computedAt": "2026-10-08T05:27:44.471Z"
+    },
+    "osaka>matsumoto": {
+      "from": "osaka",
+      "to": "matsumoto",
+      "distanceKm": 382.1,
+      "durationMin": 286,
+      "winterDurationMin": 290,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 880,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.66,
+        "snowRatio": 0.34,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 244,
+        "tunnels": 26,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 219,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:33.615Z"
     },
     "osaka>nagoya": {
       "from": "osaka",
@@ -1479,6 +3105,30 @@
       "warnings": [],
       "computedAt": "2026-10-08T05:27:41.239Z"
     },
+    "osaka>suwa": {
+      "from": "osaka",
+      "to": "suwa",
+      "distanceKm": 369.6,
+      "durationMin": 278,
+      "winterDurationMin": 282,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 837,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.65,
+        "snowRatio": 0.32,
+        "kmSnowyMinorRoad": 1,
+        "bridges": 242,
+        "tunnels": 26,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 89,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:41.779Z"
+    },
     "osaka>suzuka": {
       "from": "osaka",
       "to": "suzuka",
@@ -1551,6 +3201,345 @@
       "warnings": [],
       "computedAt": "2026-10-08T05:52:58.632Z"
     },
+    "suwa>bessho": {
+      "from": "suwa",
+      "to": "bessho",
+      "distanceKm": 54.9,
+      "durationMin": 70,
+      "winterDurationMin": 75,
+      "difficulty": 3,
+      "factors": {
+        "maxElevationM": 1386,
+        "kmAbove1000m": 13,
+        "kmSteep": 0.9,
+        "freezeRatio": 0.86,
+        "snowRatio": 0.87,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 31,
+        "tunnels": 3,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 105,
+        "ferry": false,
+        "toll": false
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:47.498Z"
+    },
+    "suwa>gero": {
+      "from": "suwa",
+      "to": "gero",
+      "distanceKm": 176.6,
+      "durationMin": 155,
+      "winterDurationMin": 161,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 839,
+        "kmAbove1000m": 0,
+        "kmSteep": 0.4,
+        "freezeRatio": 0.81,
+        "snowRatio": 0.79,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 126,
+        "tunnels": 10,
+        "kmMinorRoad": 0.3,
+        "curvinessDegPerKm": 100,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:46.299Z"
+    },
+    "suwa>kanazawa": {
+      "from": "suwa",
+      "to": "kanazawa",
+      "distanceKm": 230.1,
+      "durationMin": 227,
+      "winterDurationMin": 238,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1448,
+        "kmAbove1000m": 32,
+        "kmSteep": 1.4,
+        "freezeRatio": 0.66,
+        "snowRatio": 0.74,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 137,
+        "tunnels": 55,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 123,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:47.879Z"
+    },
+    "suwa>kawazu": {
+      "from": "suwa",
+      "to": "kawazu",
+      "distanceKm": 237.9,
+      "durationMin": 198,
+      "winterDurationMin": 200,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 1069,
+        "kmAbove1000m": 9,
+        "kmSteep": 0.9,
+        "freezeRatio": 0.58,
+        "snowRatio": 0.41,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 200,
+        "tunnels": 29,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 208,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:46.870Z"
+    },
+    "suwa>kusatsu": {
+      "from": "suwa",
+      "to": "kusatsu",
+      "distanceKm": 101.2,
+      "durationMin": 137,
+      "winterDurationMin": 153,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1731,
+        "kmAbove1000m": 42,
+        "kmSteep": 9.9,
+        "freezeRatio": 0.91,
+        "snowRatio": 0.88,
+        "kmSnowyMinorRoad": 1,
+        "bridges": 36,
+        "tunnels": 2,
+        "kmMinorRoad": 0.3,
+        "curvinessDegPerKm": 167,
+        "ferry": false,
+        "toll": false
+      },
+      "warnings": [
+        "Climbs to 1731 m: check this pass is open in February and add it to data/winter-closures.json if it is not.",
+        "9.9 km of sustained grades over 8% where most nights freeze."
+      ],
+      "computedAt": "2026-10-08T06:50:46.624Z"
+    },
+    "suwa>matsumoto": {
+      "from": "suwa",
+      "to": "matsumoto",
+      "distanceKm": 35.4,
+      "durationMin": 38,
+      "winterDurationMin": 40,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 880,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.85,
+        "snowRatio": 0.95,
+        "kmSnowyMinorRoad": 0.3,
+        "bridges": 22,
+        "tunnels": 2,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 152,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:47.922Z"
+    },
+    "suwa>nagoya": {
+      "from": "suwa",
+      "to": "nagoya",
+      "distanceKm": 203.2,
+      "durationMin": 155,
+      "winterDurationMin": 159,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 839,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.76,
+        "snowRatio": 0.54,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 148,
+        "tunnels": 8,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 116,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:45.358Z"
+    },
+    "suwa>ngo": {
+      "from": "suwa",
+      "to": "ngo",
+      "distanceKm": 241.7,
+      "durationMin": 184,
+      "winterDurationMin": 188,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 839,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.67,
+        "snowRatio": 0.46,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 187,
+        "tunnels": 14,
+        "kmMinorRoad": 0.4,
+        "curvinessDegPerKm": 135,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:45.253Z"
+    },
+    "suwa>okuhida": {
+      "from": "suwa",
+      "to": "okuhida",
+      "distanceKm": 80.1,
+      "durationMin": 90,
+      "winterDurationMin": 96,
+      "difficulty": 3,
+      "factors": {
+        "maxElevationM": 1368,
+        "kmAbove1000m": 21,
+        "kmSteep": 0.5,
+        "freezeRatio": 0.81,
+        "snowRatio": 0.89,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 51,
+        "tunnels": 24,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 132,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:46.439Z"
+    },
+    "suwa>osaka": {
+      "from": "suwa",
+      "to": "osaka",
+      "distanceKm": 371.2,
+      "durationMin": 278,
+      "winterDurationMin": 282,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 839,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.65,
+        "snowRatio": 0.32,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 259,
+        "tunnels": 24,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 184,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:45.800Z"
+    },
+    "suwa>suzuka": {
+      "from": "suwa",
+      "to": "suzuka",
+      "distanceKm": 255.1,
+      "durationMin": 206,
+      "winterDurationMin": 210,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 839,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.65,
+        "snowRatio": 0.43,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 182,
+        "tunnels": 13,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 67,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:45.462Z"
+    },
+    "suwa>tokyo": {
+      "from": "suwa",
+      "to": "tokyo",
+      "distanceKm": 195.2,
+      "durationMin": 162,
+      "winterDurationMin": 164,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 1015,
+        "kmAbove1000m": 2,
+        "kmSteep": 0,
+        "freezeRatio": 0.69,
+        "snowRatio": 0.44,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 164,
+        "tunnels": 14,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 158,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:46.173Z"
+    },
+    "suwa>yunomine": {
+      "from": "suwa",
+      "to": "yunomine",
+      "distanceKm": 441.3,
+      "durationMin": 360,
+      "winterDurationMin": 364,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 839,
+        "kmAbove1000m": 0,
+        "kmSteep": 1.3,
+        "freezeRatio": 0.5,
+        "snowRatio": 0.25,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 310,
+        "tunnels": 61,
+        "kmMinorRoad": 1.9,
+        "curvinessDegPerKm": 143,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:47.388Z"
+    },
+    "suzuka>bessho": {
+      "from": "suzuka",
+      "to": "bessho",
+      "distanceKm": 293.5,
+      "durationMin": 261,
+      "winterDurationMin": 269,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1382,
+        "kmAbove1000m": 13,
+        "kmSteep": 1.7,
+        "freezeRatio": 0.67,
+        "snowRatio": 0.48,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 176,
+        "tunnels": 16,
+        "kmMinorRoad": 0,
+        "curvinessDegPerKm": 90,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:47:16.305Z"
+    },
     "suzuka>gero": {
       "from": "suzuka",
       "to": "gero",
@@ -1574,6 +3563,30 @@
       },
       "warnings": [],
       "computedAt": "2026-10-08T05:27:10.826Z"
+    },
+    "suzuka>kanazawa": {
+      "from": "suzuka",
+      "to": "kanazawa",
+      "distanceKm": 261.4,
+      "durationMin": 241,
+      "winterDurationMin": 242,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 266,
+        "kmAbove1000m": 0,
+        "kmSteep": 0.4,
+        "freezeRatio": 0.44,
+        "snowRatio": 0.29,
+        "kmSnowyMinorRoad": 1.2,
+        "bridges": 196,
+        "tunnels": 22,
+        "kmMinorRoad": 0,
+        "curvinessDegPerKm": 72,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:48:58.207Z"
     },
     "suzuka>kawazu": {
       "from": "suzuka",
@@ -1625,6 +3638,30 @@
         "11.6 km of sustained grades over 8% where most nights freeze."
       ],
       "computedAt": "2026-10-08T05:27:11.761Z"
+    },
+    "suzuka>matsumoto": {
+      "from": "suzuka",
+      "to": "matsumoto",
+      "distanceKm": 265.4,
+      "durationMin": 214,
+      "winterDurationMin": 218,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 880,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.66,
+        "snowRatio": 0.45,
+        "kmSnowyMinorRoad": 0.2,
+        "bridges": 163,
+        "tunnels": 9,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 71,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:33.233Z"
     },
     "suzuka>nagoya": {
       "from": "suzuka",
@@ -1722,6 +3759,30 @@
       "warnings": [],
       "computedAt": "2026-10-08T05:27:09.677Z"
     },
+    "suzuka>suwa": {
+      "from": "suzuka",
+      "to": "suwa",
+      "distanceKm": 252.9,
+      "durationMin": 206,
+      "winterDurationMin": 210,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 836,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.66,
+        "snowRatio": 0.43,
+        "kmSnowyMinorRoad": 1,
+        "bridges": 161,
+        "tunnels": 9,
+        "kmMinorRoad": 0,
+        "curvinessDegPerKm": 64,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:41.402Z"
+    },
     "suzuka>tokyo": {
       "from": "suzuka",
       "to": "tokyo",
@@ -1770,6 +3831,30 @@
       "warnings": [],
       "computedAt": "2026-10-08T05:52:31.501Z"
     },
+    "tokyo>bessho": {
+      "from": "tokyo",
+      "to": "bessho",
+      "distanceKm": 218.1,
+      "durationMin": 186,
+      "winterDurationMin": 188,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 923,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.65,
+        "snowRatio": 0.34,
+        "kmSnowyMinorRoad": 2,
+        "bridges": 144,
+        "tunnels": 28,
+        "kmMinorRoad": 0,
+        "curvinessDegPerKm": 122,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:47:33.255Z"
+    },
     "tokyo>gero": {
       "from": "tokyo",
       "to": "gero",
@@ -1793,6 +3878,32 @@
       },
       "warnings": [],
       "computedAt": "2026-10-08T05:28:52.090Z"
+    },
+    "tokyo>kanazawa": {
+      "from": "tokyo",
+      "to": "kanazawa",
+      "distanceKm": 422.3,
+      "durationMin": 372,
+      "winterDurationMin": 384,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1447,
+        "kmAbove1000m": 33,
+        "kmSteep": 2,
+        "freezeRatio": 0.67,
+        "snowRatio": 0.6,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 309,
+        "tunnels": 75,
+        "kmMinorRoad": 0,
+        "curvinessDegPerKm": 124,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [
+        "2 km of sustained grades over 8% where most nights freeze."
+      ],
+      "computedAt": "2026-10-08T06:49:02.325Z"
     },
     "tokyo>kawazu": {
       "from": "tokyo",
@@ -1843,6 +3954,30 @@
         "3.1 km of sustained grades over 8% where most nights freeze."
       ],
       "computedAt": "2026-10-08T05:30:07.878Z"
+    },
+    "tokyo>matsumoto": {
+      "from": "tokyo",
+      "to": "matsumoto",
+      "distanceKm": 227.6,
+      "durationMin": 183,
+      "winterDurationMin": 185,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 1016,
+        "kmAbove1000m": 2,
+        "kmSteep": 0,
+        "freezeRatio": 0.72,
+        "snowRatio": 0.51,
+        "kmSnowyMinorRoad": 0.3,
+        "bridges": 194,
+        "tunnels": 22,
+        "kmMinorRoad": 0,
+        "curvinessDegPerKm": 195,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:34.055Z"
     },
     "tokyo>nagoya": {
       "from": "tokyo",
@@ -1940,6 +4075,30 @@
       "warnings": [],
       "computedAt": "2026-10-08T05:27:46.435Z"
     },
+    "tokyo>suwa": {
+      "from": "tokyo",
+      "to": "suwa",
+      "distanceKm": 194.8,
+      "durationMin": 161,
+      "winterDurationMin": 163,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 1016,
+        "kmAbove1000m": 2,
+        "kmSteep": 0,
+        "freezeRatio": 0.7,
+        "snowRatio": 0.44,
+        "kmSnowyMinorRoad": 1,
+        "bridges": 165,
+        "tunnels": 18,
+        "kmMinorRoad": 0,
+        "curvinessDegPerKm": 98,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:42.177Z"
+    },
     "tokyo>suzuka": {
       "from": "tokyo",
       "to": "suzuka",
@@ -1988,6 +4147,30 @@
       "warnings": [],
       "computedAt": "2026-10-08T05:53:00.018Z"
     },
+    "yunomine>bessho": {
+      "from": "yunomine",
+      "to": "bessho",
+      "distanceKm": 481.1,
+      "durationMin": 413,
+      "winterDurationMin": 422,
+      "difficulty": 4,
+      "factors": {
+        "maxElevationM": 1379,
+        "kmAbove1000m": 12,
+        "kmSteep": 3,
+        "freezeRatio": 0.52,
+        "snowRatio": 0.3,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 326,
+        "tunnels": 68,
+        "kmMinorRoad": 1.8,
+        "curvinessDegPerKm": 123,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:47:39.488Z"
+    },
     "yunomine>gero": {
       "from": "yunomine",
       "to": "gero",
@@ -2011,6 +4194,30 @@
       },
       "warnings": [],
       "computedAt": "2026-10-08T05:53:04.648Z"
+    },
+    "yunomine>kanazawa": {
+      "from": "yunomine",
+      "to": "kanazawa",
+      "distanceKm": 432.9,
+      "durationMin": 386,
+      "winterDurationMin": 387,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 361,
+        "kmAbove1000m": 0,
+        "kmSteep": 1.3,
+        "freezeRatio": 0.35,
+        "snowRatio": 0.18,
+        "kmSnowyMinorRoad": 1.4,
+        "bridges": 303,
+        "tunnels": 72,
+        "kmMinorRoad": 1.8,
+        "curvinessDegPerKm": 122,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:20.323Z"
     },
     "yunomine>kawazu": {
       "from": "yunomine",
@@ -2061,6 +4268,30 @@
         "Climbs to 1732 m: check this pass is open in February and add it to data/winter-closures.json if it is not."
       ],
       "computedAt": "2026-10-08T05:53:05.557Z"
+    },
+    "yunomine>matsumoto": {
+      "from": "yunomine",
+      "to": "matsumoto",
+      "distanceKm": 453,
+      "durationMin": 366,
+      "winterDurationMin": 371,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 880,
+        "kmAbove1000m": 0,
+        "kmSteep": 0.9,
+        "freezeRatio": 0.5,
+        "snowRatio": 0.26,
+        "kmSnowyMinorRoad": 0.5,
+        "bridges": 313,
+        "tunnels": 61,
+        "kmMinorRoad": 1.8,
+        "curvinessDegPerKm": 146,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:35.606Z"
     },
     "yunomine>nagoya": {
       "from": "yunomine",
@@ -2157,6 +4388,30 @@
       },
       "warnings": [],
       "computedAt": "2026-10-08T05:53:03.853Z"
+    },
+    "yunomine>suwa": {
+      "from": "yunomine",
+      "to": "suwa",
+      "distanceKm": 440.5,
+      "durationMin": 358,
+      "winterDurationMin": 363,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 836,
+        "kmAbove1000m": 0,
+        "kmSteep": 0.9,
+        "freezeRatio": 0.49,
+        "snowRatio": 0.25,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 311,
+        "tunnels": 61,
+        "kmMinorRoad": 1.8,
+        "curvinessDegPerKm": 133,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-08T06:50:44.562Z"
     },
     "yunomine>suzuka": {
       "from": "yunomine",
