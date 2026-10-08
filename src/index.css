@@ -1,0 +1,36 @@
+@import 'ol/ol.css';
+@import 'tailwindcss';
+@plugin "daisyui" {
+  themes: dark --default;
+}
+
+/* OpenLayers' own controls are styled for a light page; these bring them onto the dark theme. */
+.ol-control button {
+  background-color: color-mix(in oklab, var(--color-base-200) 90%, transparent);
+  color: var(--color-base-content);
+}
+.ol-control button:hover,
+.ol-control button:focus {
+  background-color: var(--color-base-300);
+  outline: none;
+}
+.ol-attribution {
+  background: color-mix(in oklab, var(--color-base-100) 75%, transparent) !important;
+  font-size: 10px;
+}
+.ol-attribution ul {
+  color: var(--color-base-content);
+  text-shadow: none;
+}
+.ol-attribution a {
+  color: var(--color-info);
+}
+
+/* The flight day: unavailable, and visibly so. */
+.bg-hatched {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    color-mix(in oklab, var(--color-base-content) 6%, transparent) 0 6px,
+    transparent 6px 12px
+  );
+}

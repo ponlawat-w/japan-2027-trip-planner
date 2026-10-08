@@ -1,0 +1,114 @@
+[
+  {
+    "id": "ngo",
+    "name": "Chubu Centrair Airport (NGO)",
+    "nameJa": "中部国際空港",
+    "kind": "airport",
+    "lat": 34.8599,
+    "lon": 136.8162,
+    "rating": 0,
+    "idealNights": 0,
+    "maxNights": 0
+  },
+  {
+    "id": "nagoya",
+    "name": "Nagoya",
+    "nameJa": "名古屋",
+    "kind": "city",
+    "lat": 35.1711,
+    "lon": 136.8847,
+    "rating": 2,
+    "idealNights": 1,
+    "maxNights": 2
+  },
+  {
+    "id": "suzuka",
+    "name": "Suzuka",
+    "nameJa": "鈴鹿",
+    "kind": "city",
+    "lat": 34.8818,
+    "lon": 136.5842,
+    "rating": 2,
+    "idealNights": 2,
+    "maxNights": 3
+  },
+  {
+    "id": "osaka",
+    "name": "Osaka",
+    "nameJa": "大阪",
+    "kind": "city",
+    "lat": 34.7025,
+    "lon": 135.4962,
+    "rating": 4,
+    "idealNights": 2,
+    "maxNights": 3
+  },
+  {
+    "id": "tokyo",
+    "name": "Tokyo",
+    "nameJa": "東京",
+    "kind": "city",
+    "lat": 35.6817,
+    "lon": 139.7644,
+    "rating": 4,
+    "idealNights": 3,
+    "maxNights": 4
+  },
+  {
+    "id": "gero",
+    "name": "Gero Onsen",
+    "nameJa": "下呂温泉",
+    "kind": "onsen",
+    "lat": 35.8058,
+    "lon": 137.2396,
+    "rating": 4,
+    "idealNights": 1,
+    "maxNights": 2
+  },
+  {
+    "id": "okuhida",
+    "name": "Okuhida Onsengo",
+    "nameJa": "奥飛騨温泉郷",
+    "kind": "onsen",
+    "lat": 36.1911,
+    "lon": 137.5517,
+    "rating": 5,
+    "idealNights": 1,
+    "maxNights": 2,
+    "note": "Point at Hirayu; Fukuchi and Shin-Hotaka are 5–15 km north"
+  },
+  {
+    "id": "kusatsu",
+    "name": "Kusatsu Onsen",
+    "nameJa": "草津温泉",
+    "kind": "onsen",
+    "lat": 36.6229,
+    "lon": 138.5967,
+    "rating": 5,
+    "idealNights": 1,
+    "maxNights": 2
+  },
+  {
+    "id": "kawazu",
+    "name": "Kawazu Onsen",
+    "nameJa": "河津温泉",
+    "kind": "onsen",
+    "lat": 34.7474,
+    "lon": 138.9965,
+    "rating": 3,
+    "idealNights": 1,
+    "maxNights": 2,
+    "note": "Kawazu-zakura bloom from early February"
+  },
+  {
+    "id": "yunomine",
+    "name": "Yunomine Onsen",
+    "nameJa": "湯の峰温泉",
+    "kind": "onsen",
+    "lat": 33.8287,
+    "lon": 135.7574,
+    "rating": 4,
+    "idealNights": 1,
+    "maxNights": 2
+  }
+]

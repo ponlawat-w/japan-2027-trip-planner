@@ -1,0 +1,11 @@
+node_modules
+dist
+*.log
+.DS_Store
+*.tsbuildinfo
+
+# CLI caches: DEM tiles and Open-Meteo responses, re-downloadable
+.cache
+
+# Valhalla's OSM extract and built routing tiles (several GB)
+valhalla/custom_files

@@ -1,0 +1,46 @@
+{
+  "name": "japan-2027-trip-planner",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint src cli",
+    "format": "prettier --write src cli",
+    "cli": "tsx cli/index.ts"
+  },
+  "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@radix-ui/react-dialog": "^1.1.23",
+    "clsx": "^2.1.1",
+    "daisyui": "^5.7.22",
+    "lucide-react": "^1.42.0",
+    "ol": "^10.10.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "tailwind-merge": "^3.6.0",
+    "zustand": "^5.0.15"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^22.15.0",
+    "@types/pngjs": "^6.0.5",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5",
+    "@vitejs/plugin-react": "^6.1.0",
+    "eslint": "^10.9.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.4",
+    "pngjs": "^7.0.0",
+    "prettier": "^3.9.6",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.20.0",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.67.0",
+    "vite": "^8.2.2"
+  }
+}

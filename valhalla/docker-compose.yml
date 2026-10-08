@@ -1,0 +1,20 @@
+# Self-hosted Valhalla for the route CLI (see valhalla/README.md).
+# The first start downloads Geofabrik's Japan extract and builds routing tiles into ./custom_files,
+# which takes a long while; later starts reuse the built tiles.
+services:
+  valhalla:
+    image: ghcr.io/valhalla/valhalla-scripted:latest
+    container_name: japan-trip-valhalla
+    ports:
+      - '8002:8002'
+    volumes:
+      - ./custom_files:/custom_files
+    environment:
+      - tile_urls=https://download.geofabrik.de/asia/japan-latest.osm.pbf
+      - server_threads=4
+      - use_tiles_ignore_pbf=True
+      - build_elevation=False
+      - build_admins=True
+      - build_time_zones=False
+      - serve_tiles=True
+    restart: unless-stopped
