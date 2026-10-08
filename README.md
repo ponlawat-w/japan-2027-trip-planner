@@ -93,7 +93,7 @@ Fields: `--kind` is `city`, `onsen` or `airport`.
 after which each extra night is worth about a third as much. `--max-nights` is a limit auto-fill
 never exceeds.
 
-Afterwards, commit `data/`. The next push to `main` deploys it.
+Afterwards, commit `data/`. The next push to `master` deploys it.
 
 #### Destinations not yet added
 
@@ -129,7 +129,7 @@ npm run cli -- add kawazu --name "Kawazu Onsen" --name-ja 河津温泉郷 --kind
 ## Deploying
 
 [.github/workflows/deploy.yml](.github/workflows/deploy.yml) lints, builds and publishes `dist/` to
-the `gh-pages` branch on every push to `main`. Once, in the repository settings: **Pages → Build
+the `gh-pages` branch on every push to `master`. Once, in the repository settings: **Pages → Build
 and deployment → Deploy from a branch → `gh-pages` / root.**
 
 ## Credits
