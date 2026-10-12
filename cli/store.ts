@@ -79,6 +79,7 @@ export const removeLegsOf = async (id: string): Promise<number> => {
     await rm(path.join(LEGS_DIR, legFileName(leg.from, leg.to)), { force: true });
     removed++;
   }
+  await rm(path.join(LEGS_DIR, id), { recursive: true, force: true });
   await writeMatrix(matrix);
   return removed;
 };

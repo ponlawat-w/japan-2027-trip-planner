@@ -12,7 +12,7 @@ time by a CLI and committed under `data/`, then bundled into the build.
 data/             ← written by the CLI, committed, bundled into the site
   destinations.json
   matrix.json         every directed leg: distance, time, difficulty, factors, warnings
-  legs/<a>__<b>.json  each leg's line, split into difficulty-coloured sections (lazy-loaded)
+  legs/<a>/<b>.json   each leg's line, split into difficulty-coloured sections (lazy-loaded)
   winter-closures.json  roads closed every winter, excluded from routing
 cli/              ← the CLI: Valhalla + GSI DEM + Open-Meteo → data/
 src/              ← the React app

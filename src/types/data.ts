@@ -89,7 +89,7 @@ export interface LegSection {
   line: string;
 }
 
-/** `data/legs/<from>__<to>.json`: one leg's line, loaded only when the leg is on the plan. */
+/** `data/legs/<from>/<to>.json`: one leg's line, loaded only when the leg is on the plan. */
 export interface LegGeometry {
   from: string;
   to: string;
@@ -98,4 +98,5 @@ export interface LegGeometry {
 
 export const legKey = (from: string, to: string): string => `${from}>${to}`;
 
-export const legFileName = (from: string, to: string): string => `${from}__${to}.json`;
+/** A leg's file under `data/legs/`: one folder per origin. */
+export const legFileName = (from: string, to: string): string => `${from}/${to}.json`;

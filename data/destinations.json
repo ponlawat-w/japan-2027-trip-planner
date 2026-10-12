@@ -154,5 +154,28 @@
     "rating": 4,
     "idealNights": 1,
     "maxNights": 2
+  },
+  {
+    "id": "shiga",
+    "name": "Shiga (Lake Biwa)",
+    "nameJa": "滋賀（琵琶湖）",
+    "kind": "city",
+    "lat": 35.0093,
+    "lon": 135.8667,
+    "rating": 3,
+    "idealNights": 1,
+    "maxNights": 2,
+    "note": "Point at Hama-Ōtsu on the lake's south shore"
+  },
+  {
+    "id": "fukui",
+    "name": "Fukui",
+    "nameJa": "福井",
+    "kind": "city",
+    "lat": 36.0622,
+    "lon": 136.2236,
+    "rating": 3,
+    "idealNights": 1,
+    "maxNights": 2
   }
 ]

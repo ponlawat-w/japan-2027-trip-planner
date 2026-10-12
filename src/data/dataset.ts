@@ -1,6 +1,7 @@
 import destinationsJson from '@data/destinations.json';
 import matrixJson from '@data/matrix.json';
 import {
+  legFileName,
   legKey,
   type Destination,
   type Difficulty,
@@ -101,7 +102,7 @@ export const getLeg = (from: string, to: string): Leg | undefined => {
   return estimate;
 };
 
-const geometryLoaders = import.meta.glob<LegGeometry>('../../data/legs/*.json', {
+const geometryLoaders = import.meta.glob<LegGeometry>('../../data/legs/*/*.json', {
   import: 'default',
 });
 const geometries = new Map<string, Promise<LegGeometry | null>>();
@@ -109,7 +110,7 @@ const geometries = new Map<string, Promise<LegGeometry | null>>();
 export const loadLegGeometry = (from: string, to: string): Promise<LegGeometry | null> => {
   const key = legKey(from, to);
   if (!geometries.has(key)) {
-    const loader = geometryLoaders[`../../data/legs/${from}__${to}.json`];
+    const loader = geometryLoaders[`../../data/legs/${legFileName(from, to)}`];
     geometries.set(key, loader ? loader() : Promise.resolve(null));
   }
   return geometries.get(key)!;
