@@ -1,4 +1,5 @@
 import type { Units } from '@/store/preferencesStore';
+import type { TrainLeg } from '@/types/data';
 
 const KM_PER_MILE = 1.609344;
 const FEET_PER_METRE = 3.28084;
@@ -27,6 +28,12 @@ export const formatTurnRate = (degreesPerKm: number, units: Units): string =>
   units === 'metric'
     ? `${Math.round(degreesPerKm)}°/km`
     : `${Math.round(degreesPerKm * KM_PER_MILE)}°/mi`;
+
+/** "direct", "1 change", "2 changes": the 乗り換え a train leg asks for. */
+export const formatChanges = (leg: TrainLeg): string => {
+  const changes = leg.segments.length - 1;
+  return changes === 0 ? 'direct' : `${changes} change${changes > 1 ? 's' : ''}`;
+};
 
 export const formatPercent = (ratio: number): string => `${Math.round(ratio * 100)}%`;
 

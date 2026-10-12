@@ -23,7 +23,8 @@ const AppBar: FC = () => {
   }, [copied]);
 
   const copyLink = async () => {
-    const url = shareUrl(usePlanStore.getState().plan);
+    const { plan, modes } = usePlanStore.getState();
+    const url = shareUrl(plan, modes);
     try {
       await navigator.clipboard.writeText(url);
       setCopied(true);

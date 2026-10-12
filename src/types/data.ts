@@ -6,7 +6,7 @@
  */
 
 /**
- * What a destination is, which decides how it is drawn and whether auto-fill may choose it.
+ * What a destination is, which decides how it is drawn and whether a night can be spent there.
  *
  * - `airport` — where the trip starts and ends; never a place to spend a night.
  * - `city` / `onsen` — places worth visiting.
@@ -21,12 +21,8 @@ export interface Destination {
   kind: DestinationKind;
   lat: number;
   lon: number;
-  /** How worth visiting it is, 1–5. Auto-fill weighs every night spent here by this. */
+  /** How worth visiting it is, 1–5, shown as stars. */
   rating: number;
-  /** Nights beyond which another night here is worth much less to auto-fill. */
-  idealNights: number;
-  /** Nights auto-fill will never exceed. A plan made by hand may, and is warned about it. */
-  maxNights: number;
   note?: string;
 }
 
@@ -95,6 +91,80 @@ export interface LegGeometry {
   to: string;
   sections: LegSection[];
 }
+
+/**
+ * How a leg is travelled. Every leg can be driven; a train is an option only where the CLI has
+ * computed one, and is then the default.
+ */
+export type TransportMode = 'road' | 'train';
+
+/**
+ * The kind of train, as far as planning a day goes: `shinkansen`, or `local` for any conventional
+ * line — limited expresses such as Rapid Mie and μSKY included.
+ */
+export type RailService = 'shinkansen' | 'local';
+
+export interface TrainStation {
+  name: string;
+  nameJa: string;
+  lat: number;
+  lon: number;
+}
+
+/** One ride without changing trains. */
+export interface TrainSegment {
+  service: RailService;
+  line: string;
+  lineJa: string;
+  from: TrainStation;
+  to: TrainStation;
+  /** Along the track, measured on OpenStreetMap's railway lines. */
+  distanceKm: number;
+  /** A typical ride, averaged over the trains a traveller would take. */
+  rideMin: number;
+  /**
+   * The 乗り換え before this ride: the walk between platforms plus, on average, half the usual
+   * gap between trains. Zero on the first ride, whose departure the traveller picks.
+   */
+  transferMin: number;
+}
+
+/** One directed A → B train journey, station to station, as `train-matrix.json` holds it. */
+export interface TrainLeg {
+  from: string;
+  to: string;
+  distanceKm: number;
+  /** Every ride and every transfer, from the first departure to the last arrival. */
+  durationMin: number;
+  segments: TrainSegment[];
+  /** Where each ride's typical time comes from, for checking it by hand. */
+  sources: string[];
+  computedAt: string;
+}
+
+/** `data/train-matrix.json`: every computed train leg, keyed by {@link legKey}. */
+export interface TrainMatrix {
+  legs: Record<string, TrainLeg>;
+}
+
+/** One ride's track, so the map can draw shinkansen and local lines apart. */
+export interface TrainSection {
+  service: RailService;
+  /** Google polyline at precision 6, simplified for display. */
+  line: string;
+}
+
+/** `data/train-legs/<from>/<to>.json`: one train leg's track, one section per ride. */
+export interface TrainGeometry {
+  from: string;
+  to: string;
+  sections: TrainSection[];
+}
+
+/** The services a train leg uses, in riding order, each named once. */
+export const trainServices = (leg: TrainLeg): RailService[] => [
+  ...new Set(leg.segments.map((segment) => segment.service)),
+];
 
 export const legKey = (from: string, to: string): string => `${from}>${to}`;
 

@@ -9,21 +9,13 @@ import {
   type DragEndEvent,
   type DragStartEvent,
 } from '@dnd-kit/core';
-import { Plane } from 'lucide-react';
-import {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  type FC,
-  type PointerEvent,
-} from 'react';
+import { Eraser, Plane } from 'lucide-react';
+import { useEffect, useMemo, useRef, useState, type FC, type PointerEvent } from 'react';
 import DestinationPicker, { type PickerRequest } from '@/components/DestinationPicker';
 import StayDialog from '@/components/StayDialog';
-import AutofillControls from '@/components/timeline/AutofillControls';
+import TravelDialog from '@/components/TravelDialog';
 import DayHeader from '@/components/timeline/DayHeader';
-import DriveChip from '@/components/timeline/DriveChip';
+import LegChip from '@/components/timeline/LegChip';
 import EmptyStay from '@/components/timeline/EmptyStay';
 import StayBlock from '@/components/timeline/StayBlock';
 import { AIRPORT, getDestination } from '@/data/dataset';
@@ -31,13 +23,12 @@ import { useIsWide } from '@/hooks/useMediaQuery';
 import {
   assignRange,
   canMoveStay,
+  emptyPlan,
   legsOf,
   moveStay,
   resizeStayTo,
-  setPinned,
   staysOf,
   type Plan,
-  type PlannedLeg,
   type Stay,
 } from '@/lib/plan';
 import { DAYS, FLIGHT_DAY } from '@/lib/trip';
@@ -52,6 +43,7 @@ import { usePlanStore } from '@/store/planStore';
 const Timeline: FC = () => {
   const committed = usePlanStore((state) => state.plan);
   const setPlan = usePlanStore((state) => state.setPlan);
+  const modes = usePlanStore((state) => state.modes);
   // While an edge is being dragged the timeline shows the resize live, and commits it (one undo
   // step) only on release. Everything below reads `plan`, the one on screen.
   const [preview, setPreview] = useState<Plan | null>(null);
@@ -59,11 +51,10 @@ const Timeline: FC = () => {
   const gridRef = useRef<HTMLDivElement>(null);
   const wide = useIsWide();
   const stays = useMemo(() => staysOf(plan), [plan]);
-  const legsByDay = useMemo(() => {
-    const byDay = new Map<number, PlannedLeg>();
-    for (const leg of legsOf(plan)) byDay.set(leg.day, leg);
-    return byDay;
-  }, [plan]);
+  const legs = useMemo(() => legsOf(plan, modes), [plan, modes]);
+  const legsByDay = useMemo(() => new Map(legs.map((leg) => [leg.day, leg])), [legs]);
+  // By index, so the dialog follows the leg as its mode changes underneath it.
+  const [openLeg, setOpenLeg] = useState<number | null>(null);
 
   const [picker, setPicker] = useState<PickerRequest | null>(null);
   const [openNight, setOpenNight] = useState<number | null>(null);
@@ -72,24 +63,12 @@ const Timeline: FC = () => {
   // --- Choosing empty nights: a click picks one; a mouse drag sweeps a range. ------------------
   const [sweep, setSweep] = useState<{ anchor: number; current: number } | null>(null);
 
-  /** Keeps a sweep inside the unpinned nights around its anchor. */
-  const clampSweep = useCallback(
-    (anchor: number, night: number): number => {
-      const step = night >= anchor ? 1 : -1;
-      let reach = anchor;
-      while (reach !== night && !plan[reach + step]?.pinned) reach += step;
-      return reach;
-    },
-    [plan],
-  );
-
   useEffect(() => {
     if (!sweep) return;
     const finish = () => {
       setPicker({
         first: Math.min(sweep.anchor, sweep.current),
         last: Math.max(sweep.anchor, sweep.current),
-        pinned: false,
       });
       setSweep(null);
     };
@@ -103,12 +82,12 @@ const Timeline: FC = () => {
     }
   };
   const onNightPointerEnter = (night: number) => {
-    if (sweep) setSweep({ anchor: sweep.anchor, current: clampSweep(sweep.anchor, night) });
+    if (sweep) setSweep({ anchor: sweep.anchor, current: night });
   };
   // Touch and keyboard arrive here. A mouse click arrives too, after its one-night sweep has
   // already opened the same picker on release, which makes this a no-op for it.
   const onNightClick = (night: number) => {
-    if (!sweep) setPicker({ first: night, last: night, pinned: false });
+    if (!sweep) setPicker({ first: night, last: night });
   };
   const isSwept = (night: number) =>
     !!sweep &&
@@ -196,7 +175,6 @@ const Timeline: FC = () => {
     setPicker({
       first: stay.start,
       last: stay.start + stay.nights - 1,
-      pinned: stay.pinned,
       currentId: stay.destinationId ?? undefined,
     });
   };
@@ -209,7 +187,16 @@ const Timeline: FC = () => {
         <h2 className="grow text-sm font-semibold uppercase tracking-wide text-base-content/60">
           Timeline
         </h2>
-        <AutofillControls />
+        <button
+          type="button"
+          className="btn btn-sm btn-ghost"
+          onClick={() => setPlan(emptyPlan())}
+          disabled={committed.every((night) => night.destinationId === null)}
+          title="Empty every night (undo brings them back)"
+        >
+          <Eraser className="h-4 w-4" />
+          <span className="hidden sm:inline">Clear</span>
+        </button>
       </div>
 
       <DndContext
@@ -239,6 +226,7 @@ const Timeline: FC = () => {
                 key={day.index}
                 day={day}
                 leg={legsByDay.get(day.index)}
+                onOpenLeg={(leg) => setOpenLeg(leg.index)}
                 wide={wide}
                 style={
                   wide
@@ -250,10 +238,11 @@ const Timeline: FC = () => {
 
             {!wide &&
               [...legsByDay.values()].map((leg) => (
-                <DriveChip
-                  key={`drive-${leg.index}`}
+                <LegChip
+                  key={`leg-${leg.index}`}
                   leg={leg}
                   variant="between"
+                  onOpen={() => setOpenLeg(leg.index)}
                   style={{ gridRow: driveRow(leg.day), gridColumn: 2 }}
                 />
               ))}
@@ -272,9 +261,6 @@ const Timeline: FC = () => {
                   isDragging={dragging === index}
                   onOpen={() => openStay(stay)}
                   onResizeStart={(edge, event) => startResize(stay, edge, event)}
-                  onTogglePin={() =>
-                    setPlan(setPinned(plan, stay.start, stay.start + stay.nights - 1, !stay.pinned))
-                  }
                 />
               ) : (
                 <EmptyStay
@@ -318,20 +304,24 @@ const Timeline: FC = () => {
         {wide
           ? 'Click or drag across empty nights to plan them. '
           : 'Tap an empty night to plan it. '}
-        Drag a stay&apos;s edge to change its nights. {wide ? 'Drag' : 'Press and hold'} an unpinned
-        stay to reorder it; pinned stays keep their dates.
+        Drag a stay&apos;s edge to change its nights. {wide ? 'Click' : 'Tap'} a leg to choose train
+        or drive. {wide ? 'Drag' : 'Press and hold'} a stay to reorder it.
       </p>
 
       <DestinationPicker
         plan={plan}
         request={picker}
         onClose={() => setPicker(null)}
-        onPick={(destinationId, first, last, pinned) => {
+        onPick={(destinationId, first, last) => {
           let next = picker?.currentId ? assignRange(plan, picker.first, picker.last, null) : plan;
-          next = assignRange(next, first, last, destinationId, pinned);
+          next = assignRange(next, first, last, destinationId);
           setPlan(next);
           setPicker(null);
         }}
+      />
+      <TravelDialog
+        planned={openLeg !== null ? legs[openLeg] : undefined}
+        onClose={() => setOpenLeg(null)}
       />
       <StayDialog
         plan={plan}

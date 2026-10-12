@@ -1,5 +1,6 @@
-import { AIRPORT, getLeg, type Leg } from '@/data/dataset';
+import { AIRPORT, getLeg, getTrainLeg, type Leg } from '@/data/dataset';
 import { FLIGHT_DAY, NIGHT_COUNT } from '@/lib/trip';
+import { legKey, type TrainLeg, type TransportMode } from '@/types/data';
 
 /**
  * The plan is one entry per night, and nothing else.
@@ -9,36 +10,28 @@ import { FLIGHT_DAY, NIGHT_COUNT } from '@/lib/trip';
  */
 export interface Night {
   destinationId: string | null;
-  /** Kept as it is by auto-fill, and by reordering around it. */
-  pinned: boolean;
 }
 
 export type Plan = Night[];
 
 export const emptyPlan = (): Plan =>
-  Array.from({ length: NIGHT_COUNT }, () => ({ destinationId: null, pinned: false }));
+  Array.from({ length: NIGHT_COUNT }, () => ({ destinationId: null }));
 
-/** A run of consecutive nights with one destination and one pin state; empty nights form them too. */
+/** A run of consecutive nights with one destination; empty nights form them too. */
 export interface Stay {
   start: number;
   nights: number;
   destinationId: string | null;
-  pinned: boolean;
 }
 
 export const staysOf = (plan: Plan): Stay[] => {
   const stays: Stay[] = [];
   plan.forEach((night, index) => {
     const last = stays[stays.length - 1];
-    if (last && last.destinationId === night.destinationId && last.pinned === night.pinned) {
+    if (last && last.destinationId === night.destinationId) {
       last.nights++;
     } else {
-      stays.push({
-        start: index,
-        nights: 1,
-        destinationId: night.destinationId,
-        pinned: night.pinned,
-      });
+      stays.push({ start: index, nights: 1, destinationId: night.destinationId });
     }
   });
   return stays;
@@ -46,10 +39,7 @@ export const staysOf = (plan: Plan): Stay[] => {
 
 const flatten = (stays: Stay[]): Plan =>
   stays.flatMap((stay) =>
-    Array.from({ length: stay.nights }, () => ({
-      destinationId: stay.destinationId,
-      pinned: stay.destinationId !== null && stay.pinned,
-    })),
+    Array.from({ length: stay.nights }, () => ({ destinationId: stay.destinationId })),
   );
 
 const clampNight = (index: number): number => Math.max(0, Math.min(NIGHT_COUNT - 1, index));
@@ -59,42 +49,14 @@ export const assignRange = (
   first: number,
   last: number,
   destinationId: string | null,
-  pinned = false,
 ): Plan =>
   plan.map((night, index) =>
-    index >= clampNight(first) && index <= clampNight(last)
-      ? { destinationId, pinned: destinationId !== null && pinned }
-      : night,
+    index >= clampNight(first) && index <= clampNight(last) ? { destinationId } : night,
   );
 
-export const setPinned = (plan: Plan, first: number, last: number, pinned: boolean): Plan =>
-  plan.map((night, index) =>
-    index >= first && index <= last && night.destinationId !== null ? { ...night, pinned } : night,
-  );
-
-export const clearUnpinned = (plan: Plan): Plan =>
-  plan.map((night) => (night.pinned ? night : { destinationId: null, pinned: false }));
-
-/**
- * The stays a stay may trade places with: the unbroken run of unpinned stays around it.
- *
- * Reordering inside such a run never changes its total length, so every pinned night keeps its
- * date — which is the point of pinning it.
- */
-export const reorderWindow = (stays: Stay[], index: number): [number, number] => {
-  let first = index;
-  let last = index;
-  while (first > 0 && !stays[first - 1].pinned) first--;
-  while (last < stays.length - 1 && !stays[last + 1].pinned) last++;
-  return [first, last];
-};
-
-export const canMoveStay = (stays: Stay[], from: number, to: number): boolean => {
-  if (from === to || stays[from]?.pinned || stays[to]?.pinned) return false;
-  if (stays[from].destinationId === null) return false;
-  const [first, last] = reorderWindow(stays, from);
-  return to >= first && to <= last;
-};
+/** A stay may trade places with any other stay, empty runs of nights included. */
+export const canMoveStay = (stays: Stay[], from: number, to: number): boolean =>
+  from !== to && stays[from]?.destinationId != null && to >= 0 && to < stays.length;
 
 /** Moves the stay at `from` to `to`'s place among the stays, shifting those between. */
 export const moveStay = (plan: Plan, from: number, to: number): Plan => {
@@ -110,9 +72,8 @@ export const moveStay = (plan: Plan, from: number, to: number): Plan => {
  * Moves one edge of a stay to a boundary between nights: `boundary` is the night the stay now
  * starts on (`start` edge) or the first night after it (`end` edge), so 0–13 either way.
  *
- * A stay keeps at least one night. Growing takes over neighbouring nights, but stops at the first
- * night pinned to somewhere else. Shrinking leaves the freed nights empty rather than handing them
- * to the neighbour, which would be a guess.
+ * A stay keeps at least one night. Growing takes over neighbouring nights. Shrinking leaves the
+ * freed nights empty rather than handing them to the neighbour, which would be a guess.
  */
 export const resizeStayTo = (
   plan: Plan,
@@ -122,34 +83,12 @@ export const resizeStayTo = (
 ): Plan => {
   if (stay.destinationId === null) return plan;
   const end = stay.start + stay.nights;
-  const blocked = (index: number) =>
-    plan[index].pinned && plan[index].destinationId !== stay.destinationId;
-  let first = stay.start;
-  let last = end - 1;
-  if (edge === 'end') {
-    let newEnd = Math.max(stay.start + 1, Math.min(NIGHT_COUNT, boundary));
-    for (let i = end; i < newEnd; i++) {
-      if (blocked(i)) {
-        newEnd = i;
-        break;
-      }
-    }
-    last = newEnd - 1;
-  } else {
-    let newStart = Math.min(end - 1, Math.max(0, boundary));
-    for (let i = stay.start - 1; i >= newStart; i--) {
-      if (blocked(i)) {
-        newStart = i + 1;
-        break;
-      }
-    }
-    first = newStart;
-  }
+  const first = edge === 'start' ? Math.min(end - 1, Math.max(0, boundary)) : stay.start;
+  const last =
+    edge === 'end' ? Math.max(stay.start + 1, Math.min(NIGHT_COUNT, boundary)) - 1 : end - 1;
   return plan.map((night, index) => {
-    if (index >= first && index <= last) {
-      return { destinationId: stay.destinationId, pinned: stay.pinned };
-    }
-    if (index >= stay.start && index < end) return { destinationId: null, pinned: false };
+    if (index >= first && index <= last) return { destinationId: stay.destinationId };
+    if (index >= stay.start && index < end) return { destinationId: null };
     return night;
   });
 };
@@ -184,46 +123,80 @@ export const stopsOf = (plan: Plan): Stop[] => {
   return stops;
 };
 
-/** One drive of the trip, on the day it is driven. */
+/**
+ * How each leg is travelled, where a person chose something other than the default: keyed by
+ * {@link legKey}, so the choice follows the pair of places wherever the plan puts them.
+ */
+export type ModeChoices = Record<string, TransportMode>;
+
+/** Train where the CLI computed one: less tiring than a winter drive, and usually faster. */
+export const defaultMode = (from: string, to: string): TransportMode =>
+  getTrainLeg(from, to) ? 'train' : 'road';
+
+/** The mode a leg is travelled by: the person's choice if it is still possible, or the default. */
+export const modeOf = (modes: ModeChoices, from: string, to: string): TransportMode => {
+  const chosen = modes[legKey(from, to)];
+  if (chosen === 'train' && !getTrainLeg(from, to)) return 'road';
+  return chosen ?? defaultMode(from, to);
+};
+
+/** Records a choice, keeping only those that differ from the default. */
+export const chooseMode = (
+  modes: ModeChoices,
+  from: string,
+  to: string,
+  mode: TransportMode,
+): ModeChoices => {
+  const key = legKey(from, to);
+  const rest = Object.fromEntries(Object.entries(modes).filter(([other]) => other !== key));
+  return mode === defaultMode(from, to) ? rest : { ...rest, [key]: mode };
+};
+
+/** One leg of the trip, on the day it is travelled. */
 export interface PlannedLeg {
   index: number;
   from: string;
   to: string;
-  /** Day index the drive happens on: the first night of the stop it arrives at. */
+  /** Day index the leg happens on: the first night of the stop it arrives at. */
   day: number;
-  leg: Leg | undefined;
+  mode: TransportMode;
+  /** The drive, always there to fall back on (estimated if the CLI has not computed it). */
+  road: Leg | undefined;
+  /** The train option, where the CLI computed one. */
+  train: TrainLeg | undefined;
 }
 
+/** Time spent travelling the leg its chosen way: winter driving time, or the train door to door. */
+export const travelMinutes = (planned: PlannedLeg): number | undefined =>
+  planned.mode === 'train' ? planned.train?.durationMin : planned.road?.winterDurationMin;
+
+export const travelKm = (planned: PlannedLeg): number | undefined =>
+  planned.mode === 'train' ? planned.train?.distanceKm : planned.road?.distanceKm;
+
 /**
- * Every drive, from the airport through each stop and back to the airport on the flight day.
+ * Every leg, from the airport through each stop and back to the airport on the flight day.
  *
- * Two stops at the same destination with only empty nights between them make no drive: the empty
+ * Two stops at the same destination with only empty nights between them make no leg: the empty
  * nights are a hole in the plan, not a trip away and back.
  */
-export const legsOf = (plan: Plan): PlannedLeg[] => {
+export const legsOf = (plan: Plan, modes: ModeChoices = {}): PlannedLeg[] => {
   const stops = stopsOf(plan);
   const legs: PlannedLeg[] = [];
-  let previous = AIRPORT.id;
-  for (const stop of stops) {
-    if (stop.destinationId !== previous) {
-      legs.push({
-        index: legs.length,
-        from: previous,
-        to: stop.destinationId,
-        day: stop.start,
-        leg: getLeg(previous, stop.destinationId),
-      });
-    }
-    previous = stop.destinationId;
-  }
-  if (stops.length > 0) {
+  const add = (from: string, to: string, day: number) =>
     legs.push({
       index: legs.length,
-      from: previous,
-      to: AIRPORT.id,
-      day: FLIGHT_DAY,
-      leg: getLeg(previous, AIRPORT.id),
+      from,
+      to,
+      day,
+      mode: modeOf(modes, from, to),
+      road: getLeg(from, to),
+      train: getTrainLeg(from, to),
     });
+  let previous = AIRPORT.id;
+  for (const stop of stops) {
+    if (stop.destinationId !== previous) add(previous, stop.destinationId, stop.start);
+    previous = stop.destinationId;
   }
+  if (stops.length > 0) add(previous, AIRPORT.id, FLIGHT_DAY);
   return legs;
 };

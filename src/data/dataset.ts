@@ -1,5 +1,6 @@
 import destinationsJson from '@data/destinations.json';
 import matrixJson from '@data/matrix.json';
+import trainMatrixJson from '@data/train-matrix.json';
 import {
   legFileName,
   legKey,
@@ -8,6 +9,9 @@ import {
   type LegGeometry,
   type LegSummary,
   type Matrix,
+  type TrainGeometry,
+  type TrainLeg,
+  type TrainMatrix,
 } from '@/types/data';
 
 /**
@@ -19,6 +23,7 @@ import {
 
 export const DESTINATIONS = destinationsJson as Destination[];
 const MATRIX = matrixJson as Matrix;
+const TRAIN_MATRIX = trainMatrixJson as TrainMatrix;
 
 const byId = new Map(DESTINATIONS.map((destination) => [destination.id, destination]));
 
@@ -33,8 +38,6 @@ export const AIRPORT: Destination = DESTINATIONS.find((d) => d.kind === 'airport
   lat: 34.8599,
   lon: 136.8162,
   rating: 0,
-  idealNights: 0,
-  maxNights: 0,
 };
 
 /** Places a night can be spent: every destination but the airport. */
@@ -102,6 +105,10 @@ export const getLeg = (from: string, to: string): Leg | undefined => {
   return estimate;
 };
 
+/** The train option between two destinations, where the CLI has computed one. */
+export const getTrainLeg = (from: string, to: string): TrainLeg | undefined =>
+  TRAIN_MATRIX.legs[legKey(from, to)];
+
 const geometryLoaders = import.meta.glob<LegGeometry>('../../data/legs/*/*.json', {
   import: 'default',
 });
@@ -114,4 +121,18 @@ export const loadLegGeometry = (from: string, to: string): Promise<LegGeometry |
     geometries.set(key, loader ? loader() : Promise.resolve(null));
   }
   return geometries.get(key)!;
+};
+
+const trainGeometryLoaders = import.meta.glob<TrainGeometry>('../../data/train-legs/*/*.json', {
+  import: 'default',
+});
+const trainGeometries = new Map<string, Promise<TrainGeometry | null>>();
+
+export const loadTrainGeometry = (from: string, to: string): Promise<TrainGeometry | null> => {
+  const key = legKey(from, to);
+  if (!trainGeometries.has(key)) {
+    const loader = trainGeometryLoaders[`../../data/train-legs/${legFileName(from, to)}`];
+    trainGeometries.set(key, loader ? loader() : Promise.resolve(null));
+  }
+  return trainGeometries.get(key)!;
 };

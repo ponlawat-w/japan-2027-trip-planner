@@ -1,6 +1,6 @@
 import { Plane } from 'lucide-react';
 import { type CSSProperties, type FC } from 'react';
-import DriveChip from '@/components/timeline/DriveChip';
+import LegChip from '@/components/timeline/LegChip';
 import type { PlannedLeg } from '@/lib/plan';
 import { FLIGHT_DAY, type TripDay } from '@/lib/trip';
 import { cn } from '@/utils/cn';
@@ -8,16 +8,17 @@ import { cn } from '@/utils/cn';
 interface DayHeaderProps {
   day: TripDay;
   /**
-   * The drive made on this day, if any: into the stay that starts tonight. Shown here only in the
-   * wide timeline; on a phone the timeline puts it in its own row between the two stays.
+   * The leg travelled on this day, if any: into the stay that starts tonight. Shown here only in
+   * the wide timeline; on a phone the timeline puts it in its own row between the two stays.
    */
   leg: PlannedLeg | undefined;
+  onOpenLeg: (leg: PlannedLeg) => void;
   wide: boolean;
   style: CSSProperties;
 }
 
 /** A day's date: a column heading when wide, a label beside its night on a phone. */
-const DayHeader: FC<DayHeaderProps> = ({ day, leg, wide, style }) => {
+const DayHeader: FC<DayHeaderProps> = ({ day, leg, onOpenLeg, wide, style }) => {
   const isWeekend = day.date.getDay() === 0 || day.date.getDay() === 6;
   const isFlightDay = day.index === FLIGHT_DAY;
 
@@ -46,7 +47,7 @@ const DayHeader: FC<DayHeaderProps> = ({ day, leg, wide, style }) => {
         </span>
         {isFlightDay && wide && <Plane className="h-3.5 w-3.5 self-center text-sky-300" />}
       </div>
-      {wide && leg && <DriveChip leg={leg} variant="compact" />}
+      {wide && leg && <LegChip leg={leg} variant="compact" onOpen={() => onOpenLeg(leg)} />}
     </div>
   );
 };

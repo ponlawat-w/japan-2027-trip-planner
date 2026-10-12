@@ -1,4 +1,4 @@
-import { Minus, Pin, Plus, Search, Star } from 'lucide-react';
+import { Minus, Plus, Search, Star } from 'lucide-react';
 import { useMemo, useState, type FC } from 'react';
 import DifficultyBadge from '@/components/DifficultyBadge';
 import ImageSearchLink from '@/components/ImageSearchLink';
@@ -13,8 +13,6 @@ import type { Destination } from '@/types/data';
 export interface PickerRequest {
   first: number;
   last: number;
-  /** Pre-selected pin state: kept when changing a pinned stay's destination. */
-  pinned: boolean;
   /** The destination being replaced, when changing a stay rather than filling empty nights. */
   currentId?: string;
 }
@@ -23,7 +21,7 @@ interface DestinationPickerProps {
   plan: Plan;
   request: PickerRequest | null;
   onClose: () => void;
-  onPick: (destinationId: string, first: number, last: number, pinned: boolean) => void;
+  onPick: (destinationId: string, first: number, last: number) => void;
 }
 
 /** The nearest planned destination before `first`, or the airport the trip starts from. */
@@ -41,18 +39,6 @@ const nextOf = (plan: Plan, last: number): string => {
   return AIRPORT.id;
 };
 
-/** How far the range may stretch: up to the next pinned night that belongs to another stay. */
-const maxLastOf = (plan: Plan, request: PickerRequest): number => {
-  let last = request.last;
-  while (
-    last + 1 < NIGHT_COUNT &&
-    (!plan[last + 1].pinned || plan[last + 1].destinationId === request.currentId)
-  ) {
-    last++;
-  }
-  return last;
-};
-
 const DestinationPicker: FC<DestinationPickerProps> = ({ plan, request, onClose, onPick }) => (
   <Dialog open={request !== null} onOpenChange={(open) => !open && onClose()}>
     <DialogContent className="sm:max-w-lg">
@@ -67,9 +53,8 @@ const PickerBody: FC<Omit<DestinationPickerProps, 'onClose'> & { request: Picker
   onPick,
 }) => {
   const [nights, setNights] = useState(request.last - request.first + 1);
-  const [pinned, setPinned] = useState(request.pinned);
   const [query, setQuery] = useState('');
-  const maxNights = maxLastOf(plan, request) - request.first + 1;
+  const nightsLeft = NIGHT_COUNT - request.first;
   const last = request.first + nights - 1;
   const previous = previousOf(plan, request.first);
   const next = nextOf(plan, last);
@@ -117,22 +102,13 @@ const PickerBody: FC<Omit<DestinationPickerProps, 'onClose'> & { request: Picker
           <button
             type="button"
             className="btn btn-sm join-item"
-            onClick={() => setNights((n) => Math.min(maxNights, n + 1))}
-            disabled={nights >= maxNights}
+            onClick={() => setNights((n) => Math.min(nightsLeft, n + 1))}
+            disabled={nights >= nightsLeft}
             aria-label="One night more"
           >
             <Plus className="h-4 w-4" />
           </button>
         </div>
-        <label className="label cursor-pointer gap-2 text-sm">
-          <input
-            type="checkbox"
-            className="checkbox checkbox-sm checkbox-warning"
-            checked={pinned}
-            onChange={(event) => setPinned(event.target.checked)}
-          />
-          <Pin className="h-4 w-4" /> Pin
-        </label>
       </div>
 
       <label className="input input-sm mt-3 w-full">
@@ -156,7 +132,7 @@ const PickerBody: FC<Omit<DestinationPickerProps, 'onClose'> & { request: Picker
                 type="button"
                 className="flex min-w-0 grow items-start gap-3 rounded-lg border border-transparent px-3 py-2 text-left hover:border-base-content/20 hover:bg-base-300 data-[current=true]:border-base-content/30"
                 data-current={isCurrent}
-                onClick={() => onPick(destination.id, request.first, last, pinned)}
+                onClick={() => onPick(destination.id, request.first, last)}
               >
                 <span
                   className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full"

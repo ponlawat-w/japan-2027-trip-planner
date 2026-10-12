@@ -1,9 +1,9 @@
 # Japan 2027 Trip Planner
 
 A planner for a February road trip in Japan: arrive at Chubu Centrair (NGO) on 2 February 2027, fly
-home from NGO on the 15th. Put destinations on a night-by-night timeline, pin the nights that are
-fixed, and let auto-fill fill the rest. Each drive shows its distance, its time, and how hard it is
-likely to be in February.
+home from NGO on the 15th. Put destinations on a night-by-night timeline. Each leg shows its
+distance and time: by train where there is one, otherwise by car, with how hard the drive is likely
+to be in February.
 
 Everything runs in the browser. Distances, times, route lines and difficulty are computed ahead of
 time by a CLI and committed under `data/`, then bundled into the build.
@@ -14,7 +14,10 @@ data/             ← written by the CLI, committed, bundled into the site
   matrix.json         every directed leg: distance, time, difficulty, factors, warnings
   legs/<a>/<b>.json   each leg's line, split into difficulty-coloured sections (lazy-loaded)
   winter-closures.json  roads closed every winter, excluded from routing
-cli/              ← the CLI: Valhalla + GSI DEM + Open-Meteo → data/
+  train-routes.json   train options, written by hand: stations, rides, cited typical times
+  train-matrix.json   every directed train leg: rides, changes, distance, door-to-door time
+  train-legs/<a>/<b>.json  each train leg's track, one section per ride (lazy-loaded)
+cli/              ← the CLI: Valhalla + GSI DEM + Open-Meteo → data/; OSM railways → train legs
 src/              ← the React app
 valhalla/         ← docker compose for the self-hosted router
 ```
@@ -27,20 +30,23 @@ npm run dev        # http://localhost:5190
 ```
 
 - **Timeline.** Click an empty night (or drag across several) to plan it. Drag a stay's edge to
-  change its nights. Click a stay to pin it, change it or swap it with a neighbour. Drag an
-  unpinned stay onto another to reorder them. Pinned stays keep their dates. On a phone the
+  change its nights. Click a stay to change it or swap it with a neighbour, or drag it onto
+  another to reorder them. **Clear** empties every night (undo brings them back). On a phone the
   timeline is vertical: tap a night, drag the grip at a stay's top or bottom, and press and hold a
   stay to move it.
-- **Auto-fill** keeps pinned nights and refills every other night. It trades the places' ratings
-  against winter driving time, long days and hard legs. It never picks a place that is already
-  pinned, and it uses each place for at most one stay. When it runs out of places (or a place
-  would go past its maximum nights), it leaves the rest of the nights empty. Each click picks a
-  different random seed, so you get a different plan; undo goes back to the previous one.
-- **The address bar always holds the plan** (`#plan=!nagoya.!suzuka.…`), updated as you edit, so
+- **The address bar always holds the plan** (`#plan=nagoya.suzuka.…`), updated as you edit, so
   you can copy the URL at any time; **Copy link** does the same in one tap. Opening a link loads
   its plan, and undo brings back the one you had before. The plan is also saved in `localStorage`.
 - **km / mi** in the app bar switches distances and heights between metric and imperial. It is
   saved per browser, and is not part of shared links.
+- **Train or drive.** Every leg can be driven. Where `train-matrix.json` has a train for the pair
+  it is the default, shown with its rides (white: shinkansen, violet: local train) and each
+  change of trains (乗り換え) on the timeline, the list and the map. Click a leg on the timeline,
+  or use its select in the list, to switch. A train leg ends at its own station (Shin-Osaka for
+  Osaka), not at the destination's point. Choices are part of the plan: undoable, saved, and in
+  the link (`&road=nagoya~tokyo`).
+- **The summary** groups its figures by what they cover: _All travel_ (car and train together),
+  _By car only_ and _By train only_.
 - **Summary, map and drives** are read-only views of the timeline. Hover a drive to highlight it
   on the map. Expand a drive to see what its difficulty is based on.
 
@@ -77,7 +83,7 @@ npm run cli -- list
 npm run cli -- add kinosaki --name "Kinosaki Onsen" --name-ja 城崎温泉 --kind onsen \
   --lat 35.6237 --lon 134.8137 --rating 4
 npm run cli -- add arima --name "Arima Onsen" --name-ja 有馬温泉 --kind onsen --geocode "有馬温泉"
-npm run cli -- edit arima --rating 5 --max-nights 2      # metadata only, no recompute
+npm run cli -- edit arima --rating 5                     # metadata only, no recompute
 npm run cli -- compute                                   # any legs still missing
 npm run cli -- compute --id arima --force                # recompute one destination's legs
 npm run cli -- remove arima
@@ -88,12 +94,32 @@ npm run cli -- explain gero okuhida --min 3              # per-km breakdown, for
 destinations that is 2(*n* − 1) legs, a few seconds each once caches are warm. Each leg is saved as
 soon as it is done, so an interrupted run loses nothing: run `compute` again and it continues.
 
-Fields: `--kind` is `city`, `onsen` or `airport`.
-`--rating` (1–5) is how much auto-fill wants to go there. `--ideal-nights` is the number of nights
-after which each extra night is worth about a third as much. `--max-nights` is a limit auto-fill
-never exceeds.
+Fields: `--kind` is `city`, `onsen` or `airport`. `--rating` (1–5) is shown as stars.
 
 Afterwards, commit `data/`. The next push to `master` deploys it.
+
+### Trains
+
+```sh
+brew install osmium-tool        # once
+npm run cli -- train            # rebuild every train leg from data/train-routes.json
+```
+
+`data/train-routes.json` is the input, edited by hand:
+
+- `stations`: coordinates (taken from OSM's station nodes), and `transferWalkMin` where a route
+  changes trains there.
+- `segments`: one ride between two stations, either direction. `rideMin` is a typical ride from
+  published timetables, with its `sources`. `everyMin` is the usual gap between trains, needed
+  where a route changes onto the ride. `track` is a pattern for the OSM `name` of the line's ways
+  (plus `highspeed: true` for shinkansen track).
+- `routes`: a pair of destinations and the stations between them. Both directions are computed.
+
+A leg's time is its rides plus, at each change, the walk and half the gap between trains: the
+average wait. The first departure has no wait. So Tokyo → Suzuka (onto the hourly Rapid Mie) is
+slower than Suzuka → Tokyo, as it is in practice. Distances are measured along OSM's track,
+found by a shortest path over the ways the `track` pattern allows. Railways are cut once from the
+OSM file Valhalla downloaded (Valhalla itself need not be running) and cached in `.cache/rail/`.
 
 #### Destinations not yet added
 

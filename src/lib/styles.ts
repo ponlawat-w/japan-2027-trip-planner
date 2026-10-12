@@ -1,10 +1,11 @@
-import type { DestinationKind, Difficulty } from '@/types/data';
+import type { DestinationKind, Difficulty, RailService } from '@/types/data';
 
 /**
  * Colours that carry meaning, held once so the timeline, the map and the leg list agree.
  *
  * Difficulty runs green to red. Destination kinds take hues clear of that ramp (blue, pink,
- * violet), so a stop's colour is never mistaken for a difficulty.
+ * slate), so a stop's colour is never mistaken for a difficulty. Trains are white and violet,
+ * clear of both: a train line is never read as a drive of some difficulty.
  */
 
 export const DIFFICULTY_COLORS: Record<Difficulty, string> = {
@@ -33,4 +34,14 @@ export const KIND_LABELS: Record<DestinationKind, string> = {
   airport: 'Airport',
   city: 'City',
   onsen: 'Onsen',
+};
+
+export const SERVICE_COLORS: Record<RailService, string> = {
+  shinkansen: '#f8fafc',
+  local: '#a78bfa',
+};
+
+export const SERVICE_LABELS: Record<RailService, string> = {
+  shinkansen: 'Shinkansen',
+  local: 'Local train',
 };

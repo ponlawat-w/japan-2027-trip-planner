@@ -6,9 +6,7 @@
     "kind": "airport",
     "lat": 34.8599,
     "lon": 136.8162,
-    "rating": 0,
-    "idealNights": 0,
-    "maxNights": 0
+    "rating": 0
   },
   {
     "id": "nagoya",
@@ -17,9 +15,7 @@
     "kind": "city",
     "lat": 35.1711,
     "lon": 136.8847,
-    "rating": 2,
-    "idealNights": 1,
-    "maxNights": 2
+    "rating": 2
   },
   {
     "id": "suzuka",
@@ -28,9 +24,7 @@
     "kind": "city",
     "lat": 34.8818,
     "lon": 136.5842,
-    "rating": 2,
-    "idealNights": 2,
-    "maxNights": 3
+    "rating": 2
   },
   {
     "id": "osaka",
@@ -39,9 +33,7 @@
     "kind": "city",
     "lat": 34.7025,
     "lon": 135.4962,
-    "rating": 4,
-    "idealNights": 2,
-    "maxNights": 3
+    "rating": 4
   },
   {
     "id": "tokyo",
@@ -50,9 +42,7 @@
     "kind": "city",
     "lat": 35.6817,
     "lon": 139.7644,
-    "rating": 4,
-    "idealNights": 3,
-    "maxNights": 4
+    "rating": 4
   },
   {
     "id": "gero",
@@ -61,9 +51,7 @@
     "kind": "onsen",
     "lat": 35.8058,
     "lon": 137.2396,
-    "rating": 4,
-    "idealNights": 1,
-    "maxNights": 2
+    "rating": 4
   },
   {
     "id": "okuhida",
@@ -73,54 +61,7 @@
     "lat": 36.1911,
     "lon": 137.5517,
     "rating": 5,
-    "idealNights": 1,
-    "maxNights": 2,
     "note": "Point at Hirayu; Fukuchi and Shin-Hotaka are 5–15 km north"
-  },
-  {
-    "id": "kusatsu",
-    "name": "Kusatsu Onsen",
-    "nameJa": "草津温泉",
-    "kind": "onsen",
-    "lat": 36.6229,
-    "lon": 138.5967,
-    "rating": 4,
-    "idealNights": 1,
-    "maxNights": 2
-  },
-  {
-    "id": "kawazu",
-    "name": "Kawazu Onsen",
-    "nameJa": "河津温泉",
-    "kind": "onsen",
-    "lat": 34.7474,
-    "lon": 138.9965,
-    "rating": 3,
-    "idealNights": 1,
-    "maxNights": 2,
-    "note": "Kawazu-zakura bloom from early February"
-  },
-  {
-    "id": "yunomine",
-    "name": "Yunomine Onsen",
-    "nameJa": "湯の峰温泉",
-    "kind": "onsen",
-    "lat": 33.8287,
-    "lon": 135.7574,
-    "rating": 4,
-    "idealNights": 1,
-    "maxNights": 2
-  },
-  {
-    "id": "bessho",
-    "name": "Bessho Onsen",
-    "nameJa": "別所温泉",
-    "kind": "onsen",
-    "lat": 36.3532,
-    "lon": 138.162,
-    "rating": 3,
-    "idealNights": 1,
-    "maxNights": 2
   },
   {
     "id": "kanazawa",
@@ -129,9 +70,7 @@
     "kind": "city",
     "lat": 36.5773,
     "lon": 136.6473,
-    "rating": 2,
-    "idealNights": 2,
-    "maxNights": 3
+    "rating": 2
   },
   {
     "id": "matsumoto",
@@ -140,20 +79,7 @@
     "kind": "city",
     "lat": 36.2307,
     "lon": 137.9638,
-    "rating": 3,
-    "idealNights": 1,
-    "maxNights": 2
-  },
-  {
-    "id": "suwa",
-    "name": "Kami-Suwa Onsen",
-    "nameJa": "上諏訪温泉",
-    "kind": "onsen",
-    "lat": 36.047,
-    "lon": 138.1164,
-    "rating": 4,
-    "idealNights": 1,
-    "maxNights": 2
+    "rating": 3
   },
   {
     "id": "shiga",
@@ -163,8 +89,6 @@
     "lat": 35.0093,
     "lon": 135.8667,
     "rating": 3,
-    "idealNights": 1,
-    "maxNights": 2,
     "note": "Point at Hama-Ōtsu on the lake's south shore"
   },
   {
@@ -174,8 +98,26 @@
     "kind": "city",
     "lat": 36.0622,
     "lon": 136.2236,
-    "rating": 3,
-    "idealNights": 1,
-    "maxNights": 2
+    "rating": 3
+  },
+  {
+    "id": "takayama",
+    "name": "Takayama",
+    "nameJa": "高山",
+    "kind": "city",
+    "lat": 36.1422,
+    "lon": 137.2594,
+    "rating": 4,
+    "note": "Point at the Sanmachi old town"
+  },
+  {
+    "id": "shirakawago",
+    "name": "Shirakawa-go",
+    "nameJa": "白川郷",
+    "kind": "city",
+    "lat": 36.2573,
+    "lon": 136.9068,
+    "rating": 4,
+    "note": "Village of gassho-zukuri farmhouses (World Heritage); point at Ogimachi"
   }
 ]

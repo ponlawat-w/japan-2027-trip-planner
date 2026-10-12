@@ -13,8 +13,15 @@ import { boundingExtent } from 'ol/extent';
 import { defaults as defaultControls } from 'ol/control/defaults';
 import type { FeatureLike } from 'ol/Feature';
 import { decodePolyline6 } from '@/lib/polyline';
-import { DIFFICULTY_COLORS, KIND_COLORS } from '@/lib/styles';
-import type { Destination, Difficulty, LegGeometry } from '@/types/data';
+import { DIFFICULTY_COLORS, KIND_COLORS, SERVICE_COLORS } from '@/lib/styles';
+import type {
+  Destination,
+  Difficulty,
+  LegGeometry,
+  RailService,
+  TrainGeometry,
+  TrainLeg,
+} from '@/types/data';
 
 /** Japan's main islands, for the first view before anything is planned. */
 const JAPAN_CENTER = fromLonLat([137.5, 36.2]);
@@ -22,6 +29,8 @@ const MAX_FIT_ZOOM = 10;
 /** Zoomed in further than this (metres per pixel), unplanned destinations are labelled too. */
 const CANDIDATE_LABEL_RESOLUTION = 1500;
 const HOVER_TOLERANCE_PX = 6;
+/** Room between the legend's top and the lowest stop, its label included. */
+const LEGEND_CLEARANCE_PX = 32;
 
 const LABEL_FONT = '600 12px ui-sans-serif, system-ui, sans-serif';
 const HALO = new Stroke({ color: 'rgba(10, 12, 16, 0.9)', width: 3 });
@@ -46,18 +55,28 @@ export interface MapStop {
   orders: string[];
 }
 
-export interface MapLeg {
-  index: number;
-  from: Destination;
-  to: Destination;
-  /** Null until loaded, or when the leg has not been computed: drawn as a dashed straight line. */
-  geometry: LegGeometry | null;
-  difficulty: Difficulty;
-}
+export type MapLeg =
+  | {
+      mode: 'road';
+      index: number;
+      from: Destination;
+      to: Destination;
+      /** Null until loaded, or when the leg has not been computed: drawn as a dashed straight line. */
+      geometry: LegGeometry | null;
+      difficulty: Difficulty;
+    }
+  | {
+      mode: 'train';
+      index: number;
+      train: TrainLeg;
+      /** Null until loaded: each ride is drawn station to station meanwhile. */
+      geometry: TrainGeometry | null;
+    };
 
 /**
- * The trip map: every destination, the planned stops in order, and the route coloured by
- * difficulty.
+ * The trip map: every destination, the planned stops in order, drives coloured by difficulty and
+ * trains by service, with the stations they stop at. A train leg ends at its own station, which may
+ * be off the destination's point (Shin-Osaka for Osaka): only the drive goes to the door.
  *
  * Imperative behind a small React wrapper, the same split as the streetview platform's maps:
  * OpenLayers owns its own render loop, and is told what changed rather than re-created.
@@ -66,12 +85,21 @@ export class TripMapController {
   private readonly map: Map;
   private readonly candidateSource = new VectorSource();
   private readonly routeSource = new VectorSource();
+  private readonly stationSource = new VectorSource();
   private readonly stopSource = new VectorSource();
   private readonly routeLayer: VectorLayer<VectorSource>;
   private highlightedLeg: number | null = null;
   private fittedKey = '';
 
-  constructor(target: HTMLElement, onHoverLeg: (index: number | null) => void) {
+  /**
+   * @param legendHeight The height of whatever sits over the map's bottom edge (the legend), read
+   *   at each fit so the stops are framed above it rather than under it.
+   */
+  constructor(
+    target: HTMLElement,
+    onHoverLeg: (index: number | null) => void,
+    private readonly legendHeight: () => number = () => 0,
+  ) {
     this.routeLayer = new VectorLayer({
       source: this.routeSource,
       style: (feature) => this.routeStyle(feature),
@@ -88,6 +116,11 @@ export class TripMapController {
         }),
         this.routeLayer,
         new TileLayer({ source: createEsriCanvas('Reference'), opacity: 0.8 }),
+        new VectorLayer({
+          source: this.stationSource,
+          style: (feature) => this.stationStyle(feature),
+          declutter: true,
+        }),
         new VectorLayer({
           source: this.stopSource,
           style: (feature) => this.stopStyle(feature),
@@ -147,15 +180,18 @@ export class TripMapController {
 
   setLegs(legs: MapLeg[]): void {
     this.routeSource.clear();
+    this.stationSource.clear();
     const features: Feature[] = [];
+    const line = (coordinates: [number, number][]) =>
+      new LineString(coordinates.map((coordinate) => fromLonLat(coordinate)));
     for (const leg of legs) {
-      if (leg.geometry) {
+      if (leg.mode === 'train') {
+        features.push(...this.trainFeatures(leg));
+      } else if (leg.geometry) {
         for (const section of leg.geometry.sections) {
           features.push(
             new Feature({
-              geometry: new LineString(
-                decodePolyline6(section.line).map((coordinate) => fromLonLat(coordinate)),
-              ),
+              geometry: line(decodePolyline6(section.line)),
               legIndex: leg.index,
               difficulty: section.difficulty,
             }),
@@ -164,9 +200,9 @@ export class TripMapController {
       } else {
         features.push(
           new Feature({
-            geometry: new LineString([
-              fromLonLat([leg.from.lon, leg.from.lat]),
-              fromLonLat([leg.to.lon, leg.to.lat]),
+            geometry: line([
+              [leg.from.lon, leg.from.lat],
+              [leg.to.lon, leg.to.lat],
             ]),
             legIndex: leg.index,
             difficulty: leg.difficulty,
@@ -176,6 +212,41 @@ export class TripMapController {
       }
     }
     this.routeSource.addFeatures(features);
+  }
+
+  /** A train leg's rides, and a ring at each station it stops at, labelled where trains change. */
+  private trainFeatures(leg: Extract<MapLeg, { mode: 'train' }>): Feature[] {
+    const { segments } = leg.train;
+    const features = segments.map((segment, i) => {
+      const section = leg.geometry?.sections[i];
+      const coordinates: [number, number][] = section
+        ? decodePolyline6(section.line)
+        : [
+            [segment.from.lon, segment.from.lat],
+            [segment.to.lon, segment.to.lat],
+          ];
+      return new Feature({
+        geometry: new LineString(coordinates.map((coordinate) => fromLonLat(coordinate))),
+        legIndex: leg.index,
+        service: segment.service,
+        estimated: !section,
+      });
+    });
+    const stations = [
+      { station: segments[0].from, change: false },
+      ...segments.map((segment, i) => ({ station: segment.to, change: i < segments.length - 1 })),
+    ];
+    this.stationSource.addFeatures(
+      stations.map(
+        ({ station, change }) =>
+          new Feature({
+            geometry: new Point(fromLonLat([station.lon, station.lat])),
+            label: change ? `Change · ${station.name}` : '',
+            change,
+          }),
+      ),
+    );
+    return features;
   }
 
   setHighlightedLeg(index: number | null): void {
@@ -204,8 +275,9 @@ export class TripMapController {
       stops.map(({ destination }) => fromLonLat([destination.lon, destination.lat])),
     );
     this.map.getView().fit(extent, {
-      // Extra room on the right, where every stop hangs its name: the east-most label stays in view.
-      padding: [48, 110, 48, 48],
+      // Extra room on the right, where every stop hangs its name: the east-most label stays in
+      // view; and at the bottom, clear of the legend.
+      padding: [48, 110, Math.max(48, this.legendHeight() + LEGEND_CLEARANCE_PX), 48],
       maxZoom: MAX_FIT_ZOOM,
       duration: 400,
     });
@@ -213,12 +285,14 @@ export class TripMapController {
 
   private routeStyle(feature: FeatureLike): Style[] {
     const index = feature.get('legIndex') as number;
-    const difficulty = feature.get('difficulty') as Difficulty;
+    const service = feature.get('service') as RailService | undefined;
     const estimated = !!feature.get('estimated');
     const isHighlighted = this.highlightedLeg === index;
     const isDimmed = this.highlightedLeg !== null && !isHighlighted;
     const width = isHighlighted ? 6 : 4;
-    const color = DIFFICULTY_COLORS[difficulty];
+    const color = service
+      ? SERVICE_COLORS[service]
+      : DIFFICULTY_COLORS[feature.get('difficulty') as Difficulty];
     return [
       new Style({
         stroke: new Stroke({ color: `rgba(0, 0, 0, ${isDimmed ? 0.3 : 0.75})`, width: width + 3 }),
@@ -235,6 +309,26 @@ export class TripMapController {
         zIndex: isHighlighted ? 3 : 1,
       }),
     ];
+  }
+
+  private stationStyle(feature: FeatureLike): Style {
+    const change = !!feature.get('change');
+    return new Style({
+      image: new Circle({
+        radius: change ? 5 : 4,
+        fill: new Fill({ color: '#0b0d12' }),
+        stroke: new Stroke({ color: change ? '#fbbf24' : '#f8fafc', width: 2 }),
+      }),
+      text: change
+        ? new Text({
+            text: feature.get('label') as string,
+            font: '600 11px ui-sans-serif, system-ui, sans-serif',
+            offsetY: -13,
+            fill: new Fill({ color: '#fbbf24' }),
+            stroke: HALO,
+          })
+        : undefined,
+    });
   }
 
   /** The order number on the marker itself, the name hanging off to its right. */

@@ -1,0 +1,193 @@
+{
+  "stations": {
+    "centrair": {
+      "name": "Central Japan Int'l Airport",
+      "nameJa": "中部国際空港",
+      "lat": 34.85994,
+      "lon": 136.81618
+    },
+    "meitetsu-nagoya": {
+      "name": "Meitetsu Nagoya",
+      "nameJa": "名鉄名古屋",
+      "lat": 35.16942,
+      "lon": 136.88394
+    },
+    "nagoya": {
+      "name": "Nagoya",
+      "nameJa": "名古屋",
+      "lat": 35.17073,
+      "lon": 136.88184,
+      "transferWalkMin": 10,
+      "note": "No published figure found for shinkansen ↔ conventional lines here; assumed the same as Shin-Osaka."
+    },
+    "suzuka": {
+      "name": "Suzuka (Ise Railway)",
+      "nameJa": "鈴鹿",
+      "lat": 34.87849,
+      "lon": 136.58884
+    },
+    "tokyo": {
+      "name": "Tokyo",
+      "nameJa": "東京",
+      "lat": 35.68096,
+      "lon": 139.76799
+    },
+    "shin-osaka": {
+      "name": "Shin-Osaka",
+      "nameJa": "新大阪",
+      "lat": 34.73354,
+      "lon": 135.50019
+    }
+  },
+  "segments": [
+    {
+      "between": [
+        "centrair",
+        "meitetsu-nagoya"
+      ],
+      "service": "local",
+      "line": "Meitetsu Airport Line (μSKY / Ltd. Express)",
+      "lineJa": "名鉄空港線・常滑線",
+      "rideMin": 32,
+      "track": "^(名古屋鉄道|名鉄)(空港線|常滑線|名古屋本線)$",
+      "note": "μSKY and limited express 28–35 min, semi-express about 37 min.",
+      "sources": [
+        "https://www.nagoya-info.jp/access/centrair/",
+        "https://www.airtrip.jp/travel-column/6363"
+      ]
+    },
+    {
+      "between": [
+        "nagoya",
+        "suzuka"
+      ],
+      "service": "local",
+      "line": "JR Rapid Mie (via Ise Railway)",
+      "lineJa": "快速みえ（関西本線・伊勢鉄道）",
+      "rideMin": 42,
+      "everyMin": 60,
+      "track": "^(JR)?関西本線$|^伊勢鉄道伊勢線$",
+      "note": "41–42 min without a change; about one train an hour.",
+      "sources": [
+        "https://ekitan.com/transit/section/sf-4455/st-4288",
+        "https://www.navitime.co.jp/transfer/searchlist?orvStationCode=00008576&dnvStationCode=00009050&defaultCondition=0",
+        "https://4travel.jp/dm_shisetsu/11371324"
+      ]
+    },
+    {
+      "between": [
+        "tokyo",
+        "nagoya"
+      ],
+      "service": "shinkansen",
+      "line": "Tokaido Shinkansen (Nozomi)",
+      "lineJa": "東海道新幹線（のぞみ）",
+      "rideMin": 95,
+      "everyMin": 10,
+      "track": "^東海道新幹線$",
+      "highspeed": true,
+      "note": "1h34–1h36 by Nozomi; up to 12 Nozomi an hour.",
+      "sources": [
+        "https://jr-group.jp/nozomi-stop/",
+        "https://shinkansen.tabiris.com/train01.html",
+        "https://travel.watch.impress.co.jp/docs/news/2092600.html"
+      ]
+    },
+    {
+      "between": [
+        "nagoya",
+        "shin-osaka"
+      ],
+      "service": "shinkansen",
+      "line": "Tokaido Shinkansen (Nozomi)",
+      "lineJa": "東海道新幹線（のぞみ）",
+      "rideMin": 50,
+      "everyMin": 10,
+      "track": "^東海道新幹線$",
+      "highspeed": true,
+      "note": "About 49–50 min by Nozomi.",
+      "sources": [
+        "https://shinkansen.tabiris.com/train01.html",
+        "https://jr-group.jp/nozomi-stop/"
+      ]
+    },
+    {
+      "between": [
+        "tokyo",
+        "shin-osaka"
+      ],
+      "service": "shinkansen",
+      "line": "Tokaido Shinkansen (Nozomi)",
+      "lineJa": "東海道新幹線（のぞみ）",
+      "rideMin": 150,
+      "everyMin": 10,
+      "track": "^東海道新幹線$",
+      "highspeed": true,
+      "note": "2h30 is the standard Nozomi; some run in 2h27.",
+      "sources": [
+        "https://jr-central.co.jp/news/release/_pdf/000044803.pdf",
+        "https://travel.watch.impress.co.jp/docs/news/2092600.html"
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "from": "ngo",
+      "to": "nagoya",
+      "via": [
+        "centrair",
+        "meitetsu-nagoya"
+      ]
+    },
+    {
+      "from": "nagoya",
+      "to": "suzuka",
+      "via": [
+        "nagoya",
+        "suzuka"
+      ]
+    },
+    {
+      "from": "nagoya",
+      "to": "tokyo",
+      "via": [
+        "nagoya",
+        "tokyo"
+      ]
+    },
+    {
+      "from": "nagoya",
+      "to": "osaka",
+      "via": [
+        "nagoya",
+        "shin-osaka"
+      ]
+    },
+    {
+      "from": "suzuka",
+      "to": "tokyo",
+      "via": [
+        "suzuka",
+        "nagoya",
+        "tokyo"
+      ]
+    },
+    {
+      "from": "suzuka",
+      "to": "osaka",
+      "via": [
+        "suzuka",
+        "nagoya",
+        "shin-osaka"
+      ]
+    },
+    {
+      "from": "tokyo",
+      "to": "osaka",
+      "via": [
+        "tokyo",
+        "shin-osaka"
+      ]
+    }
+  ]
+}

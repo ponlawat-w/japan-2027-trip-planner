@@ -6,10 +6,13 @@ import {
   readClosures,
   readDestinations,
   readMatrix,
+  readTrainRoutes,
   removeLegsOf,
   saveLeg,
   writeDestinations,
+  writeTrainLegs,
 } from './store.ts';
+import { computeTrainLegs, validateTrainRoutes } from './train.ts';
 import { assertValhallaReachable } from './valhalla.ts';
 
 const USAGE = `Usage: npm run cli -- <command> [options]
@@ -22,15 +25,16 @@ Commands:
                   --lat <n> --lon <n>    Coordinates, or instead:
                   --geocode <query>      Look the place up on OpenStreetMap (Nominatim)
                   --rating <1-5>         How worth visiting (default: 3; 0 for airport)
-                  --ideal-nights <n>     Nights before more are worth less (default by kind)
-                  --max-nights <n>       Most nights auto-fill will plan here (default by kind)
                   --note <text>          Shown in the destination picker
                   --no-compute           Only record it; compute legs later with \`compute\`
   edit <id>     Change a destination's fields (same options as add). Moving it recomputes its legs.
-  remove <id>   Remove a destination and every leg to or from it.
+  remove <id>   Remove a destination and every leg to or from it, train legs included.
   compute       Compute every leg that is missing.
                   --id <id>              Only legs to or from this destination
                   --force                Recompute legs that already exist
+  train         Rebuild every train leg from data/train-routes.json: the cited times, and the
+                track from OpenStreetMap. Needs osmium (\`brew install osmium-tool\`) and the OSM
+                file Valhalla downloaded; Valhalla itself need not be running.
   list          Destinations and how many of their legs are computed.
   explain <from> <to>
                 Recompute one leg without saving, and print every km scoring at least --min
@@ -40,13 +44,10 @@ Commands:
 Valhalla must be running (valhalla/README.md); VALHALLA_URL overrides http://localhost:8002.
 `;
 
-const KIND_DEFAULTS: Record<
-  DestinationKind,
-  Pick<Destination, 'rating' | 'idealNights' | 'maxNights'>
-> = {
-  airport: { rating: 0, idealNights: 0, maxNights: 0 },
-  city: { rating: 3, idealNights: 2, maxNights: 3 },
-  onsen: { rating: 3, idealNights: 1, maxNights: 2 },
+const KIND_DEFAULTS: Record<DestinationKind, Pick<Destination, 'rating'>> = {
+  airport: { rating: 0 },
+  city: { rating: 3 },
+  onsen: { rating: 3 },
 };
 const KINDS = Object.keys(KIND_DEFAULTS) as DestinationKind[];
 
@@ -60,8 +61,6 @@ const { values, positionals } = parseArgs({
     lon: { type: 'string' },
     geocode: { type: 'string' },
     rating: { type: 'string' },
-    'ideal-nights': { type: 'string' },
-    'max-nights': { type: 'string' },
     note: { type: 'string' },
     'no-compute': { type: 'boolean', default: false },
     id: { type: 'string' },
@@ -173,10 +172,6 @@ const applyFields = (destination: Destination): Destination => {
     ...(values['name-ja'] !== undefined && { nameJa: values['name-ja'] }),
     ...(kind !== undefined && { kind }),
     ...(rating !== undefined && { rating }),
-    ...(numberOption('ideal-nights') !== undefined && {
-      idealNights: numberOption('ideal-nights')!,
-    }),
-    ...(numberOption('max-nights') !== undefined && { maxNights: numberOption('max-nights')! }),
     ...(values.note !== undefined && { note: values.note }),
   };
 };
@@ -240,6 +235,14 @@ const commands: Record<string, (id?: string) => Promise<void>> = {
     await computeMissing(destinations, { onlyId: values.id, force: values.force });
   },
 
+  async train() {
+    const spec = await readTrainRoutes();
+    validateTrainRoutes(spec, await readDestinations());
+    const legs = await computeTrainLegs(spec, (line) => console.log(line));
+    await writeTrainLegs(legs);
+    console.log(`Wrote ${legs.length} train legs.`);
+  },
+
   async explain(fromId) {
     const destinations = await readDestinations();
     const find = (key: string | undefined) =>
@@ -290,7 +293,6 @@ const commands: Record<string, (id?: string) => Promise<void>> = {
         name: `${destination.name} (${destination.nameJa})`,
         kind: destination.kind,
         rating: destination.rating,
-        nights: `${destination.idealNights}/${destination.maxNights}`,
         legs: `${legs.filter((leg) => leg.from === destination.id || leg.to === destination.id).length}/${expected(destination)}`,
       })),
     );

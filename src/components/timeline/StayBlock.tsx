@@ -1,5 +1,5 @@
 import { useDraggable, useDroppable } from '@dnd-kit/core';
-import { GripVertical, Pin } from 'lucide-react';
+import { GripVertical } from 'lucide-react';
 import { type CSSProperties, type FC, type PointerEvent } from 'react';
 import ImageSearchLink from '@/components/ImageSearchLink';
 import { getDestination } from '@/data/dataset';
@@ -16,7 +16,6 @@ interface StayBlockProps {
   isValidTarget: boolean;
   isDragging: boolean;
   onOpen: () => void;
-  onTogglePin: () => void;
   onResizeStart: (edge: 'start' | 'end', event: PointerEvent<HTMLElement>) => void;
 }
 
@@ -56,7 +55,7 @@ const ResizeHandle: FC<{
 );
 
 /**
- * A booked stay across its nights: tap for every action, drag (unpinned) to reorder, drag an edge
+ * A booked stay across its nights: tap for every action, drag to reorder, drag an edge
  * to change its nights.
  */
 const StayBlock: FC<StayBlockProps> = ({
@@ -67,7 +66,6 @@ const StayBlock: FC<StayBlockProps> = ({
   isValidTarget,
   isDragging,
   onOpen,
-  onTogglePin,
   onResizeStart,
 }) => {
   const destination = getDestination(stay.destinationId!)!;
@@ -76,12 +74,8 @@ const StayBlock: FC<StayBlockProps> = ({
     setNodeRef: setDragRef,
     listeners,
     attributes,
-  } = useDraggable({ id: `stay-${index}`, data: { index }, disabled: stay.pinned });
-  const { setNodeRef: setDropRef, isOver } = useDroppable({
-    id: `drop-${index}`,
-    data: { index },
-    disabled: stay.pinned,
-  });
+  } = useDraggable({ id: `stay-${index}`, data: { index } });
+  const { setNodeRef: setDropRef, isOver } = useDroppable({ id: `drop-${index}`, data: { index } });
 
   return (
     <div
@@ -97,7 +91,6 @@ const StayBlock: FC<StayBlockProps> = ({
       className={cn(
         'group relative flex min-w-0 select-none rounded-lg border-l-4 transition-[opacity,box-shadow]',
         wide ? 'mx-0.5 min-h-20' : 'my-0.5 min-h-12',
-        stay.pinned && 'ring-1 ring-amber-300/50',
         isDragging && 'opacity-40',
         isValidTarget && 'ring-2 ring-info/40',
         isValidTarget && isOver && 'ring-info',
@@ -108,12 +101,12 @@ const StayBlock: FC<StayBlockProps> = ({
         className={cn(
           'flex min-w-0 grow gap-1 p-2 text-left',
           wide ? 'flex-col' : 'flex-row items-center',
-          !stay.pinned && 'cursor-grab active:cursor-grabbing',
+          'cursor-grab active:cursor-grabbing',
         )}
         onClick={onOpen}
         {...listeners}
         {...attributes}
-        aria-label={`${destination.name}, ${stay.nights} nights${stay.pinned ? ', pinned' : ''}`}
+        aria-label={`${destination.name}, ${stay.nights} nights`}
       >
         <span className={cn('flex min-w-0 flex-col', !wide && 'grow')}>
           <span className="truncate text-sm font-semibold leading-tight">{destination.name}</span>
@@ -123,9 +116,7 @@ const StayBlock: FC<StayBlockProps> = ({
           {stay.nights} night{stay.nights > 1 ? 's' : ''}
         </span>
         {/* On a phone the grip hints that a long press moves the stay; wide, the cursor does. */}
-        {!stay.pinned && !wide && (
-          <GripVertical className="h-4 w-4 shrink-0 text-base-content/30" />
-        )}
+        {!wide && <GripVertical className="h-4 w-4 shrink-0 text-base-content/30" />}
       </button>
       <ResizeHandle
         edge="start"
@@ -142,18 +133,6 @@ const StayBlock: FC<StayBlockProps> = ({
           wide ? 'absolute bottom-0.5 right-2' : 'self-center',
         )}
       />
-      <button
-        type="button"
-        className={cn(
-          'btn btn-ghost btn-xs btn-square shrink-0',
-          wide ? 'absolute right-0.5 top-0.5' : 'self-center mr-1',
-          stay.pinned ? 'text-amber-300' : 'text-base-content/30 hover:text-amber-200',
-        )}
-        onClick={onTogglePin}
-        title={stay.pinned ? 'Unpin: auto-fill may change it' : 'Pin: auto-fill keeps it'}
-      >
-        <Pin className={cn('h-3.5 w-3.5', stay.pinned && 'fill-current')} />
-      </button>
     </div>
   );
 };

@@ -1,0 +1,564 @@
+{
+  "legs": {
+    "nagoya>ngo": {
+      "from": "nagoya",
+      "to": "ngo",
+      "distanceKm": 39.4,
+      "durationMin": 32,
+      "segments": [
+        {
+          "service": "local",
+          "line": "Meitetsu Airport Line (μSKY / Ltd. Express)",
+          "lineJa": "名鉄空港線・常滑線",
+          "from": {
+            "name": "Meitetsu Nagoya",
+            "nameJa": "名鉄名古屋",
+            "lat": 35.16942,
+            "lon": 136.88394
+          },
+          "to": {
+            "name": "Central Japan Int'l Airport",
+            "nameJa": "中部国際空港",
+            "lat": 34.85994,
+            "lon": 136.81618
+          },
+          "distanceKm": 39.4,
+          "rideMin": 32,
+          "transferMin": 0
+        }
+      ],
+      "sources": [
+        "https://www.nagoya-info.jp/access/centrair/",
+        "https://www.airtrip.jp/travel-column/6363"
+      ],
+      "computedAt": "2026-10-12T09:16:12.501Z"
+    },
+    "nagoya>osaka": {
+      "from": "nagoya",
+      "to": "osaka",
+      "distanceKm": 173.1,
+      "durationMin": 50,
+      "segments": [
+        {
+          "service": "shinkansen",
+          "line": "Tokaido Shinkansen (Nozomi)",
+          "lineJa": "東海道新幹線（のぞみ）",
+          "from": {
+            "name": "Nagoya",
+            "nameJa": "名古屋",
+            "lat": 35.17073,
+            "lon": 136.88184
+          },
+          "to": {
+            "name": "Shin-Osaka",
+            "nameJa": "新大阪",
+            "lat": 34.73354,
+            "lon": 135.50019
+          },
+          "distanceKm": 173.1,
+          "rideMin": 50,
+          "transferMin": 0
+        }
+      ],
+      "sources": [
+        "https://shinkansen.tabiris.com/train01.html",
+        "https://jr-group.jp/nozomi-stop/"
+      ],
+      "computedAt": "2026-10-12T09:16:12.501Z"
+    },
+    "nagoya>suzuka": {
+      "from": "nagoya",
+      "to": "suzuka",
+      "distanceKm": 48,
+      "durationMin": 42,
+      "segments": [
+        {
+          "service": "local",
+          "line": "JR Rapid Mie (via Ise Railway)",
+          "lineJa": "快速みえ（関西本線・伊勢鉄道）",
+          "from": {
+            "name": "Nagoya",
+            "nameJa": "名古屋",
+            "lat": 35.17073,
+            "lon": 136.88184
+          },
+          "to": {
+            "name": "Suzuka (Ise Railway)",
+            "nameJa": "鈴鹿",
+            "lat": 34.87849,
+            "lon": 136.58884
+          },
+          "distanceKm": 48,
+          "rideMin": 42,
+          "transferMin": 0
+        }
+      ],
+      "sources": [
+        "https://ekitan.com/transit/section/sf-4455/st-4288",
+        "https://www.navitime.co.jp/transfer/searchlist?orvStationCode=00008576&dnvStationCode=00009050&defaultCondition=0",
+        "https://4travel.jp/dm_shisetsu/11371324"
+      ],
+      "computedAt": "2026-10-12T09:16:12.501Z"
+    },
+    "nagoya>tokyo": {
+      "from": "nagoya",
+      "to": "tokyo",
+      "distanceKm": 341.8,
+      "durationMin": 95,
+      "segments": [
+        {
+          "service": "shinkansen",
+          "line": "Tokaido Shinkansen (Nozomi)",
+          "lineJa": "東海道新幹線（のぞみ）",
+          "from": {
+            "name": "Nagoya",
+            "nameJa": "名古屋",
+            "lat": 35.17073,
+            "lon": 136.88184
+          },
+          "to": {
+            "name": "Tokyo",
+            "nameJa": "東京",
+            "lat": 35.68096,
+            "lon": 139.76799
+          },
+          "distanceKm": 341.8,
+          "rideMin": 95,
+          "transferMin": 0
+        }
+      ],
+      "sources": [
+        "https://jr-group.jp/nozomi-stop/",
+        "https://shinkansen.tabiris.com/train01.html",
+        "https://travel.watch.impress.co.jp/docs/news/2092600.html"
+      ],
+      "computedAt": "2026-10-12T09:16:12.501Z"
+    },
+    "ngo>nagoya": {
+      "from": "ngo",
+      "to": "nagoya",
+      "distanceKm": 39.4,
+      "durationMin": 32,
+      "segments": [
+        {
+          "service": "local",
+          "line": "Meitetsu Airport Line (μSKY / Ltd. Express)",
+          "lineJa": "名鉄空港線・常滑線",
+          "from": {
+            "name": "Central Japan Int'l Airport",
+            "nameJa": "中部国際空港",
+            "lat": 34.85994,
+            "lon": 136.81618
+          },
+          "to": {
+            "name": "Meitetsu Nagoya",
+            "nameJa": "名鉄名古屋",
+            "lat": 35.16942,
+            "lon": 136.88394
+          },
+          "distanceKm": 39.4,
+          "rideMin": 32,
+          "transferMin": 0
+        }
+      ],
+      "sources": [
+        "https://www.nagoya-info.jp/access/centrair/",
+        "https://www.airtrip.jp/travel-column/6363"
+      ],
+      "computedAt": "2026-10-12T09:16:12.501Z"
+    },
+    "osaka>nagoya": {
+      "from": "osaka",
+      "to": "nagoya",
+      "distanceKm": 173.1,
+      "durationMin": 50,
+      "segments": [
+        {
+          "service": "shinkansen",
+          "line": "Tokaido Shinkansen (Nozomi)",
+          "lineJa": "東海道新幹線（のぞみ）",
+          "from": {
+            "name": "Shin-Osaka",
+            "nameJa": "新大阪",
+            "lat": 34.73354,
+            "lon": 135.50019
+          },
+          "to": {
+            "name": "Nagoya",
+            "nameJa": "名古屋",
+            "lat": 35.17073,
+            "lon": 136.88184
+          },
+          "distanceKm": 173.1,
+          "rideMin": 50,
+          "transferMin": 0
+        }
+      ],
+      "sources": [
+        "https://shinkansen.tabiris.com/train01.html",
+        "https://jr-group.jp/nozomi-stop/"
+      ],
+      "computedAt": "2026-10-12T09:16:12.501Z"
+    },
+    "osaka>suzuka": {
+      "from": "osaka",
+      "to": "suzuka",
+      "distanceKm": 221.1,
+      "durationMin": 132,
+      "segments": [
+        {
+          "service": "shinkansen",
+          "line": "Tokaido Shinkansen (Nozomi)",
+          "lineJa": "東海道新幹線（のぞみ）",
+          "from": {
+            "name": "Shin-Osaka",
+            "nameJa": "新大阪",
+            "lat": 34.73354,
+            "lon": 135.50019
+          },
+          "to": {
+            "name": "Nagoya",
+            "nameJa": "名古屋",
+            "lat": 35.17073,
+            "lon": 136.88184
+          },
+          "distanceKm": 173.1,
+          "rideMin": 50,
+          "transferMin": 0
+        },
+        {
+          "service": "local",
+          "line": "JR Rapid Mie (via Ise Railway)",
+          "lineJa": "快速みえ（関西本線・伊勢鉄道）",
+          "from": {
+            "name": "Nagoya",
+            "nameJa": "名古屋",
+            "lat": 35.17073,
+            "lon": 136.88184
+          },
+          "to": {
+            "name": "Suzuka (Ise Railway)",
+            "nameJa": "鈴鹿",
+            "lat": 34.87849,
+            "lon": 136.58884
+          },
+          "distanceKm": 48,
+          "rideMin": 42,
+          "transferMin": 40
+        }
+      ],
+      "sources": [
+        "https://shinkansen.tabiris.com/train01.html",
+        "https://jr-group.jp/nozomi-stop/",
+        "https://ekitan.com/transit/section/sf-4455/st-4288",
+        "https://www.navitime.co.jp/transfer/searchlist?orvStationCode=00008576&dnvStationCode=00009050&defaultCondition=0",
+        "https://4travel.jp/dm_shisetsu/11371324"
+      ],
+      "computedAt": "2026-10-12T09:16:12.501Z"
+    },
+    "osaka>tokyo": {
+      "from": "osaka",
+      "to": "tokyo",
+      "distanceKm": 515,
+      "durationMin": 150,
+      "segments": [
+        {
+          "service": "shinkansen",
+          "line": "Tokaido Shinkansen (Nozomi)",
+          "lineJa": "東海道新幹線（のぞみ）",
+          "from": {
+            "name": "Shin-Osaka",
+            "nameJa": "新大阪",
+            "lat": 34.73354,
+            "lon": 135.50019
+          },
+          "to": {
+            "name": "Tokyo",
+            "nameJa": "東京",
+            "lat": 35.68096,
+            "lon": 139.76799
+          },
+          "distanceKm": 515,
+          "rideMin": 150,
+          "transferMin": 0
+        }
+      ],
+      "sources": [
+        "https://jr-central.co.jp/news/release/_pdf/000044803.pdf",
+        "https://travel.watch.impress.co.jp/docs/news/2092600.html"
+      ],
+      "computedAt": "2026-10-12T09:16:12.501Z"
+    },
+    "suzuka>nagoya": {
+      "from": "suzuka",
+      "to": "nagoya",
+      "distanceKm": 48,
+      "durationMin": 42,
+      "segments": [
+        {
+          "service": "local",
+          "line": "JR Rapid Mie (via Ise Railway)",
+          "lineJa": "快速みえ（関西本線・伊勢鉄道）",
+          "from": {
+            "name": "Suzuka (Ise Railway)",
+            "nameJa": "鈴鹿",
+            "lat": 34.87849,
+            "lon": 136.58884
+          },
+          "to": {
+            "name": "Nagoya",
+            "nameJa": "名古屋",
+            "lat": 35.17073,
+            "lon": 136.88184
+          },
+          "distanceKm": 48,
+          "rideMin": 42,
+          "transferMin": 0
+        }
+      ],
+      "sources": [
+        "https://ekitan.com/transit/section/sf-4455/st-4288",
+        "https://www.navitime.co.jp/transfer/searchlist?orvStationCode=00008576&dnvStationCode=00009050&defaultCondition=0",
+        "https://4travel.jp/dm_shisetsu/11371324"
+      ],
+      "computedAt": "2026-10-12T09:16:12.501Z"
+    },
+    "suzuka>osaka": {
+      "from": "suzuka",
+      "to": "osaka",
+      "distanceKm": 221.1,
+      "durationMin": 107,
+      "segments": [
+        {
+          "service": "local",
+          "line": "JR Rapid Mie (via Ise Railway)",
+          "lineJa": "快速みえ（関西本線・伊勢鉄道）",
+          "from": {
+            "name": "Suzuka (Ise Railway)",
+            "nameJa": "鈴鹿",
+            "lat": 34.87849,
+            "lon": 136.58884
+          },
+          "to": {
+            "name": "Nagoya",
+            "nameJa": "名古屋",
+            "lat": 35.17073,
+            "lon": 136.88184
+          },
+          "distanceKm": 48,
+          "rideMin": 42,
+          "transferMin": 0
+        },
+        {
+          "service": "shinkansen",
+          "line": "Tokaido Shinkansen (Nozomi)",
+          "lineJa": "東海道新幹線（のぞみ）",
+          "from": {
+            "name": "Nagoya",
+            "nameJa": "名古屋",
+            "lat": 35.17073,
+            "lon": 136.88184
+          },
+          "to": {
+            "name": "Shin-Osaka",
+            "nameJa": "新大阪",
+            "lat": 34.73354,
+            "lon": 135.50019
+          },
+          "distanceKm": 173.1,
+          "rideMin": 50,
+          "transferMin": 15
+        }
+      ],
+      "sources": [
+        "https://ekitan.com/transit/section/sf-4455/st-4288",
+        "https://www.navitime.co.jp/transfer/searchlist?orvStationCode=00008576&dnvStationCode=00009050&defaultCondition=0",
+        "https://4travel.jp/dm_shisetsu/11371324",
+        "https://shinkansen.tabiris.com/train01.html",
+        "https://jr-group.jp/nozomi-stop/"
+      ],
+      "computedAt": "2026-10-12T09:16:12.501Z"
+    },
+    "suzuka>tokyo": {
+      "from": "suzuka",
+      "to": "tokyo",
+      "distanceKm": 389.8,
+      "durationMin": 152,
+      "segments": [
+        {
+          "service": "local",
+          "line": "JR Rapid Mie (via Ise Railway)",
+          "lineJa": "快速みえ（関西本線・伊勢鉄道）",
+          "from": {
+            "name": "Suzuka (Ise Railway)",
+            "nameJa": "鈴鹿",
+            "lat": 34.87849,
+            "lon": 136.58884
+          },
+          "to": {
+            "name": "Nagoya",
+            "nameJa": "名古屋",
+            "lat": 35.17073,
+            "lon": 136.88184
+          },
+          "distanceKm": 48,
+          "rideMin": 42,
+          "transferMin": 0
+        },
+        {
+          "service": "shinkansen",
+          "line": "Tokaido Shinkansen (Nozomi)",
+          "lineJa": "東海道新幹線（のぞみ）",
+          "from": {
+            "name": "Nagoya",
+            "nameJa": "名古屋",
+            "lat": 35.17073,
+            "lon": 136.88184
+          },
+          "to": {
+            "name": "Tokyo",
+            "nameJa": "東京",
+            "lat": 35.68096,
+            "lon": 139.76799
+          },
+          "distanceKm": 341.8,
+          "rideMin": 95,
+          "transferMin": 15
+        }
+      ],
+      "sources": [
+        "https://ekitan.com/transit/section/sf-4455/st-4288",
+        "https://www.navitime.co.jp/transfer/searchlist?orvStationCode=00008576&dnvStationCode=00009050&defaultCondition=0",
+        "https://4travel.jp/dm_shisetsu/11371324",
+        "https://jr-group.jp/nozomi-stop/",
+        "https://shinkansen.tabiris.com/train01.html",
+        "https://travel.watch.impress.co.jp/docs/news/2092600.html"
+      ],
+      "computedAt": "2026-10-12T09:16:12.501Z"
+    },
+    "tokyo>nagoya": {
+      "from": "tokyo",
+      "to": "nagoya",
+      "distanceKm": 341.8,
+      "durationMin": 95,
+      "segments": [
+        {
+          "service": "shinkansen",
+          "line": "Tokaido Shinkansen (Nozomi)",
+          "lineJa": "東海道新幹線（のぞみ）",
+          "from": {
+            "name": "Tokyo",
+            "nameJa": "東京",
+            "lat": 35.68096,
+            "lon": 139.76799
+          },
+          "to": {
+            "name": "Nagoya",
+            "nameJa": "名古屋",
+            "lat": 35.17073,
+            "lon": 136.88184
+          },
+          "distanceKm": 341.8,
+          "rideMin": 95,
+          "transferMin": 0
+        }
+      ],
+      "sources": [
+        "https://jr-group.jp/nozomi-stop/",
+        "https://shinkansen.tabiris.com/train01.html",
+        "https://travel.watch.impress.co.jp/docs/news/2092600.html"
+      ],
+      "computedAt": "2026-10-12T09:16:12.501Z"
+    },
+    "tokyo>osaka": {
+      "from": "tokyo",
+      "to": "osaka",
+      "distanceKm": 515,
+      "durationMin": 150,
+      "segments": [
+        {
+          "service": "shinkansen",
+          "line": "Tokaido Shinkansen (Nozomi)",
+          "lineJa": "東海道新幹線（のぞみ）",
+          "from": {
+            "name": "Tokyo",
+            "nameJa": "東京",
+            "lat": 35.68096,
+            "lon": 139.76799
+          },
+          "to": {
+            "name": "Shin-Osaka",
+            "nameJa": "新大阪",
+            "lat": 34.73354,
+            "lon": 135.50019
+          },
+          "distanceKm": 515,
+          "rideMin": 150,
+          "transferMin": 0
+        }
+      ],
+      "sources": [
+        "https://jr-central.co.jp/news/release/_pdf/000044803.pdf",
+        "https://travel.watch.impress.co.jp/docs/news/2092600.html"
+      ],
+      "computedAt": "2026-10-12T09:16:12.501Z"
+    },
+    "tokyo>suzuka": {
+      "from": "tokyo",
+      "to": "suzuka",
+      "distanceKm": 389.8,
+      "durationMin": 177,
+      "segments": [
+        {
+          "service": "shinkansen",
+          "line": "Tokaido Shinkansen (Nozomi)",
+          "lineJa": "東海道新幹線（のぞみ）",
+          "from": {
+            "name": "Tokyo",
+            "nameJa": "東京",
+            "lat": 35.68096,
+            "lon": 139.76799
+          },
+          "to": {
+            "name": "Nagoya",
+            "nameJa": "名古屋",
+            "lat": 35.17073,
+            "lon": 136.88184
+          },
+          "distanceKm": 341.8,
+          "rideMin": 95,
+          "transferMin": 0
+        },
+        {
+          "service": "local",
+          "line": "JR Rapid Mie (via Ise Railway)",
+          "lineJa": "快速みえ（関西本線・伊勢鉄道）",
+          "from": {
+            "name": "Nagoya",
+            "nameJa": "名古屋",
+            "lat": 35.17073,
+            "lon": 136.88184
+          },
+          "to": {
+            "name": "Suzuka (Ise Railway)",
+            "nameJa": "鈴鹿",
+            "lat": 34.87849,
+            "lon": 136.58884
+          },
+          "distanceKm": 48,
+          "rideMin": 42,
+          "transferMin": 40
+        }
+      ],
+      "sources": [
+        "https://jr-group.jp/nozomi-stop/",
+        "https://shinkansen.tabiris.com/train01.html",
+        "https://travel.watch.impress.co.jp/docs/news/2092600.html",
+        "https://ekitan.com/transit/section/sf-4455/st-4288",
+        "https://www.navitime.co.jp/transfer/searchlist?orvStationCode=00008576&dnvStationCode=00009050&defaultCondition=0",
+        "https://4travel.jp/dm_shisetsu/11371324"
+      ],
+      "computedAt": "2026-10-12T09:16:12.501Z"
+    }
+  }
+}

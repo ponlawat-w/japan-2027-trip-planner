@@ -19,7 +19,8 @@ const App: FC = () => (
       </div>
     </main>
     <footer className="px-4 pb-4 text-center text-[11px] text-base-content/40">
-      Routing: Valhalla on OpenStreetMap data (ODbL) · Elevation: 国土地理院 標高タイル · Climate:{' '}
+      Routing: Valhalla on OpenStreetMap data (ODbL) · Railways: OpenStreetMap; train times from
+      published timetables · Elevation: 国土地理院 標高タイル · Climate:{' '}
       <a className="link" href="https://open-meteo.com/">
         Open-Meteo
       </a>{' '}

@@ -4,8 +4,6 @@ import {
   ChevronLeft,
   ChevronRight,
   ChevronUp,
-  Pin,
-  PinOff,
   Star,
   Trash2,
 } from 'lucide-react';
@@ -13,15 +11,7 @@ import { type FC, type ReactNode } from 'react';
 import ImageSearchLink from '@/components/ImageSearchLink';
 import { getDestination } from '@/data/dataset';
 import { useIsWide } from '@/hooks/useMediaQuery';
-import {
-  assignRange,
-  canMoveStay,
-  moveStay,
-  resizeStay,
-  setPinned,
-  type Plan,
-  type Stay,
-} from '@/lib/plan';
+import { assignRange, canMoveStay, moveStay, resizeStay, type Plan, type Stay } from '@/lib/plan';
 import { KIND_COLORS, KIND_LABELS } from '@/lib/styles';
 import { stayDateRange } from '@/lib/trip';
 import Dialog, { DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/ui/Dialog';
@@ -32,7 +22,7 @@ interface StayDialogProps {
   /**
    * A night inside the stay being edited, or null when closed.
    *
-   * A night rather than an index into `stays`: resizing or pinning can merge or split the stays
+   * A night rather than an index into `stays`: resizing or moving can merge or split the stays
    * around it and shift every index, while a night that is still part of the stay keeps naming it.
    */
   night: number | null;
@@ -122,14 +112,7 @@ const StayDialog: FC<StayDialogProps> = ({
             </DialogHeader>
 
             <div className="mt-4 grid grid-cols-2 gap-2">
-              <ActionButton
-                className={stay.pinned ? 'btn-warning' : 'btn-soft btn-warning'}
-                onClick={() => apply(setPinned(plan, stay.start, last, !stay.pinned), stay.start)}
-              >
-                {stay.pinned ? <PinOff className="h-4 w-4" /> : <Pin className="h-4 w-4" />}
-                {stay.pinned ? 'Unpin' : 'Pin'}
-              </ActionButton>
-              <ActionButton onClick={() => onChangeDestination(stay)}>
+              <ActionButton className="col-span-2" onClick={() => onChangeDestination(stay)}>
                 <ArrowLeftRight className="h-4 w-4" /> Change place
               </ActionButton>
 
@@ -171,12 +154,6 @@ const StayDialog: FC<StayDialogProps> = ({
                 <LaterIcon className="h-4 w-4" /> Swap with next
               </ActionButton>
             </div>
-            {stay.pinned && (
-              <p className="mt-2 text-xs text-base-content/50">
-                Pinned stays keep their dates: unpin to swap this one with its neighbours.
-              </p>
-            )}
-
             <button
               type="button"
               className="btn btn-sm btn-soft btn-error mt-4 w-full"
