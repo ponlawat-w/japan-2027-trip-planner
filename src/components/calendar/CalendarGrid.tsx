@@ -13,7 +13,6 @@ import {
   FLIGHT_DAY,
   type CalendarSegment,
 } from '@/lib/trip';
-import { usePreferencesStore } from '@/store/preferencesStore';
 import { cn } from '@/utils/cn';
 
 interface CalendarGridProps {
@@ -116,8 +115,7 @@ const CalendarGrid: FC<CalendarGridProps> = ({
   onOpenLeg,
   rentalStrip,
 }) => {
-  const weekStart = usePreferencesStore((state) => state.weekStart);
-  const weeks = useMemo(() => calendarWeeks(weekStart), [weekStart]);
+  const weeks = useMemo(() => calendarWeeks(), []);
   const dateRow = (week: number) => 4 * week + 2;
   const legRow = (week: number) => 4 * week + 3;
   const stayRow = (week: number) => 4 * week + 4;
@@ -127,7 +125,7 @@ const CalendarGrid: FC<CalendarGridProps> = ({
     gridColumn: `${segment.column + 1} / span ${segment.nights}`,
     gridRow: stayRow(segment.week),
   });
-  const flight = calendarPosition(weekStart, FLIGHT_DAY);
+  const flight = calendarPosition(FLIGHT_DAY);
 
   return (
     <div
@@ -199,7 +197,7 @@ const CalendarGrid: FC<CalendarGridProps> = ({
       })}
 
       {[...legsByDay.values()].map((leg) => {
-        const { week, column } = calendarPosition(weekStart, leg.day);
+        const { week, column } = calendarPosition(leg.day);
         return (
           <div
             key={`leg-${leg.index}`}
@@ -214,7 +212,7 @@ const CalendarGrid: FC<CalendarGridProps> = ({
       {stays.flatMap((stay, index) => {
         const isValidTarget =
           dragging !== null && dragging !== index && canMoveStay(stays, dragging, index);
-        return calendarSegments(weekStart, stay.start, stay.nights).map((segment) =>
+        return calendarSegments(stay.start, stay.nights).map((segment) =>
           stay.destinationId ? (
             <CalendarStay
               key={`${stay.start}-${stay.destinationId}-${segment.week}`}
@@ -259,7 +257,7 @@ const CalendarGrid: FC<CalendarGridProps> = ({
       </div>
 
       {rental &&
-        calendarSegments(weekStart, rental.from, rental.to - rental.from + 1).map((segment) => (
+        calendarSegments(rental.from, rental.to - rental.from + 1).map((segment) => (
           <RentalBar
             key={`rental-${segment.week}`}
             rental={rental}

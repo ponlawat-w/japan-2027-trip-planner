@@ -51,19 +51,18 @@ export interface CalendarCell {
   column: number;
 }
 
-/** Dates shown before the trip's first day, to fill its first week. */
-const leadOf = (weekStart: 0 | 1): number => (DAYS[0].date.getDay() - weekStart + 7) % 7;
-
 /**
- * The whole weeks that hold the trip, starting on Sunday (0) or Monday (1): three either way for
- * 2–15 February 2027.
+ * Dates shown before the trip's first day, to fill its first week. Weeks start on Sunday, as
+ * calendars do in Japan and the US.
  */
-export const calendarWeeks = (weekStart: 0 | 1): CalendarCell[][] => {
-  const lead = leadOf(weekStart);
-  const weekCount = Math.ceil((lead + DAY_COUNT) / 7);
+const LEAD = DAYS[0].date.getDay();
+
+/** The whole weeks that hold the trip: three for 2–15 February 2027, 31 January to 20 February. */
+export const calendarWeeks = (): CalendarCell[][] => {
+  const weekCount = Math.ceil((LEAD + DAY_COUNT) / 7);
   return Array.from({ length: weekCount }, (_, week) =>
     Array.from({ length: 7 }, (_, column) => {
-      const offset = week * 7 + column - lead;
+      const offset = week * 7 + column - LEAD;
       return {
         date: new Date(TRIP_YEAR, TRIP_MONTH_INDEX, FIRST_DAY_OF_MONTH + offset),
         tripDay: offset >= 0 && offset < DAY_COUNT ? offset : null,
@@ -75,13 +74,10 @@ export const calendarWeeks = (weekStart: 0 | 1): CalendarCell[][] => {
 };
 
 /** Where a trip day falls in {@link calendarWeeks}. */
-export const calendarPosition = (
-  weekStart: 0 | 1,
-  day: number,
-): { week: number; column: number } => {
-  const lead = leadOf(weekStart);
-  return { week: Math.floor((lead + day) / 7), column: (lead + day) % 7 };
-};
+export const calendarPosition = (day: number): { week: number; column: number } => ({
+  week: Math.floor((LEAD + day) / 7),
+  column: (LEAD + day) % 7,
+});
 
 /** A stretch of nights within one calendar week: a stay that crosses a week is drawn in pieces. */
 export interface CalendarSegment {
@@ -94,15 +90,11 @@ export interface CalendarSegment {
   isLast: boolean;
 }
 
-export const calendarSegments = (
-  weekStart: 0 | 1,
-  start: number,
-  nights: number,
-): CalendarSegment[] => {
+export const calendarSegments = (start: number, nights: number): CalendarSegment[] => {
   const segments: CalendarSegment[] = [];
   const end = start + nights;
   for (let day = start; day < end;) {
-    const { week, column } = calendarPosition(weekStart, day);
+    const { week, column } = calendarPosition(day);
     const span = Math.min(7 - column, end - day);
     segments.push({
       week,

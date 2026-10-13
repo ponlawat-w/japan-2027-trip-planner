@@ -62,8 +62,6 @@ const Timeline: FC = () => {
   const wide = useIsWide();
   const view = usePreferencesStore((state) => state.view);
   const setView = usePreferencesStore((state) => state.setView);
-  const weekStart = usePreferencesStore((state) => state.weekStart);
-  const setWeekStart = usePreferencesStore((state) => state.setWeekStart);
   const calendar = view === 'calendar';
   const stays = useMemo(() => staysOf(plan), [plan]);
   const committedRental = usePlanStore((state) => state.rental);
@@ -327,17 +325,6 @@ const Timeline: FC = () => {
         <h2 className="grow text-sm font-semibold uppercase tracking-wide text-base-content/60">
           {calendar ? 'Calendar' : 'Timeline'}
         </h2>
-        {calendar && (
-          <SegmentedControl
-            label="Week starts on"
-            value={weekStart}
-            onChange={setWeekStart}
-            options={[
-              { value: 0, label: 'Sun', title: 'Weeks start on Sunday' },
-              { value: 1, label: 'Mon', title: 'Weeks start on Monday' },
-            ]}
-          />
-        )}
         <SegmentedControl
           label="View"
           value={view}

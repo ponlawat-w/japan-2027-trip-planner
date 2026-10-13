@@ -39,9 +39,9 @@ npm run dev        # http://localhost:5190
   stay to move it.
 - **Timeline / Calendar** beside **Clear** switches the same plan to a month calendar: the three
   weeks around 2–15 February, a stay drawn as a bar across its nights (split where it crosses into
-  the next week), and each leg on the day it is travelled. Everything above works there too: drag
-  a bar's left or right end to change its nights. **Sun / Mon** sets the first day of the week.
-  Both choices are saved per browser, like km / mi, and are not part of shared links.
+  the next week), and each leg on the day it is travelled. Weeks start on Sunday. Everything
+  above works there too: drag a bar's left or right end to change its nights. The view is saved
+  per browser, like km / mi, and is not part of shared links.
 - **The address bar always holds the plan** (`#plan=nagoya.suzuka.…`), updated as you edit, so
   you can copy the URL at any time; **Copy link** does the same in one tap. Opening a link loads
   its plan, and undo brings back the one you had before. The plan is also saved in `localStorage`.
