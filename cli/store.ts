@@ -7,6 +7,9 @@ import {
   legFileName,
   legKey,
   type Destination,
+  type FerryGeometry,
+  type FerryLeg,
+  type FerryMatrix,
   type LegGeometry,
   type LegSummary,
   type Matrix,
@@ -26,6 +29,9 @@ const LEGS_DIR = path.join(DATA_DIR, 'legs');
 const TRAIN_ROUTES_FILE = path.join(DATA_DIR, 'train-routes.json');
 const TRAIN_MATRIX_FILE = path.join(DATA_DIR, 'train-matrix.json');
 const TRAIN_LEGS_DIR = path.join(DATA_DIR, 'train-legs');
+const FERRY_ROUTES_FILE = path.join(DATA_DIR, 'ferry-routes.json');
+const FERRY_MATRIX_FILE = path.join(DATA_DIR, 'ferry-matrix.json');
+const FERRY_LEGS_DIR = path.join(DATA_DIR, 'ferry-legs');
 
 /** A road closed every winter, kept out of routing as a polygon across it. */
 export interface WinterClosure {
@@ -149,6 +155,88 @@ export const writeTrainLegs = async (
   });
 };
 
+export interface FerryPortSpec {
+  name: string;
+  nameJa: string;
+  lat: number;
+  lon: number;
+  /** The destination this pier belongs to, reached on foot rather than by car. */
+  destination?: string;
+  /** The walk between the pier and the destination, where `destination` is set. */
+  walkMin?: number;
+  note?: string;
+}
+
+/** One boat between two ports, in either direction, with its timetable and its sources. */
+export interface FerrySailingSpec {
+  between: [string, string];
+  line: string;
+  lineJa: string;
+  rideMin: number;
+  boardingMin: number;
+  fareYen: number;
+  /** Departures from each port, by port id. */
+  departures: Record<string, string[]>;
+  note?: string;
+  /** The boat's course as `[lon, lat]`, from `between[0]` to `between[1]`. */
+  path: LonLat[];
+  sources: string[];
+}
+
+/** A ferry option between two destinations, both ways: the pier it leaves from, and the one it reaches. */
+export interface FerryRouteSpec {
+  from: string;
+  to: string;
+  via: [string, string];
+}
+
+/** `data/ferry-routes.json`: written by hand, from the operators' sites, and read by `ferry`. */
+export interface FerryRoutes {
+  ports: Record<string, FerryPortSpec>;
+  sailings: FerrySailingSpec[];
+  routes: FerryRouteSpec[];
+}
+
+export const readFerryRoutes = (): Promise<FerryRoutes> =>
+  readJson<FerryRoutes>(FERRY_ROUTES_FILE, { ports: {}, sailings: [], routes: [] });
+
+export const readFerryMatrix = (): Promise<FerryMatrix> =>
+  readJson<FerryMatrix>(FERRY_MATRIX_FILE, { legs: {} });
+
+/** Replaces every ferry leg at once, as {@link writeTrainLegs} does for trains. */
+export const writeFerryLegs = async (
+  legs: { summary: FerryLeg; geometry: FerryGeometry }[],
+): Promise<void> => {
+  await rm(FERRY_LEGS_DIR, { recursive: true, force: true });
+  for (const { geometry } of legs) {
+    await writeJson(
+      path.join(FERRY_LEGS_DIR, legFileName(geometry.from, geometry.to)),
+      geometry,
+      false,
+    );
+  }
+  const sorted = [...legs].sort((a, b) =>
+    legKey(a.summary.from, a.summary.to).localeCompare(legKey(b.summary.from, b.summary.to)),
+  );
+  await writeJson(FERRY_MATRIX_FILE, {
+    legs: Object.fromEntries(
+      sorted.map(({ summary }) => [legKey(summary.from, summary.to), summary]),
+    ),
+  });
+};
+
+/** Ferry legs to or from a removed destination. Its routes in `ferry-routes.json` stay for a person to edit. */
+const removeFerryLegsOf = async (id: string): Promise<void> => {
+  const matrix = await readFerryMatrix();
+  for (const [key, leg] of Object.entries(matrix.legs)) {
+    if (leg.from !== id && leg.to !== id) continue;
+    delete matrix.legs[key];
+    await rm(path.join(FERRY_LEGS_DIR, legFileName(leg.from, leg.to)), { force: true });
+  }
+  await rm(path.join(FERRY_LEGS_DIR, id), { recursive: true, force: true });
+  if (existsSync(FERRY_MATRIX_FILE)) await writeJson(FERRY_MATRIX_FILE, matrix);
+};
+
 /** Train legs to or from a removed destination. Its routes in `train-routes.json` stay for a person to edit. */
 const removeTrainLegsOf = async (id: string): Promise<void> => {
   const matrix = await readTrainMatrix();
@@ -163,6 +251,7 @@ const removeTrainLegsOf = async (id: string): Promise<void> => {
 
 export const removeLegsOf = async (id: string): Promise<number> => {
   await removeTrainLegsOf(id);
+  await removeFerryLegsOf(id);
   const matrix = await readMatrix();
   let removed = 0;
   for (const [key, leg] of Object.entries(matrix.legs)) {

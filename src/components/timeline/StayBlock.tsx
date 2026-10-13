@@ -26,21 +26,32 @@ interface StayBlockProps {
  * phone dragging it resizes rather than scrolls. On a phone the grip is always visible, since there
  * is no hover to reveal it.
  */
-const ResizeHandle: FC<{
+export const ResizeHandle: FC<{
   edge: 'start' | 'end';
-  wide: boolean;
+  /** `x` for a stay laid out left to right, `y` for one laid out top to bottom. */
+  axis: 'x' | 'y';
+  revealOnHover: boolean;
+  /** What dragging it changes, if not a stay's arrival or departure. */
+  label?: string;
   onPointerDown: (event: PointerEvent<HTMLElement>) => void;
-}> = ({ edge, wide, onPointerDown }) => (
+}> = ({ edge, axis, revealOnHover, label, onPointerDown }) => (
   <div
     role="separator"
-    aria-orientation={wide ? 'vertical' : 'horizontal'}
+    aria-orientation={axis === 'x' ? 'vertical' : 'horizontal'}
     aria-label={
-      edge === 'start' ? 'Drag to change the arrival day' : 'Drag to change the departure day'
+      label ??
+      (edge === 'start' ? 'Drag to change the arrival day' : 'Drag to change the departure day')
     }
     className={cn(
       'absolute z-10 flex touch-none items-center justify-center',
-      wide
-        ? cn('inset-y-0 w-3 cursor-ew-resize', edge === 'start' ? '-left-1.5' : '-right-1.5')
+      axis === 'x'
+        ? cn(
+            'inset-y-0 cursor-ew-resize',
+            // Wider without a mouse: a fingertip needs more to land on.
+            revealOnHover
+              ? cn('w-3', edge === 'start' ? '-left-1.5' : '-right-1.5')
+              : cn('w-4', edge === 'start' ? '-left-2' : '-right-2'),
+          )
         : cn('inset-x-0 h-4 cursor-ns-resize', edge === 'start' ? '-top-2' : '-bottom-2'),
     )}
     onPointerDown={onPointerDown}
@@ -48,7 +59,8 @@ const ResizeHandle: FC<{
     <span
       className={cn(
         'rounded-full bg-base-content/50 transition-opacity',
-        wide ? 'h-8 w-1 opacity-0 group-hover:opacity-100' : 'h-1 w-8 opacity-40',
+        axis === 'x' ? 'h-[60%] max-h-8 w-1' : 'h-1 w-8',
+        revealOnHover ? 'opacity-0 group-hover:opacity-100' : 'opacity-40',
       )}
     />
   </div>
@@ -118,12 +130,15 @@ const StayBlock: FC<StayBlockProps> = ({
         {/* On a phone the grip hints that a long press moves the stay; wide, the cursor does. */}
         {!wide && <GripVertical className="h-4 w-4 shrink-0 text-base-content/30" />}
       </button>
-      <ResizeHandle
-        edge="start"
-        wide={wide}
-        onPointerDown={(event) => onResizeStart('start', event)}
-      />
-      <ResizeHandle edge="end" wide={wide} onPointerDown={(event) => onResizeStart('end', event)} />
+      {(['start', 'end'] as const).map((edge) => (
+        <ResizeHandle
+          key={edge}
+          edge={edge}
+          axis={wide ? 'x' : 'y'}
+          revealOnHover={wide}
+          onPointerDown={(event) => onResizeStart(edge, event)}
+        />
+      ))}
       {/* Outside the block's button, so a tap opens the photos rather than the stay's actions.
           Wide, it sits in the bottom corner, clear of the resize grip along the right edge. */}
       <ImageSearchLink

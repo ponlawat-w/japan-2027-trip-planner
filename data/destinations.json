@@ -119,5 +119,15 @@
     "lon": 136.9068,
     "rating": 4,
     "note": "Village of gassho-zukuri farmhouses (World Heritage); point at Ogimachi"
+  },
+  {
+    "id": "nagashima",
+    "name": "Nagashima Spa Land",
+    "nameJa": "ナガシマスパーランド",
+    "kind": "onsen",
+    "lat": 35.0307,
+    "lon": 136.7333,
+    "rating": 3,
+    "note": "Theme park with Nagashima Onsen; resort hotels (Hanamizuki, Hotel Nagashima, Garden Hotel Olive) next to it"
   }
 ]

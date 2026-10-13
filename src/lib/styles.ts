@@ -5,7 +5,7 @@ import type { DestinationKind, Difficulty, RailService } from '@/types/data';
  *
  * Difficulty runs green to red. Destination kinds take hues clear of that ramp (blue, pink,
  * slate), so a stop's colour is never mistaken for a difficulty. Trains are white and violet,
- * clear of both: a train line is never read as a drive of some difficulty.
+ * and ferries cyan, clear of both: neither is ever read as a drive of some difficulty.
  */
 
 export const DIFFICULTY_COLORS: Record<Difficulty, string> = {
@@ -40,6 +40,16 @@ export const SERVICE_COLORS: Record<RailService, string> = {
   shinkansen: '#f8fafc',
   local: '#a78bfa',
 };
+
+/** The boat's course: cyan, clear of the difficulty ramp and of both train services. */
+export const FERRY_COLOR = '#22d3ee';
+
+/** The rental car's days, and driving in it: amber. Someone else's car is a quiet slate. */
+export const RENTAL_COLOR = '#fbbf24';
+export const CAR_COLOR = '#94a3b8';
+
+/** What a car leg is called: in the rental the traveller drives, or in someone else's car. */
+export const carLabel = (rental: boolean): string => (rental ? 'Rental car' : "Someone else's car");
 
 export const SERVICE_LABELS: Record<RailService, string> = {
   shinkansen: 'Shinkansen',

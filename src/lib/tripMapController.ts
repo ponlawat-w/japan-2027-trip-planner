@@ -13,10 +13,12 @@ import { boundingExtent } from 'ol/extent';
 import { defaults as defaultControls } from 'ol/control/defaults';
 import type { FeatureLike } from 'ol/Feature';
 import { decodePolyline6 } from '@/lib/polyline';
-import { DIFFICULTY_COLORS, KIND_COLORS, SERVICE_COLORS } from '@/lib/styles';
+import { DIFFICULTY_COLORS, FERRY_COLOR, KIND_COLORS, SERVICE_COLORS } from '@/lib/styles';
 import type {
   Destination,
   Difficulty,
+  FerryGeometry,
+  FerryLeg,
   LegGeometry,
   RailService,
   TrainGeometry,
@@ -71,11 +73,18 @@ export type MapLeg =
       train: TrainLeg;
       /** Null until loaded: each ride is drawn station to station meanwhile. */
       geometry: TrainGeometry | null;
+    }
+  | {
+      mode: 'ferry';
+      index: number;
+      ferry: FerryLeg;
+      /** Null until loaded: the crossing is drawn pier to pier meanwhile. */
+      geometry: FerryGeometry | null;
     };
 
 /**
- * The trip map: every destination, the planned stops in order, drives coloured by difficulty and
- * trains by service, with the stations they stop at. A train leg ends at its own station, which may
+ * The trip map: every destination, the planned stops in order, drives coloured by difficulty,
+ * trains by service with the stations they stop at, and ferries' crossings with their piers. A train leg ends at its own station, which may
  * be off the destination's point (Shin-Osaka for Osaka): only the drive goes to the door.
  *
  * Imperative behind a small React wrapper, the same split as the streetview platform's maps:
@@ -187,6 +196,8 @@ export class TripMapController {
     for (const leg of legs) {
       if (leg.mode === 'train') {
         features.push(...this.trainFeatures(leg));
+      } else if (leg.mode === 'ferry') {
+        features.push(...this.ferryFeatures(leg));
       } else if (leg.geometry) {
         for (const section of leg.geometry.sections) {
           features.push(
@@ -249,6 +260,43 @@ export class TripMapController {
     return features;
   }
 
+  /** A ferry leg's drive by difficulty and its crossing, with a labelled ring at each pier. */
+  private ferryFeatures(leg: Extract<MapLeg, { mode: 'ferry' }>): Feature[] {
+    const { crossing } = leg.ferry;
+    const toLine = (coordinates: [number, number][]) =>
+      new LineString(coordinates.map((coordinate) => fromLonLat(coordinate)));
+    const features = leg.geometry
+      ? leg.geometry.sections.map(
+          (section) =>
+            new Feature({
+              geometry: toLine(decodePolyline6(section.line)),
+              legIndex: leg.index,
+              ...(section.mode === 'sea' ? { sea: true } : { difficulty: section.difficulty }),
+            }),
+        )
+      : [
+          new Feature({
+            geometry: toLine([
+              [crossing.from.lon, crossing.from.lat],
+              [crossing.to.lon, crossing.to.lat],
+            ]),
+            legIndex: leg.index,
+            sea: true,
+          }),
+        ];
+    this.stationSource.addFeatures(
+      [crossing.from, crossing.to].map(
+        (port) =>
+          new Feature({
+            geometry: new Point(fromLonLat([port.lon, port.lat])),
+            label: port.name,
+            port: true,
+          }),
+      ),
+    );
+    return features;
+  }
+
   setHighlightedLeg(index: number | null): void {
     if (index === this.highlightedLeg) return;
     this.highlightedLeg = index;
@@ -286,13 +334,16 @@ export class TripMapController {
   private routeStyle(feature: FeatureLike): Style[] {
     const index = feature.get('legIndex') as number;
     const service = feature.get('service') as RailService | undefined;
+    const sea = !!feature.get('sea');
     const estimated = !!feature.get('estimated');
     const isHighlighted = this.highlightedLeg === index;
     const isDimmed = this.highlightedLeg !== null && !isHighlighted;
     const width = isHighlighted ? 6 : 4;
-    const color = service
-      ? SERVICE_COLORS[service]
-      : DIFFICULTY_COLORS[feature.get('difficulty') as Difficulty];
+    const color = sea
+      ? FERRY_COLOR
+      : service
+        ? SERVICE_COLORS[service]
+        : DIFFICULTY_COLORS[feature.get('difficulty') as Difficulty];
     return [
       new Style({
         stroke: new Stroke({ color: `rgba(0, 0, 0, ${isDimmed ? 0.3 : 0.75})`, width: width + 3 }),
@@ -302,7 +353,8 @@ export class TripMapController {
         stroke: new Stroke({
           color: isDimmed ? `${color}55` : color,
           width,
-          lineDash: estimated ? [8, 8] : undefined,
+          // A crossing is dotted, apart from both a drive and a line not yet computed (dashed).
+          lineDash: sea ? [1, 9] : estimated ? [8, 8] : undefined,
           lineCap: 'round',
           lineJoin: 'round',
         }),
@@ -311,23 +363,27 @@ export class TripMapController {
     ];
   }
 
+  /** Train stations (amber where trains change, labelled) and ferry piers (cyan, labelled). */
   private stationStyle(feature: FeatureLike): Style {
     const change = !!feature.get('change');
+    const port = !!feature.get('port');
+    const accent = port ? FERRY_COLOR : change ? '#fbbf24' : '#f8fafc';
     return new Style({
       image: new Circle({
-        radius: change ? 5 : 4,
+        radius: change || port ? 5 : 4,
         fill: new Fill({ color: '#0b0d12' }),
-        stroke: new Stroke({ color: change ? '#fbbf24' : '#f8fafc', width: 2 }),
+        stroke: new Stroke({ color: accent, width: 2 }),
       }),
-      text: change
-        ? new Text({
-            text: feature.get('label') as string,
-            font: '600 11px ui-sans-serif, system-ui, sans-serif',
-            offsetY: -13,
-            fill: new Fill({ color: '#fbbf24' }),
-            stroke: HALO,
-          })
-        : undefined,
+      text:
+        change || port
+          ? new Text({
+              text: feature.get('label') as string,
+              font: '600 11px ui-sans-serif, system-ui, sans-serif',
+              offsetY: -13,
+              fill: new Fill({ color: accent }),
+              stroke: HALO,
+            })
+          : undefined,
     });
   }
 

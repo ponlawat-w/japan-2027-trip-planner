@@ -72,6 +72,30 @@
       "warnings": [],
       "computedAt": "2026-10-12T01:24:24.911Z"
     },
+    "fukui>nagashima": {
+      "from": "fukui",
+      "to": "nagashima",
+      "distanceKm": 177.4,
+      "durationMin": 153,
+      "winterDurationMin": 153,
+      "difficulty": 1,
+      "factors": {
+        "maxElevationM": 266,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.49,
+        "snowRatio": 0.27,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 129,
+        "tunnels": 23,
+        "kmMinorRoad": 0.3,
+        "curvinessDegPerKm": 98,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:50.405Z"
+    },
     "fukui>nagoya": {
       "from": "fukui",
       "to": "nagoya",
@@ -359,6 +383,30 @@
       },
       "warnings": [],
       "computedAt": "2026-10-08T06:50:34.314Z"
+    },
+    "gero>nagashima": {
+      "from": "gero",
+      "to": "nagashima",
+      "distanceKm": 150.2,
+      "durationMin": 136,
+      "winterDurationMin": 138,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 566,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.56,
+        "snowRatio": 0.23,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 71,
+        "tunnels": 28,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 153,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:48.576Z"
     },
     "gero>nagoya": {
       "from": "gero",
@@ -648,6 +696,30 @@
       "warnings": [],
       "computedAt": "2026-10-08T06:50:36.603Z"
     },
+    "kanazawa>nagashima": {
+      "from": "kanazawa",
+      "to": "nagashima",
+      "distanceKm": 258,
+      "durationMin": 202,
+      "winterDurationMin": 206,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 1096,
+        "kmAbove1000m": 8,
+        "kmSteep": 0,
+        "freezeRatio": 0.56,
+        "snowRatio": 0.44,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 153,
+        "tunnels": 63,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 131,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:49.230Z"
+    },
     "kanazawa>nagoya": {
       "from": "kanazawa",
       "to": "nagoya",
@@ -936,6 +1008,30 @@
       "warnings": [],
       "computedAt": "2026-10-08T06:50:39.939Z"
     },
+    "matsumoto>nagashima": {
+      "from": "matsumoto",
+      "to": "nagashima",
+      "distanceKm": 244.7,
+      "durationMin": 183,
+      "winterDurationMin": 187,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 880,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.69,
+        "snowRatio": 0.49,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 173,
+        "tunnels": 12,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 191,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:49.749Z"
+    },
     "matsumoto>nagoya": {
       "from": "matsumoto",
       "to": "nagoya",
@@ -1152,6 +1248,318 @@
       "warnings": [],
       "computedAt": "2026-10-08T06:50:38.090Z"
     },
+    "nagashima>fukui": {
+      "from": "nagashima",
+      "to": "fukui",
+      "distanceKm": 179.6,
+      "durationMin": 160,
+      "winterDurationMin": 160,
+      "difficulty": 1,
+      "factors": {
+        "maxElevationM": 265,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.49,
+        "snowRatio": 0.27,
+        "kmSnowyMinorRoad": 1.4,
+        "bridges": 142,
+        "tunnels": 22,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 98,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:53.961Z"
+    },
+    "nagashima>gero": {
+      "from": "nagashima",
+      "to": "gero",
+      "distanceKm": 149.4,
+      "durationMin": 136,
+      "winterDurationMin": 137,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 565,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.56,
+        "snowRatio": 0.23,
+        "kmSnowyMinorRoad": 0.2,
+        "bridges": 70,
+        "tunnels": 29,
+        "kmMinorRoad": 0.3,
+        "curvinessDegPerKm": 151,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:52.249Z"
+    },
+    "nagashima>kanazawa": {
+      "from": "nagashima",
+      "to": "kanazawa",
+      "distanceKm": 256.3,
+      "durationMin": 200,
+      "winterDurationMin": 204,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 1098,
+        "kmAbove1000m": 8,
+        "kmSteep": 0,
+        "freezeRatio": 0.54,
+        "snowRatio": 0.42,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 152,
+        "tunnels": 63,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 102,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:52.841Z"
+    },
+    "nagashima>matsumoto": {
+      "from": "nagashima",
+      "to": "matsumoto",
+      "distanceKm": 242.2,
+      "durationMin": 181,
+      "winterDurationMin": 185,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 880,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.7,
+        "snowRatio": 0.5,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 151,
+        "tunnels": 8,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 196,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:53.369Z"
+    },
+    "nagashima>nagoya": {
+      "from": "nagashima",
+      "to": "nagoya",
+      "distanceKm": 32.5,
+      "durationMin": 30,
+      "winterDurationMin": 30,
+      "difficulty": 1,
+      "factors": {
+        "maxElevationM": 5,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.36,
+        "snowRatio": 0,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 6,
+        "tunnels": 0,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 171,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:51.031Z"
+    },
+    "nagashima>ngo": {
+      "from": "nagashima",
+      "to": "ngo",
+      "distanceKm": 50.1,
+      "durationMin": 45,
+      "winterDurationMin": 45,
+      "difficulty": 1,
+      "factors": {
+        "maxElevationM": 59,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.24,
+        "snowRatio": 0,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 25,
+        "tunnels": 2,
+        "kmMinorRoad": 0.4,
+        "curvinessDegPerKm": 118,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:50.948Z"
+    },
+    "nagashima>okuhida": {
+      "from": "nagashima",
+      "to": "okuhida",
+      "distanceKm": 214.2,
+      "durationMin": 178,
+      "winterDurationMin": 184,
+      "difficulty": 3,
+      "factors": {
+        "maxElevationM": 1449,
+        "kmAbove1000m": 19.9,
+        "kmSteep": 0.6,
+        "freezeRatio": 0.64,
+        "snowRatio": 0.47,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 132,
+        "tunnels": 46,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 131,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:52.551Z"
+    },
+    "nagashima>osaka": {
+      "from": "nagashima",
+      "to": "osaka",
+      "distanceKm": 153.7,
+      "durationMin": 123,
+      "winterDurationMin": 123,
+      "difficulty": 1,
+      "factors": {
+        "maxElevationM": 353,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.44,
+        "snowRatio": 0.01,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 89,
+        "tunnels": 17,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 275,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:51.354Z"
+    },
+    "nagashima>shiga": {
+      "from": "nagashima",
+      "to": "shiga",
+      "distanceKm": 98.5,
+      "durationMin": 79,
+      "winterDurationMin": 79,
+      "difficulty": 1,
+      "factors": {
+        "maxElevationM": 353,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.43,
+        "snowRatio": 0.01,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 57,
+        "tunnels": 6,
+        "kmMinorRoad": 0.4,
+        "curvinessDegPerKm": 306,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:53.570Z"
+    },
+    "nagashima>shirakawago": {
+      "from": "nagashima",
+      "to": "shirakawago",
+      "distanceKm": 189.5,
+      "durationMin": 145,
+      "winterDurationMin": 148,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 1098,
+        "kmAbove1000m": 8,
+        "kmSteep": 0.4,
+        "freezeRatio": 0.55,
+        "snowRatio": 0.35,
+        "kmSnowyMinorRoad": 0.2,
+        "bridges": 113,
+        "tunnels": 50,
+        "kmMinorRoad": 0.6,
+        "curvinessDegPerKm": 146,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:54.373Z"
+    },
+    "nagashima>suzuka": {
+      "from": "nagashima",
+      "to": "suzuka",
+      "distanceKm": 26.1,
+      "durationMin": 39,
+      "winterDurationMin": 39,
+      "difficulty": 1,
+      "factors": {
+        "maxElevationM": 10,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.23,
+        "snowRatio": 0,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 15,
+        "tunnels": 1,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 65,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:51.080Z"
+    },
+    "nagashima>takayama": {
+      "from": "nagashima",
+      "to": "takayama",
+      "distanceKm": 179.2,
+      "durationMin": 142,
+      "winterDurationMin": 145,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 1098,
+        "kmAbove1000m": 8,
+        "kmSteep": 0,
+        "freezeRatio": 0.61,
+        "snowRatio": 0.4,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 111,
+        "tunnels": 41,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 133,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:54.268Z"
+    },
+    "nagashima>tokyo": {
+      "from": "nagashima",
+      "to": "tokyo",
+      "distanceKm": 350.5,
+      "durationMin": 267,
+      "winterDurationMin": 267,
+      "difficulty": 1,
+      "factors": {
+        "maxElevationM": 448,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.35,
+        "snowRatio": 0.06,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 245,
+        "tunnels": 63,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 137,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:52.111Z"
+    },
     "nagoya>fukui": {
       "from": "nagoya",
       "to": "fukui",
@@ -1247,6 +1655,30 @@
       },
       "warnings": [],
       "computedAt": "2026-10-08T06:50:33.093Z"
+    },
+    "nagoya>nagashima": {
+      "from": "nagoya",
+      "to": "nagashima",
+      "distanceKm": 32.3,
+      "durationMin": 33,
+      "winterDurationMin": 33,
+      "difficulty": 1,
+      "factors": {
+        "maxElevationM": 4,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.35,
+        "snowRatio": 0,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 5,
+        "tunnels": 0,
+        "kmMinorRoad": 0,
+        "curvinessDegPerKm": 109,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:46.534Z"
     },
     "nagoya>ngo": {
       "from": "nagoya",
@@ -1536,6 +1968,30 @@
       "warnings": [],
       "computedAt": "2026-10-08T06:50:32.939Z"
     },
+    "ngo>nagashima": {
+      "from": "ngo",
+      "to": "nagashima",
+      "distanceKm": 48.6,
+      "durationMin": 42,
+      "winterDurationMin": 42,
+      "difficulty": 1,
+      "factors": {
+        "maxElevationM": 59,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.26,
+        "snowRatio": 0,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 25,
+        "tunnels": 2,
+        "kmMinorRoad": 0.2,
+        "curvinessDegPerKm": 133,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:46.379Z"
+    },
     "ngo>nagoya": {
       "from": "ngo",
       "to": "nagoya",
@@ -1823,6 +2279,30 @@
       },
       "warnings": [],
       "computedAt": "2026-10-08T06:50:34.350Z"
+    },
+    "okuhida>nagashima": {
+      "from": "okuhida",
+      "to": "nagashima",
+      "distanceKm": 214.6,
+      "durationMin": 178,
+      "winterDurationMin": 184,
+      "difficulty": 3,
+      "factors": {
+        "maxElevationM": 1449,
+        "kmAbove1000m": 20,
+        "kmSteep": 0,
+        "freezeRatio": 0.65,
+        "snowRatio": 0.48,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 132,
+        "tunnels": 45,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 131,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:48.916Z"
     },
     "okuhida>nagoya": {
       "from": "okuhida",
@@ -2112,6 +2592,30 @@
       "warnings": [],
       "computedAt": "2026-10-08T06:50:33.615Z"
     },
+    "osaka>nagashima": {
+      "from": "osaka",
+      "to": "nagashima",
+      "distanceKm": 152.1,
+      "durationMin": 123,
+      "winterDurationMin": 123,
+      "difficulty": 1,
+      "factors": {
+        "maxElevationM": 358,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.45,
+        "snowRatio": 0.01,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 73,
+        "tunnels": 18,
+        "kmMinorRoad": 0.3,
+        "curvinessDegPerKm": 167,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:47.168Z"
+    },
     "osaka>nagoya": {
       "from": "osaka",
       "to": "nagoya",
@@ -2399,6 +2903,30 @@
       },
       "warnings": [],
       "computedAt": "2026-10-12T01:23:49.881Z"
+    },
+    "shiga>nagashima": {
+      "from": "shiga",
+      "to": "nagashima",
+      "distanceKm": 104.3,
+      "durationMin": 84,
+      "winterDurationMin": 84,
+      "difficulty": 1,
+      "factors": {
+        "maxElevationM": 364,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.43,
+        "snowRatio": 0.01,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 60,
+        "tunnels": 7,
+        "kmMinorRoad": 0.5,
+        "curvinessDegPerKm": 132,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:50.005Z"
     },
     "shiga>nagoya": {
       "from": "shiga",
@@ -2688,6 +3216,30 @@
       "warnings": [],
       "computedAt": "2026-10-12T09:24:36.676Z"
     },
+    "shirakawago>nagashima": {
+      "from": "shirakawago",
+      "to": "nagashima",
+      "distanceKm": 190.1,
+      "durationMin": 145,
+      "winterDurationMin": 148,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 1097,
+        "kmAbove1000m": 8,
+        "kmSteep": 0,
+        "freezeRatio": 0.56,
+        "snowRatio": 0.36,
+        "kmSnowyMinorRoad": 1,
+        "bridges": 114,
+        "tunnels": 48,
+        "kmMinorRoad": 0.6,
+        "curvinessDegPerKm": 141,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:50.878Z"
+    },
     "shirakawago>nagoya": {
       "from": "shirakawago",
       "to": "nagoya",
@@ -2976,6 +3528,30 @@
       "warnings": [],
       "computedAt": "2026-10-08T06:50:33.233Z"
     },
+    "suzuka>nagashima": {
+      "from": "suzuka",
+      "to": "nagashima",
+      "distanceKm": 25.9,
+      "durationMin": 39,
+      "winterDurationMin": 39,
+      "difficulty": 1,
+      "factors": {
+        "maxElevationM": 10,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.23,
+        "snowRatio": 0,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 15,
+        "tunnels": 1,
+        "kmMinorRoad": 0,
+        "curvinessDegPerKm": 63,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:46.648Z"
+    },
     "suzuka>nagoya": {
       "from": "suzuka",
       "to": "nagoya",
@@ -3263,6 +3839,30 @@
       },
       "warnings": [],
       "computedAt": "2026-10-12T09:24:26.199Z"
+    },
+    "takayama>nagashima": {
+      "from": "takayama",
+      "to": "nagashima",
+      "distanceKm": 179.5,
+      "durationMin": 142,
+      "winterDurationMin": 145,
+      "difficulty": 2,
+      "factors": {
+        "maxElevationM": 1096,
+        "kmAbove1000m": 8,
+        "kmSteep": 0,
+        "freezeRatio": 0.62,
+        "snowRatio": 0.41,
+        "kmSnowyMinorRoad": 1,
+        "bridges": 112,
+        "tunnels": 39,
+        "kmMinorRoad": 0.1,
+        "curvinessDegPerKm": 130,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:50.765Z"
     },
     "takayama>nagoya": {
       "from": "takayama",
@@ -3555,6 +4155,30 @@
       },
       "warnings": [],
       "computedAt": "2026-10-08T06:50:34.055Z"
+    },
+    "tokyo>nagashima": {
+      "from": "tokyo",
+      "to": "nagashima",
+      "distanceKm": 353.7,
+      "durationMin": 269,
+      "winterDurationMin": 269,
+      "difficulty": 1,
+      "factors": {
+        "maxElevationM": 449,
+        "kmAbove1000m": 0,
+        "kmSteep": 0,
+        "freezeRatio": 0.34,
+        "snowRatio": 0.06,
+        "kmSnowyMinorRoad": 0,
+        "bridges": 249,
+        "tunnels": 57,
+        "kmMinorRoad": 0,
+        "curvinessDegPerKm": 156,
+        "ferry": false,
+        "toll": true
+      },
+      "warnings": [],
+      "computedAt": "2026-10-13T07:42:48.229Z"
     },
     "tokyo>nagoya": {
       "from": "tokyo",

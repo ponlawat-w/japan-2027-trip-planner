@@ -49,3 +49,12 @@ export const localizeText = (text: string, units: Units): string =>
         const value = Number(number.replace(/,/g, ''));
         return unit === 'km' ? formatDistance(value, units) : formatElevation(value, units);
       });
+
+/** A source's site, to cite it by name: "tsu-airportline.co.jp". */
+export const hostOf = (url: string): string => {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return url;
+  }
+};

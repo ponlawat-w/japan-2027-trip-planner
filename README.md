@@ -17,6 +17,9 @@ data/             ← written by the CLI, committed, bundled into the site
   train-routes.json   train options, written by hand: stations, rides, cited typical times
   train-matrix.json   every directed train leg: rides, changes, distance, door-to-door time
   train-legs/<a>/<b>.json  each train leg's track, one section per ride (lazy-loaded)
+  ferry-routes.json   ferry options, written by hand: piers, sailings, published times and fares
+  ferry-matrix.json   every directed ferry leg: the drive or walk at each end, and the crossing
+  ferry-legs/<a>/<b>.json  each ferry leg's line: drive by difficulty, then the boat's course
 cli/              ← the CLI: Valhalla + GSI DEM + Open-Meteo → data/; OSM railways → train legs
 src/              ← the React app
 valhalla/         ← docker compose for the self-hosted router
@@ -34,19 +37,41 @@ npm run dev        # http://localhost:5190
   another to reorder them. **Clear** empties every night (undo brings them back). On a phone the
   timeline is vertical: tap a night, drag the grip at a stay's top or bottom, and press and hold a
   stay to move it.
+- **Timeline / Calendar** beside **Clear** switches the same plan to a month calendar: the three
+  weeks around 2–15 February, a stay drawn as a bar across its nights (split where it crosses into
+  the next week), and each leg on the day it is travelled. Everything above works there too: drag
+  a bar's left or right end to change its nights. **Sun / Mon** sets the first day of the week.
+  Both choices are saved per browser, like km / mi, and are not part of shared links.
 - **The address bar always holds the plan** (`#plan=nagoya.suzuka.…`), updated as you edit, so
   you can copy the URL at any time; **Copy link** does the same in one tap. Opening a link loads
   its plan, and undo brings back the one you had before. The plan is also saved in `localStorage`.
+  The mark between two nights is how you get to the second: `.` the default, `=` train, `~`
+  ferry, `:` car; one before the first night or after the last is the leg from or back to the
+  airport — `#plan=nagoya.suzuka=osaka.osaka:gero…nagoya=&rental=4-9`. Older links with
+  `&road=nagoya~tokyo` still load.
 - **km / mi** in the app bar switches distances and heights between metric and imperial. It is
   saved per browser, and is not part of shared links.
-- **Train or drive.** Every leg can be driven. Where `train-matrix.json` has a train for the pair
-  it is the default, shown with its rides (white: shinkansen, violet: local train) and each
+- **Train, ferry or car.** Every leg can be driven. On the rental car's days the car is the
+  default; on other days, where `train-matrix.json` has a train for the pair it is the default, shown with its rides (white: shinkansen, violet: local train) and each
   change of trains (乗り換え) on the timeline, the list and the map. Click a leg on the timeline,
   or use its select in the list, to switch. A train leg ends at its own station (Shin-Osaka for
-  Osaka), not at the destination's point. Choices are part of the plan: undoable, saved, and in
-  the link (`&road=nagoya~tokyo`).
-- **The summary** groups its figures by what they cover: _All travel_ (car and train together),
-  _By car only_ and _By train only_.
+  Osaka), not at the destination's point. Where `ferry-matrix.json` has a ferry (Suzuka ↔ NGO,
+  driving to Tsu for the Tsu Airport Line) it is an option, never the default: its time is door to
+  door, its sailings and fare are in the leg's details, and the map draws the crossing dotted
+  cyan. A choice belongs to the stay it arrives at, so it moves with the stay, and it stays as
+  chosen when the rental's days change. Choices are part of the plan: undoable, saved, and in
+  the link.
+- **Rental car.** One stretch of days with a car you drive yourself, set in the car row under the
+  stays (a column beside them on a phone; a row under each week in the calendar): drag across
+  its days, or tap a day to start or extend it, then drag either end; × removes it. Any car leg on
+  those days, a ferry's drive to its pier included, is in the rental; on other days it is in
+  someone else's car. It is part of the plan: undoable, saved, and in the link
+  (`&rental=4-9`: picked up on 4 February, returned on the 9th).
+- **The summary**, at the bottom of the page, has the plan, _All travel_, and then each way of
+  travelling on its own: _Rental car_ (you drive: winter time, distance, the hardest drive, days
+  kept), _Someone else's car_, _Train_ and _Ferry_ (the boat, the pier and the walks; its drive
+  counts under whichever car makes it). The four add up to _All travel_. Plan problems stay at the
+  top, above the timeline.
 - **Summary, map and drives** are read-only views of the timeline. Hover a drive to highlight it
   on the map. Expand a drive to see what its difficulty is based on.
 
@@ -121,7 +146,26 @@ slower than Suzuka → Tokyo, as it is in practice. Distances are measured along
 found by a shortest path over the ways the `track` pattern allows. Railways are cut once from the
 OSM file Valhalla downloaded (Valhalla itself need not be running) and cached in `.cache/rail/`.
 
-#### Destinations not yet added
+### Ferries
+
+```sh
+npm run cli -- ferry            # rebuild every ferry leg from data/ferry-routes.json (needs Valhalla)
+```
+
+`data/ferry-routes.json` is the input, edited by hand from the operator's site:
+
+- `ports`: each pier's coordinates. A pier that is part of a destination (Centrair's, for NGO)
+  names it in `destination`, with the `walkMin` between them; any other pier is driven to.
+- `sailings`: one boat between two piers, either direction. `rideMin`, `fareYen` (one adult, one
+  way), `boardingMin` (how early the operator asks you to be there), `departures` from each pier,
+  `path` (the course, from OSM), and `sources`.
+- `routes`: a pair of destinations and the two piers between them. Both directions are computed.
+
+A leg's time is the drive to the pier in winter (routed and scored like any drive), or the walk,
+plus `boardingMin`, the crossing, and the drive or walk at the other end. No wait for the boat is
+counted: as with a train's first departure, the traveller times the drive to a sailing.
+
+### Destinations not yet added
 
 Coordinates checked against OpenStreetMap. The ratings are suggestions:
 

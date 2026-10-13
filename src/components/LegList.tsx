@@ -1,6 +1,7 @@
 import { AlertTriangle, Car, ChevronDown, Ship, TrainFront } from 'lucide-react';
 import { useMemo, useState, type FC } from 'react';
 import DifficultyBadge from '@/components/DifficultyBadge';
+import { FerryItinerary } from '@/components/FerryRides';
 import { ServiceStrip, TrainItinerary, TravelModeSelect } from '@/components/TrainRides';
 import { getDestination, type Leg } from '@/data/dataset';
 import {
@@ -13,9 +14,11 @@ import {
   localizeText,
 } from '@/lib/format';
 import { legsOf, type PlannedLeg } from '@/lib/plan';
+import { carLabel, FERRY_COLOR, RENTAL_COLOR } from '@/lib/styles';
 import { dayLabel } from '@/lib/trip';
-import { usePlanStore } from '@/store/planStore';
+import { usePlanStore, useTrip } from '@/store/planStore';
 import { usePreferencesStore } from '@/store/preferencesStore';
+import { ferryDrives, type Difficulty } from '@/types/data';
 import { cn } from '@/utils/cn';
 
 const Factor: FC<{ label: string; value: string }> = ({ label, value }) => (
@@ -72,7 +75,16 @@ export const RoadDetails: FC<{ leg: Leg }> = ({ leg }) => {
 /** The leg's one-line figures for the way it is travelled. */
 const LegFigures: FC<{ planned: PlannedLeg }> = ({ planned }) => {
   const units = usePreferencesStore((state) => state.units);
-  const { road, train } = planned;
+  const { road, train, ferry } = planned;
+  if (planned.mode === 'ferry' && ferry) {
+    return (
+      <span className="flex items-center gap-1.5 text-xs text-base-content/60 tabular-nums">
+        <Ship className="h-3.5 w-3.5 shrink-0" style={{ color: FERRY_COLOR }} />
+        {formatDuration(ferry.durationMin)} · {formatDistance(ferry.distanceKm, units)} ·{' '}
+        {ferry.crossing.line}
+      </span>
+    );
+  }
   if (planned.mode === 'train' && train) {
     return (
       <span className="flex items-center gap-1.5 text-xs text-base-content/60 tabular-nums">
@@ -85,9 +97,12 @@ const LegFigures: FC<{ planned: PlannedLeg }> = ({ planned }) => {
   if (!road) return null;
   return (
     <span className="flex items-center gap-1.5 text-xs text-base-content/60 tabular-nums">
-      <Car className="h-3.5 w-3.5 shrink-0 opacity-70" />
+      <Car
+        className="h-3.5 w-3.5 shrink-0 opacity-70"
+        style={planned.rental ? { color: RENTAL_COLOR, opacity: 1 } : undefined}
+      />
       <span>
-        {road.estimated && '≈ '}
+        {carLabel(planned.rental)} · {road.estimated && '≈ '}
         {formatDistance(road.distanceKm, units)} · {formatDuration(road.winterDurationMin)}
         {road.winterDurationMin !== road.durationMin && (
           <span className="text-base-content/40"> ({formatDuration(road.durationMin)} dry)</span>
@@ -101,8 +116,16 @@ const LegRow: FC<{ planned: PlannedLeg }> = ({ planned }) => {
   const [open, setOpen] = useState(false);
   const highlighted = usePlanStore((state) => state.highlightedLeg === planned.index);
   const setHighlightedLeg = usePlanStore((state) => state.setHighlightedLeg);
-  const { road, train } = planned;
+  const { road, train, ferry } = planned;
   const byTrain = planned.mode === 'train' && !!train;
+  const byFerry = planned.mode === 'ferry' && !!ferry;
+  const byRoad = !byTrain && !byFerry;
+  // A ferry leg is as hard as the drive to or from its pier.
+  const ferryDriveList = byFerry ? ferryDrives(ferry) : [];
+  const ferryDifficulty =
+    ferryDriveList.length > 0
+      ? (Math.max(...ferryDriveList.map((drive) => drive.difficulty)) as Difficulty)
+      : null;
   const from = getDestination(planned.from);
   const to = getDestination(planned.to);
 
@@ -129,22 +152,29 @@ const LegRow: FC<{ planned: PlannedLeg }> = ({ planned }) => {
             </span>
             <LegFigures planned={planned} />
           </span>
-          {!byTrain && road?.factors.ferry && <Ship className="h-4 w-4 shrink-0 text-sky-300" />}
-          {!byTrain && road && road.warnings.length > 0 && (
+          {byRoad && road?.factors.ferry && <Ship className="h-4 w-4 shrink-0 text-sky-300" />}
+          {byRoad && road && road.warnings.length > 0 && (
             <AlertTriangle className="h-4 w-4 shrink-0 text-warning" />
           )}
-          {!byTrain && road && (
+          {byRoad && road && (
             <DifficultyBadge difficulty={road.difficulty} estimated={road.estimated} compact />
           )}
+          {ferryDifficulty && <DifficultyBadge difficulty={ferryDifficulty} compact />}
           <ChevronDown
             className={cn('h-4 w-4 shrink-0 opacity-50 transition-transform', open && 'rotate-180')}
           />
         </button>
         <TravelModeSelect planned={planned} />
       </div>
-      {open && (byTrain || road) && (
+      {open && (byTrain || byFerry || road) && (
         <div className="border-t border-base-300 px-3 py-2">
-          {byTrain ? <TrainItinerary leg={train} /> : road && <RoadDetails leg={road} />}
+          {byTrain ? (
+            <TrainItinerary leg={train} />
+          ) : byFerry ? (
+            <FerryItinerary leg={ferry} rental={planned.rental} />
+          ) : (
+            road && <RoadDetails leg={road} />
+          )}
         </div>
       )}
     </li>
@@ -153,9 +183,8 @@ const LegRow: FC<{ planned: PlannedLeg }> = ({ planned }) => {
 
 /** Every leg, in order, with what its time and difficulty are based on a tap away. */
 const LegList: FC = () => {
-  const plan = usePlanStore((state) => state.plan);
-  const modes = usePlanStore((state) => state.modes);
-  const legs = useMemo(() => legsOf(plan, modes), [plan, modes]);
+  const trip = useTrip();
+  const legs = useMemo(() => legsOf(trip), [trip]);
 
   return (
     <section className="flex min-h-0 flex-col rounded-xl border border-base-300 bg-base-200/40 p-3">
@@ -172,10 +201,10 @@ const LegList: FC = () => {
         </ol>
       )}
       <p className="mt-2 text-[11px] leading-snug text-base-content/40">
-        Where a train is listed it is the default; switch any leg back to driving. Difficulty and
-        winter times are estimates from road data, terrain and past Februaries. They cannot tell if
-        a road is icy, closed or under chain control today: check JARTIC and the road operator
-        before setting off.
+        Where a train is listed it is the default; switch any leg back to driving, or to a ferry
+        where there is one. Difficulty and winter times are estimates from road data, terrain and
+        past Februaries. They cannot tell if a road is icy, closed or under chain control today:
+        check JARTIC and the road operator before setting off.
       </p>
     </section>
   );

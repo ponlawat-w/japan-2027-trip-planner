@@ -1,6 +1,6 @@
 import { ArrowRightLeft } from 'lucide-react';
 import { Fragment, type FC } from 'react';
-import { formatDistance, formatDuration } from '@/lib/format';
+import { formatDistance, formatDuration, hostOf } from '@/lib/format';
 import type { PlannedLeg } from '@/lib/plan';
 import { SERVICE_COLORS, SERVICE_LABELS } from '@/lib/styles';
 import { usePlanStore } from '@/store/planStore';
@@ -23,14 +23,6 @@ export const ServiceStrip: FC<{ leg: TrainLeg; className?: string }> = ({ leg, c
     ))}
   </span>
 );
-
-const hostOf = (url: string): string => {
-  try {
-    return new URL(url).hostname.replace(/^www\./, '');
-  } catch {
-    return url;
-  }
-};
 
 /** Ride by ride, with each change of trains between them and where the times come from. */
 export const TrainItinerary: FC<{ leg: TrainLeg }> = ({ leg }) => {
@@ -86,23 +78,24 @@ export const TrainItinerary: FC<{ leg: TrainLeg }> = ({ leg }) => {
   );
 };
 
-/** Train or drive, for a leg that has a train. */
+/** Train, ferry or drive, for a leg that has more than one way. */
 export const TravelModeSelect: FC<{ planned: PlannedLeg; className?: string }> = ({
   planned,
   className,
 }) => {
   const setMode = usePlanStore((state) => state.setMode);
-  if (!planned.train) return null;
+  if (!planned.train && !planned.ferry) return null;
   return (
     <select
       className={cn('select select-xs w-auto shrink-0', className)}
       value={planned.mode}
-      onChange={(event) => setMode(planned.from, planned.to, event.target.value as TransportMode)}
+      onChange={(event) => setMode(planned.day, event.target.value as TransportMode)}
       onClick={(event) => event.stopPropagation()}
       aria-label="How to travel"
     >
-      <option value="train">Train</option>
-      <option value="road">Drive</option>
+      {planned.train && <option value="train">Train</option>}
+      {planned.ferry && <option value="ferry">Ferry</option>}
+      <option value="road">{planned.rental ? 'Rental car' : 'Car'}</option>
     </select>
   );
 };

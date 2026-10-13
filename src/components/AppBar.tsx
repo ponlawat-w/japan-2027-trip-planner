@@ -3,7 +3,7 @@ import { useEffect, useState, type FC } from 'react';
 import { shareUrl } from '@/lib/shareLink';
 import { usePlanStore } from '@/store/planStore';
 import { usePreferencesStore } from '@/store/preferencesStore';
-import { cn } from '@/utils/cn';
+import SegmentedControl from '@/ui/SegmentedControl';
 
 const COPIED_FEEDBACK_MS = 2000;
 
@@ -23,8 +23,8 @@ const AppBar: FC = () => {
   }, [copied]);
 
   const copyLink = async () => {
-    const { plan, modes } = usePlanStore.getState();
-    const url = shareUrl(plan, modes);
+    const { plan, homeMode, rental } = usePlanStore.getState();
+    const url = shareUrl({ plan, homeMode, rental });
     try {
       await navigator.clipboard.writeText(url);
       setCopied(true);
@@ -38,44 +38,18 @@ const AppBar: FC = () => {
       <Snowflake className="h-5 w-5 shrink-0 text-sky-300" />
       <h1 className="grow truncate text-base font-semibold">
         Japan 2027{' '}
-        <span className="hidden font-normal text-base-content/60 sm:inline">
-          · 2–15 Feb road trip
-        </span>
+        <span className="hidden font-normal text-base-content/60 sm:inline">· 2–15 Feb</span>
       </h1>
-      {/* A segmented switch: the chosen unit is filled, the other dimmed, so the current state
-          reads at a glance on the dark bar. */}
-      <div
-        className="mr-1 flex rounded-full border border-base-content/20 bg-base-200 p-0.5"
-        role="radiogroup"
-        aria-label="Units"
-      >
-        {(
-          [
-            ['metric', 'km'],
-            ['imperial', 'mi'],
-          ] as const
-        ).map(([value, label]) => {
-          const selected = units === value;
-          return (
-            <button
-              key={value}
-              type="button"
-              role="radio"
-              aria-checked={selected}
-              className={cn(
-                'rounded-full px-2.5 py-0.5 text-xs font-medium transition-colors',
-                selected
-                  ? 'bg-info text-info-content shadow-sm'
-                  : 'text-base-content/50 hover:text-base-content',
-              )}
-              onClick={() => setUnits(value)}
-              title={value === 'metric' ? 'Kilometres and metres' : 'Miles and feet'}
-            >
-              {label}
-            </button>
-          );
-        })}
-      </div>
+      <SegmentedControl
+        className="mr-1"
+        label="Units"
+        value={units}
+        onChange={setUnits}
+        options={[
+          { value: 'metric', label: 'km', title: 'Kilometres and metres' },
+          { value: 'imperial', label: 'mi', title: 'Miles and feet' },
+        ]}
+      />
       <button
         type="button"
         className="btn btn-ghost btn-sm btn-square"

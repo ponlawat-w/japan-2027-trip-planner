@@ -1,0 +1,61 @@
+{
+  "ports": {
+    "tsu": {
+      "name": "Tsu Nagisamachi",
+      "nameJa": "津なぎさまち",
+      "lat": 34.7112,
+      "lon": 136.52515,
+      "note": "Free public car park; its first lot takes stays of up to two nights, later lots (by free shuttle bus) longer."
+    },
+    "centrair": {
+      "name": "Centrair ferry pier",
+      "nameJa": "中部国際空港 セントレア港",
+      "lat": 34.85977,
+      "lon": 136.81971,
+      "destination": "ngo",
+      "walkMin": 15,
+      "note": "Linked to the airport terminal by a covered walkway."
+    }
+  },
+  "sailings": [
+    {
+      "between": ["tsu", "centrair"],
+      "line": "Tsu Airport Line",
+      "lineJa": "津エアポートライン",
+      "rideMin": 45,
+      "boardingMin": 20,
+      "fareYen": 2980,
+      "departures": {
+        "tsu": ["06:00", "08:00", "11:00", "14:00", "16:00", "18:00", "20:00"],
+        "centrair": ["07:00", "10:00", "12:00", "15:00", "17:00", "19:00", "22:00"]
+      },
+      "note": "High-speed boat for passengers only: it takes no cars. Every day of the week. Boarding closes 10 minutes before departure.",
+      "path": [
+        [136.52515, 34.7112], [136.52699, 34.7109], [136.53081, 34.71167], [136.55137, 34.71291],
+        [136.55935, 34.71431], [136.57135, 34.71838], [136.58104, 34.72553], [136.59312, 34.73622],
+        [136.59703, 34.73886], [136.6563, 34.76894], [136.67415, 34.77945], [136.69061, 34.7908],
+        [136.69623, 34.79344], [136.70288, 34.79557], [136.70619, 34.79613], [136.72408, 34.79744],
+        [136.74391, 34.80271], [136.76241, 34.80814], [136.76923, 34.81125], [136.77262, 34.81336],
+        [136.78217, 34.81769], [136.79826, 34.82029], [136.80442, 34.82226], [136.81105, 34.82514],
+        [136.81707, 34.82914], [136.82382, 34.83526], [136.82707, 34.83954], [136.82861, 34.84382],
+        [136.82877, 34.85017], [136.82723, 34.8581], [136.82648, 34.85917], [136.82422, 34.86012],
+        [136.81971, 34.85977]
+      ],
+      "sources": [
+        "https://tsu-airportline.co.jp/time-table/",
+        "https://tsu-airportline.co.jp/fare/",
+        "https://tsu-airportline.co.jp/faq/",
+        "https://tsu-airportline.co.jp/boarding/",
+        "https://skyticket.jp/guide/489474/",
+        "https://www.openstreetmap.org/way/550415137"
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "from": "suzuka",
+      "to": "ngo",
+      "via": ["tsu", "centrair"]
+    }
+  ]
+}

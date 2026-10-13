@@ -1,0 +1,188 @@
+{
+  "legs": {
+    "ngo>suzuka": {
+      "from": "ngo",
+      "to": "suzuka",
+      "distanceKm": 57.1,
+      "durationMin": 116,
+      "before": {
+        "kind": "walk",
+        "walkMin": 15,
+        "port": {
+          "name": "Centrair ferry pier",
+          "nameJa": "中部国際空港 セントレア港",
+          "lat": 34.85977,
+          "lon": 136.81971,
+          "note": "Linked to the airport terminal by a covered walkway."
+        }
+      },
+      "crossing": {
+        "line": "Tsu Airport Line",
+        "lineJa": "津エアポートライン",
+        "from": {
+          "name": "Centrair ferry pier",
+          "nameJa": "中部国際空港 セントレア港",
+          "lat": 34.85977,
+          "lon": 136.81971,
+          "note": "Linked to the airport terminal by a covered walkway."
+        },
+        "to": {
+          "name": "Tsu Nagisamachi",
+          "nameJa": "津なぎさまち",
+          "lat": 34.7112,
+          "lon": 136.52515,
+          "note": "Free public car park; its first lot takes stays of up to two nights, later lots (by free shuttle bus) longer."
+        },
+        "distanceKm": 34.8,
+        "rideMin": 45,
+        "boardingMin": 20,
+        "fareYen": 2980,
+        "departures": [
+          "07:00",
+          "10:00",
+          "12:00",
+          "15:00",
+          "17:00",
+          "19:00",
+          "22:00"
+        ],
+        "note": "High-speed boat for passengers only: it takes no cars. Every day of the week. Boarding closes 10 minutes before departure."
+      },
+      "after": {
+        "kind": "drive",
+        "drive": {
+          "from": "tsu",
+          "to": "suzuka",
+          "distanceKm": 22.3,
+          "durationMin": 36,
+          "winterDurationMin": 36,
+          "difficulty": 1,
+          "factors": {
+            "maxElevationM": 15,
+            "kmAbove1000m": 0,
+            "kmSteep": 0,
+            "freezeRatio": 0.18,
+            "snowRatio": 0,
+            "kmSnowyMinorRoad": 0,
+            "bridges": 9,
+            "tunnels": 0,
+            "kmMinorRoad": 0,
+            "curvinessDegPerKm": 30,
+            "ferry": false,
+            "toll": false
+          },
+          "warnings": [],
+          "computedAt": "2026-10-13T08:00:10.095Z"
+        },
+        "port": {
+          "name": "Tsu Nagisamachi",
+          "nameJa": "津なぎさまち",
+          "lat": 34.7112,
+          "lon": 136.52515,
+          "note": "Free public car park; its first lot takes stays of up to two nights, later lots (by free shuttle bus) longer."
+        }
+      },
+      "sources": [
+        "https://tsu-airportline.co.jp/time-table/",
+        "https://tsu-airportline.co.jp/fare/",
+        "https://tsu-airportline.co.jp/faq/",
+        "https://tsu-airportline.co.jp/boarding/",
+        "https://skyticket.jp/guide/489474/",
+        "https://www.openstreetmap.org/way/550415137"
+      ],
+      "computedAt": "2026-10-13T08:00:05.613Z"
+    },
+    "suzuka>ngo": {
+      "from": "suzuka",
+      "to": "ngo",
+      "distanceKm": 57.2,
+      "durationMin": 116,
+      "before": {
+        "kind": "drive",
+        "drive": {
+          "from": "suzuka",
+          "to": "tsu",
+          "distanceKm": 22.4,
+          "durationMin": 36,
+          "winterDurationMin": 36,
+          "difficulty": 1,
+          "factors": {
+            "maxElevationM": 15,
+            "kmAbove1000m": 0,
+            "kmSteep": 0,
+            "freezeRatio": 0.2,
+            "snowRatio": 0,
+            "kmSnowyMinorRoad": 0,
+            "bridges": 9,
+            "tunnels": 0,
+            "kmMinorRoad": 0.2,
+            "curvinessDegPerKm": 38,
+            "ferry": false,
+            "toll": false
+          },
+          "warnings": [],
+          "computedAt": "2026-10-13T08:00:09.614Z"
+        },
+        "port": {
+          "name": "Tsu Nagisamachi",
+          "nameJa": "津なぎさまち",
+          "lat": 34.7112,
+          "lon": 136.52515,
+          "note": "Free public car park; its first lot takes stays of up to two nights, later lots (by free shuttle bus) longer."
+        }
+      },
+      "crossing": {
+        "line": "Tsu Airport Line",
+        "lineJa": "津エアポートライン",
+        "from": {
+          "name": "Tsu Nagisamachi",
+          "nameJa": "津なぎさまち",
+          "lat": 34.7112,
+          "lon": 136.52515,
+          "note": "Free public car park; its first lot takes stays of up to two nights, later lots (by free shuttle bus) longer."
+        },
+        "to": {
+          "name": "Centrair ferry pier",
+          "nameJa": "中部国際空港 セントレア港",
+          "lat": 34.85977,
+          "lon": 136.81971,
+          "note": "Linked to the airport terminal by a covered walkway."
+        },
+        "distanceKm": 34.8,
+        "rideMin": 45,
+        "boardingMin": 20,
+        "fareYen": 2980,
+        "departures": [
+          "06:00",
+          "08:00",
+          "11:00",
+          "14:00",
+          "16:00",
+          "18:00",
+          "20:00"
+        ],
+        "note": "High-speed boat for passengers only: it takes no cars. Every day of the week. Boarding closes 10 minutes before departure."
+      },
+      "after": {
+        "kind": "walk",
+        "walkMin": 15,
+        "port": {
+          "name": "Centrair ferry pier",
+          "nameJa": "中部国際空港 セントレア港",
+          "lat": 34.85977,
+          "lon": 136.81971,
+          "note": "Linked to the airport terminal by a covered walkway."
+        }
+      },
+      "sources": [
+        "https://tsu-airportline.co.jp/time-table/",
+        "https://tsu-airportline.co.jp/fare/",
+        "https://tsu-airportline.co.jp/faq/",
+        "https://tsu-airportline.co.jp/boarding/",
+        "https://skyticket.jp/guide/489474/",
+        "https://www.openstreetmap.org/way/550415137"
+      ],
+      "computedAt": "2026-10-13T08:00:05.613Z"
+    }
+  }
+}

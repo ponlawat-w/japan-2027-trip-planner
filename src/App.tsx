@@ -2,14 +2,14 @@ import { type FC } from 'react';
 import AppBar from '@/components/AppBar';
 import LegList from '@/components/LegList';
 import TripMap from '@/components/TripMap';
-import TripSummary from '@/components/TripSummary';
+import TripSummary, { TripIssues } from '@/components/TripSummary';
 import Timeline from '@/components/timeline/Timeline';
 
 const App: FC = () => (
   <div className="flex min-h-dvh flex-col bg-base-100 text-base-content">
     <AppBar />
     <main className="mx-auto flex w-full max-w-[1600px] grow flex-col gap-3 p-3 md:p-4">
-      <TripSummary />
+      <TripIssues />
       <Timeline />
       {/* minmax(0, 1fr) on a phone too: an implicit grid column grows to its widest content (a
           drive's names, which never wrap) and would push the map and the drives off-screen. */}
@@ -17,6 +17,7 @@ const App: FC = () => (
         <TripMap />
         <LegList />
       </div>
+      <TripSummary />
     </main>
     <footer className="px-4 pb-4 text-center text-[11px] text-base-content/40">
       Routing: Valhalla on OpenStreetMap data (ODbL) · Railways: OpenStreetMap; train times from

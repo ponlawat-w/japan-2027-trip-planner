@@ -1,8 +1,17 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import { useShallow } from 'zustand/react/shallow';
 import { getDestination } from '@/data/dataset';
-import { chooseMode, emptyPlan, type ModeChoices, type Plan } from '@/lib/plan';
-import { decodeModes, decodePlan, planHash } from '@/lib/shareLink';
+import {
+  applyPairChoices,
+  chooseMode,
+  emptyPlan,
+  rentalBetween,
+  type Plan,
+  type Rental,
+  type Trip,
+} from '@/lib/plan';
+import { decodeTrip, planHash } from '@/lib/shareLink';
 import { NIGHT_COUNT } from '@/lib/trip';
 import type { TransportMode } from '@/types/data';
 
@@ -28,36 +37,45 @@ const DEFAULT_PLAN: Plan = [
   'nagoya',
 ].map((destinationId) => ({ destinationId }));
 
+const MODES: TransportMode[] = ['road', 'train', 'ferry'];
+const sanitizeMode = (mode: unknown): TransportMode | undefined =>
+  MODES.includes(mode as TransportMode) ? (mode as TransportMode) : undefined;
+
 /**
- * A stored or shared plan made safe to use: exactly one entry per night, and any destination that
- * has since been removed from the data read as an empty night.
+ * A stored or shared plan made safe to use: exactly one entry per night, any destination that
+ * has since been removed from the data read as an empty night, and only known ways of arriving.
  */
 const sanitize = (plan: unknown): Plan => {
   if (!Array.isArray(plan)) return emptyPlan();
   return Array.from({ length: NIGHT_COUNT }, (_, index) => {
     const night = plan[index] as Partial<Plan[number]> | undefined;
     const id = night?.destinationId;
-    return { destinationId: typeof id === 'string' && getDestination(id) ? id : null };
+    const destinationId = typeof id === 'string' && getDestination(id) ? id : null;
+    const arrival = sanitizeMode(night?.arrival);
+    return { destinationId, ...(destinationId && arrival && { arrival }) };
   });
 };
 
-/** What undo steps through: the nights, and how each leg between them is travelled. */
-interface Snapshot {
-  plan: Plan;
-  modes: ModeChoices;
-}
+/** A stored rental made safe to use: two whole days within the trip, or none. */
+const sanitizeRental = (rental: unknown): Rental | null => {
+  const { from, to } = (rental ?? {}) as Partial<Rental>;
+  return typeof from === 'number' && typeof to === 'number' ? rentalBetween(from, to) : null;
+};
 
-interface PlanState {
-  plan: Plan;
-  modes: ModeChoices;
-  past: Snapshot[];
-  future: Snapshot[];
+/** The trip alone, out of the store's state: what undo steps through, saves and shares. */
+const tripOf = ({ plan, homeMode, rental }: Trip): Trip => ({ plan, homeMode, rental });
+
+interface PlanState extends Trip {
+  past: Trip[];
+  future: Trip[];
   /** The leg hovered in the list or on the map, drawn emphasised in both. */
   highlightedLeg: number | null;
   setPlan: (plan: Plan) => void;
-  setMode: (from: string, to: string, mode: TransportMode) => void;
+  /** How the leg on `day` is travelled (a leg's `day`, the flight day for the way home). */
+  setMode: (day: number, mode: TransportMode) => void;
+  setRental: (rental: Rental | null) => void;
   /** Loads a shared plan as one undoable step. */
-  load: (snapshot: Snapshot) => void;
+  load: (trip: Trip) => void;
   undo: () => void;
   redo: () => void;
   setHighlightedLeg: (index: number | null) => void;
@@ -67,59 +85,82 @@ export const usePlanStore = create<PlanState>()(
   persist(
     (set, get) => ({
       plan: sanitize(DEFAULT_PLAN),
-      modes: {},
+      homeMode: null,
+      rental: null,
       past: [],
       future: [],
       highlightedLeg: null,
 
-      setPlan: (plan) => get().load({ plan, modes: get().modes }),
+      setPlan: (plan) => get().load({ ...tripOf(get()), plan }),
 
-      setMode: (from, to, mode) =>
-        get().load({ plan: get().plan, modes: chooseMode(get().modes, from, to, mode) }),
+      setMode: (day, mode) => get().load(chooseMode(tripOf(get()), day, mode)),
+
+      setRental: (rental) => get().load({ ...tripOf(get()), rental }),
 
       load: (next) => {
-        const { plan, modes, past } = get();
-        if (JSON.stringify(next) === JSON.stringify({ plan, modes })) return;
-        set({ ...next, past: [...past, { plan, modes }].slice(-HISTORY_LIMIT), future: [] });
+        const { past } = get();
+        const current = tripOf(get());
+        if (JSON.stringify(tripOf(next)) === JSON.stringify(current)) return;
+        set({ ...tripOf(next), past: [...past, current].slice(-HISTORY_LIMIT), future: [] });
       },
 
       undo: () => {
-        const { plan, modes, past, future } = get();
+        const { past, future } = get();
         if (past.length === 0) return;
         set({
           ...past[past.length - 1],
           past: past.slice(0, -1),
-          future: [{ plan, modes }, ...future],
+          future: [tripOf(get()), ...future],
         });
       },
 
       redo: () => {
-        const { plan, modes, past, future } = get();
+        const { past, future } = get();
         if (future.length === 0) return;
-        set({ ...future[0], past: [...past, { plan, modes }], future: future.slice(1) });
+        set({ ...future[0], past: [...past, tripOf(get())], future: future.slice(1) });
       },
 
       setHighlightedLeg: (index) => set({ highlightedLeg: index }),
     }),
     {
       name: 'japan-2027-trip-plan',
-      version: 1,
+      // 2: transport choices moved from pairs of places onto the stays they arrive at.
+      version: 2,
       storage: createJSONStorage(() => localStorage),
-      partialize: (state) => ({ plan: state.plan, modes: state.modes }),
+      partialize: (state) => tripOf(state),
+      // Version 1 kept choices per pair of places: carried over onto the legs between them.
+      migrate: (persisted) => {
+        const stored = (persisted ?? {}) as Partial<Trip> & { modes?: Record<string, unknown> };
+        const trip: Trip = {
+          plan: sanitize(stored.plan),
+          homeMode: null,
+          rental: sanitizeRental(stored.rental),
+        };
+        const pairs = Object.fromEntries(
+          Object.entries(stored.modes ?? {}).flatMap(([key, mode]) =>
+            sanitizeMode(mode) ? [[key, sanitizeMode(mode)!]] : [],
+          ),
+        );
+        return applyPairChoices(trip, pairs);
+      },
       merge: (persisted, current) => {
-        const stored = persisted as Partial<PlanState> | undefined;
+        const stored = persisted as Partial<Trip> | undefined;
         return {
           ...current,
           plan: stored?.plan ? sanitize(stored.plan) : current.plan,
-          modes: stored?.modes && typeof stored.modes === 'object' ? stored.modes : current.modes,
+          homeMode: sanitizeMode(stored?.homeMode) ?? null,
+          rental: stored && 'rental' in stored ? sanitizeRental(stored.rental) : current.rental,
         };
       },
     },
   ),
 );
 
+/** The trip as one object, new only when one of its parts changes. */
+export const useTrip = (): Trip => usePlanStore(useShallow(tripOf));
+
 /**
- * Keeps the address bar showing the current plan and its transport choices, so the URL can be copied at any moment.
+ * Keeps the address bar showing the current trip, so the URL can be copied at any moment.
  *
  * On start, a plan in the URL wins over the one saved in this browser (undo brings that one back).
  * From then on every edit rewrites the fragment with `replaceState`: one browser-history entry for
@@ -128,12 +169,11 @@ export const usePlanStore = create<PlanState>()(
  */
 export const syncPlanWithUrl = (): void => {
   const loadFromUrl = () => {
-    const shared = decodePlan(window.location.hash);
-    if (shared)
-      usePlanStore.getState().load({ plan: shared, modes: decodeModes(window.location.hash) });
+    const shared = decodeTrip(window.location.hash);
+    if (shared) usePlanStore.getState().load(shared);
   };
-  const writeToUrl = ({ plan, modes }: Snapshot) => {
-    const hash = planHash(plan, modes);
+  const writeToUrl = (trip: Trip) => {
+    const hash = planHash(trip);
     if (window.location.hash !== hash) {
       history.replaceState(
         history.state,
@@ -146,7 +186,12 @@ export const syncPlanWithUrl = (): void => {
   loadFromUrl();
   writeToUrl(usePlanStore.getState());
   usePlanStore.subscribe((state, previous) => {
-    if (state.plan !== previous.plan || state.modes !== previous.modes) writeToUrl(state);
+    if (
+      state.plan !== previous.plan ||
+      state.homeMode !== previous.homeMode ||
+      state.rental !== previous.rental
+    )
+      writeToUrl(state);
   });
   window.addEventListener('hashchange', loadFromUrl);
 };

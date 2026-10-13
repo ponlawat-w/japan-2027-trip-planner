@@ -1,4 +1,5 @@
 import destinationsJson from '@data/destinations.json';
+import ferryMatrixJson from '@data/ferry-matrix.json';
 import matrixJson from '@data/matrix.json';
 import trainMatrixJson from '@data/train-matrix.json';
 import {
@@ -6,6 +7,9 @@ import {
   legKey,
   type Destination,
   type Difficulty,
+  type FerryGeometry,
+  type FerryLeg,
+  type FerryMatrix,
   type LegGeometry,
   type LegSummary,
   type Matrix,
@@ -24,6 +28,7 @@ import {
 export const DESTINATIONS = destinationsJson as Destination[];
 const MATRIX = matrixJson as Matrix;
 const TRAIN_MATRIX = trainMatrixJson as TrainMatrix;
+const FERRY_MATRIX = ferryMatrixJson as FerryMatrix;
 
 const byId = new Map(DESTINATIONS.map((destination) => [destination.id, destination]));
 
@@ -109,6 +114,10 @@ export const getLeg = (from: string, to: string): Leg | undefined => {
 export const getTrainLeg = (from: string, to: string): TrainLeg | undefined =>
   TRAIN_MATRIX.legs[legKey(from, to)];
 
+/** The ferry option between two destinations, where `ferry-routes.json` lists one. */
+export const getFerryLeg = (from: string, to: string): FerryLeg | undefined =>
+  FERRY_MATRIX.legs[legKey(from, to)];
+
 const geometryLoaders = import.meta.glob<LegGeometry>('../../data/legs/*/*.json', {
   import: 'default',
 });
@@ -135,4 +144,18 @@ export const loadTrainGeometry = (from: string, to: string): Promise<TrainGeomet
     trainGeometries.set(key, loader ? loader() : Promise.resolve(null));
   }
   return trainGeometries.get(key)!;
+};
+
+const ferryGeometryLoaders = import.meta.glob<FerryGeometry>('../../data/ferry-legs/*/*.json', {
+  import: 'default',
+});
+const ferryGeometries = new Map<string, Promise<FerryGeometry | null>>();
+
+export const loadFerryGeometry = (from: string, to: string): Promise<FerryGeometry | null> => {
+  const key = legKey(from, to);
+  if (!ferryGeometries.has(key)) {
+    const loader = ferryGeometryLoaders[`../../data/ferry-legs/${legFileName(from, to)}`];
+    ferryGeometries.set(key, loader ? loader() : Promise.resolve(null));
+  }
+  return ferryGeometries.get(key)!;
 };

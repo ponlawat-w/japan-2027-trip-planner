@@ -1,15 +1,17 @@
-import { Car, TrainFront } from 'lucide-react';
+import { Car, Ship, TrainFront } from 'lucide-react';
 import { type FC, type ReactNode } from 'react';
 import DifficultyBadge from '@/components/DifficultyBadge';
+import { FerryItinerary } from '@/components/FerryRides';
 import { RoadDetails } from '@/components/LegList';
 import { ServiceStrip, TrainItinerary } from '@/components/TrainRides';
 import { getDestination } from '@/data/dataset';
 import { formatChanges, formatDistance, formatDuration } from '@/lib/format';
+import { carLabel, FERRY_COLOR, RENTAL_COLOR } from '@/lib/styles';
 import type { PlannedLeg } from '@/lib/plan';
 import { dayLabel } from '@/lib/trip';
 import { usePlanStore } from '@/store/planStore';
 import { usePreferencesStore } from '@/store/preferencesStore';
-import type { TransportMode } from '@/types/data';
+import { ferryDrives, type TransportMode } from '@/types/data';
 import Dialog, { DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/ui/Dialog';
 import { cn } from '@/utils/cn';
 
@@ -40,7 +42,7 @@ const Option: FC<{
   </button>
 );
 
-/** One leg: how to travel it, where a train is an option, and what that way involves. */
+/** One leg: how to travel it, where a train or ferry is an option, and what that way involves. */
 const TravelDialog: FC<{ planned: PlannedLeg | undefined; onClose: () => void }> = ({
   planned,
   onClose,
@@ -49,7 +51,7 @@ const TravelDialog: FC<{ planned: PlannedLeg | undefined; onClose: () => void }>
   const units = usePreferencesStore((state) => state.units);
   const from = planned && getDestination(planned.from);
   const to = planned && getDestination(planned.to);
-  const choose = (mode: TransportMode) => planned && setMode(planned.from, planned.to, mode);
+  const choose = (mode: TransportMode) => planned && setMode(planned.day, mode);
 
   return (
     <Dialog open={!!planned} onOpenChange={(open) => !open && onClose()}>
@@ -63,34 +65,63 @@ const TravelDialog: FC<{ planned: PlannedLeg | undefined; onClose: () => void }>
               <DialogDescription>{dayLabel(planned.day)}</DialogDescription>
             </DialogHeader>
 
-            {planned.train && (
+            {(planned.train || planned.ferry) && (
               <div
-                className="mt-4 grid grid-cols-2 gap-2"
+                className={cn(
+                  'mt-4 grid gap-2',
+                  planned.train && planned.ferry ? 'grid-cols-3' : 'grid-cols-2',
+                )}
                 role="radiogroup"
                 aria-label="How to travel"
               >
-                <Option
-                  selected={planned.mode === 'train'}
-                  onSelect={() => choose('train')}
-                  icon={<TrainFront className="h-4 w-4" />}
-                  label="Train"
-                >
-                  <span className="text-lg font-semibold tabular-nums">
-                    {formatDuration(planned.train.durationMin)}
-                  </span>
-                  <span className="flex items-center gap-1.5 text-xs text-base-content/60">
-                    <ServiceStrip leg={planned.train} />
-                    {formatChanges(planned.train)}
-                  </span>
-                  <span className="text-xs text-base-content/50 tabular-nums">
-                    {formatDistance(planned.train.distanceKm, units)} of track
-                  </span>
-                </Option>
+                {planned.train && (
+                  <Option
+                    selected={planned.mode === 'train'}
+                    onSelect={() => choose('train')}
+                    icon={<TrainFront className="h-4 w-4" />}
+                    label="Train"
+                  >
+                    <span className="text-lg font-semibold tabular-nums">
+                      {formatDuration(planned.train.durationMin)}
+                    </span>
+                    <span className="flex items-center gap-1.5 text-xs text-base-content/60">
+                      <ServiceStrip leg={planned.train} />
+                      {formatChanges(planned.train)}
+                    </span>
+                    <span className="text-xs text-base-content/50 tabular-nums">
+                      {formatDistance(planned.train.distanceKm, units)} of track
+                    </span>
+                  </Option>
+                )}
+                {planned.ferry && (
+                  <Option
+                    selected={planned.mode === 'ferry'}
+                    onSelect={() => choose('ferry')}
+                    icon={<Ship className="h-4 w-4" style={{ color: FERRY_COLOR }} />}
+                    label="Ferry"
+                  >
+                    <span className="text-lg font-semibold tabular-nums">
+                      {formatDuration(planned.ferry.durationMin)}
+                    </span>
+                    <span className="text-xs text-base-content/60">
+                      {planned.ferry.crossing.line}
+                    </span>
+                    <span className="text-xs text-base-content/50 tabular-nums">
+                      ¥{planned.ferry.crossing.fareYen.toLocaleString()} ·{' '}
+                      {formatDistance(planned.ferry.distanceKm, units)}
+                    </span>
+                  </Option>
+                )}
                 <Option
                   selected={planned.mode === 'road'}
                   onSelect={() => choose('road')}
-                  icon={<Car className="h-4 w-4" />}
-                  label="Drive"
+                  icon={
+                    <Car
+                      className="h-4 w-4"
+                      style={planned.rental ? { color: RENTAL_COLOR } : undefined}
+                    />
+                  }
+                  label={carLabel(planned.rental)}
                 >
                   {planned.road && (
                     <>
@@ -115,13 +146,25 @@ const TravelDialog: FC<{ planned: PlannedLeg | undefined; onClose: () => void }>
             <div className="mt-4">
               {planned.mode === 'train' && planned.train ? (
                 <TrainItinerary leg={planned.train} />
+              ) : planned.mode === 'ferry' && planned.ferry ? (
+                <>
+                  <FerryItinerary leg={planned.ferry} rental={planned.rental} />
+                  {ferryDrives(planned.ferry).map((drive) => (
+                    <div key={`${drive.from}-${drive.to}`} className="mt-3">
+                      <RoadDetails leg={{ ...drive, estimated: false }} />
+                    </div>
+                  ))}
+                </>
               ) : (
                 planned.road && (
                   <>
-                    {!planned.train && (
+                    {!planned.train && !planned.ferry && (
                       <p className="mb-2 text-sm tabular-nums">
-                        <Car className="mr-1.5 inline h-4 w-4 opacity-70" />
-                        {planned.road.estimated && '≈ '}
+                        <Car
+                          className="mr-1.5 inline h-4 w-4 opacity-70"
+                          style={planned.rental ? { color: RENTAL_COLOR, opacity: 1 } : undefined}
+                        />
+                        {carLabel(planned.rental)} · {planned.road.estimated && '≈ '}
                         {formatDuration(planned.road.winterDurationMin)} in winter ·{' '}
                         {formatDistance(planned.road.distanceKm, units)}{' '}
                         <DifficultyBadge

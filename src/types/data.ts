@@ -94,9 +94,9 @@ export interface LegGeometry {
 
 /**
  * How a leg is travelled. Every leg can be driven; a train is an option only where the CLI has
- * computed one, and is then the default.
+ * computed one, and is then the default. A ferry is an option where one is listed, never the default.
  */
-export type TransportMode = 'road' | 'train';
+export type TransportMode = 'road' | 'train' | 'ferry';
 
 /**
  * The kind of train, as far as planning a day goes: `shinkansen`, or `local` for any conventional
@@ -160,6 +160,77 @@ export interface TrainGeometry {
   to: string;
   sections: TrainSection[];
 }
+
+export interface FerryPort {
+  name: string;
+  nameJa: string;
+  lat: number;
+  lon: number;
+  note?: string;
+}
+
+/** One boat between two ports, with its timetable as published. */
+export interface FerryCrossing {
+  line: string;
+  lineJa: string;
+  from: FerryPort;
+  to: FerryPort;
+  /** Along the boat's course, as OpenStreetMap draws it. */
+  distanceKm: number;
+  rideMin: number;
+  /** How early to be at the pier before departure, as the operator asks. */
+  boardingMin: number;
+  /** One way, one adult. */
+  fareYen: number;
+  /** Departures from `from`, "HH:MM", every day. */
+  departures: string[];
+  note?: string;
+}
+
+/**
+ * Getting between a destination and its pier: driven (routed and scored like any drive, from or to
+ * the pier) or, where the pier is part of the destination itself, walked.
+ */
+export type FerryAccess =
+  | { kind: 'drive'; drive: LegSummary; port: FerryPort }
+  | { kind: 'walk'; walkMin: number; port: FerryPort };
+
+/** One directed A → B journey by boat, door to door, as `ferry-matrix.json` holds it. */
+export interface FerryLeg {
+  from: string;
+  to: string;
+  /** The drives and the crossing together. */
+  distanceKm: number;
+  /** Winter driving, walking, being at the pier in time, and the crossing. */
+  durationMin: number;
+  /** From the destination to the boat. */
+  before: FerryAccess;
+  crossing: FerryCrossing;
+  /** From the boat to the destination. */
+  after: FerryAccess;
+  sources: string[];
+  computedAt: string;
+}
+
+/** `data/ferry-matrix.json`: every computed ferry leg, keyed by {@link legKey}. */
+export interface FerryMatrix {
+  legs: Record<string, FerryLeg>;
+}
+
+/** A ferry leg's line, in travel order: drives coloured by difficulty, and the boat's course. */
+export type FerrySection =
+  { mode: 'road'; difficulty: Difficulty; line: string } | { mode: 'sea'; line: string };
+
+/** `data/ferry-legs/<from>/<to>.json`: one ferry leg's line (lazy-loaded). */
+export interface FerryGeometry {
+  from: string;
+  to: string;
+  sections: FerrySection[];
+}
+
+/** The drive a ferry leg includes, if any: the stretch on land that is not walked. */
+export const ferryDrives = (leg: FerryLeg): LegSummary[] =>
+  [leg.before, leg.after].flatMap((access) => (access.kind === 'drive' ? [access.drive] : []));
 
 /** The services a train leg uses, in riding order, each named once. */
 export const trainServices = (leg: TrainLeg): RailService[] => [

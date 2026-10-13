@@ -1,15 +1,18 @@
 import { parseArgs } from 'node:util';
 import { legKey, type Destination, type DestinationKind } from '../src/types/data.ts';
 import { requestJson } from './http.ts';
+import { computeFerryLegs, validateFerryRoutes } from './ferry.ts';
 import { computeLeg } from './leg.ts';
 import {
   readClosures,
   readDestinations,
+  readFerryRoutes,
   readMatrix,
   readTrainRoutes,
   removeLegsOf,
   saveLeg,
   writeDestinations,
+  writeFerryLegs,
   writeTrainLegs,
 } from './store.ts';
 import { computeTrainLegs, validateTrainRoutes } from './train.ts';
@@ -28,13 +31,15 @@ Commands:
                   --note <text>          Shown in the destination picker
                   --no-compute           Only record it; compute legs later with \`compute\`
   edit <id>     Change a destination's fields (same options as add). Moving it recomputes its legs.
-  remove <id>   Remove a destination and every leg to or from it, train legs included.
+  remove <id>   Remove a destination and every leg to or from it, train and ferry legs included.
   compute       Compute every leg that is missing.
                   --id <id>              Only legs to or from this destination
                   --force                Recompute legs that already exist
   train         Rebuild every train leg from data/train-routes.json: the cited times, and the
                 track from OpenStreetMap. Needs osmium (\`brew install osmium-tool\`) and the OSM
                 file Valhalla downloaded; Valhalla itself need not be running.
+  ferry         Rebuild every ferry leg from data/ferry-routes.json: the published crossing, and
+                the drive to or from each pier routed and scored like any drive.
   list          Destinations and how many of their legs are computed.
   explain <from> <to>
                 Recompute one leg without saving, and print every km scoring at least --min
@@ -241,6 +246,18 @@ const commands: Record<string, (id?: string) => Promise<void>> = {
     const legs = await computeTrainLegs(spec, (line) => console.log(line));
     await writeTrainLegs(legs);
     console.log(`Wrote ${legs.length} train legs.`);
+  },
+
+  async ferry() {
+    const spec = await readFerryRoutes();
+    const destinations = await readDestinations();
+    validateFerryRoutes(spec, destinations);
+    await assertValhallaReachable();
+    const legs = await computeFerryLegs(spec, destinations, await readClosures(), (line) =>
+      console.log(line),
+    );
+    await writeFerryLegs(legs);
+    console.log(`Wrote ${legs.length} ferry legs.`);
   },
 
   async explain(fromId) {
